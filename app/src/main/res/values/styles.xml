@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance.MyAunt.ChipReason" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+
+    <style name="Widget.MyAunt.Chip.ReasonTag" parent="Widget.Material3.Chip.Filter">
+        <item name="android:textAppearance">@style/TextAppearance.MyAunt.ChipReason</item>
+        <item name="android:textColor">@color/chip_reason_text</item>
+        <item name="chipBackgroundColor">@color/chip_reason_background</item>
+        <item name="chipStrokeColor">@color/chip_reason_stroke</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipCornerRadius">22dp</item>
+        <item name="chipMinHeight">44dp</item>
+        <item name="chipStartPadding">16dp</item>
+        <item name="chipEndPadding">16dp</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="rippleColor">@color/md_pink_soft</item>
+    </style>
+
+    <style name="Widget.MyAunt.Chip.ReasonTagUnsure" parent="Widget.Material3.Chip.Filter">
+        <item name="android:textAppearance">@style/TextAppearance.MyAunt.ChipReason</item>
+        <item name="android:textColor">@color/chip_unsure_text</item>
+        <item name="chipBackgroundColor">@color/chip_unsure_background</item>
+        <item name="chipStrokeColor">@color/chip_unsure_stroke</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipCornerRadius">22dp</item>
+        <item name="chipMinHeight">44dp</item>
+        <item name="chipStartPadding">16dp</item>
+        <item name="chipEndPadding">16dp</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="rippleColor">@color/md_pink_soft</item>
+    </style>
+</resources>

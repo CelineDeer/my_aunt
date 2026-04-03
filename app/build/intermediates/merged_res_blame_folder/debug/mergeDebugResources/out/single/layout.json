@@ -1,0 +1,50 @@
+[
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/fragment_chart.xml",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/fragment_chart.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/fragment_home.xml",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/dialog_privacy_policy.xml",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/dialog_privacy_policy.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/item_special_record.xml",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/item_special_record.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/item_chart_page.xml",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/item_chart_page.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/activity_splash.xml",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.myaunt.app-mergeDebugResources-33:/layout/dialog_privacy_policy.xml",
+        "source": "com.myaunt.app-main-36:/layout/dialog_privacy_policy.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/fragment_special_records.xml",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/fragment_special_records.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/activity_main.xml",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/dialog_special_reason.xml",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/dialog_special_reason.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/widget_period_cycle.xml",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/widget_period_cycle.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/dialog_month_range_picker.xml",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/dialog_month_range_picker.xml"
+    }
+]

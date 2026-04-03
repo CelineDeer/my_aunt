@@ -1,0 +1,70 @@
+<resources>
+    <string name="app_name">我的姨妈</string>
+    <string name="widget_period_description">显示距离上次经期天数与预计下次</string>
+    <string name="widget_period_label">经期小助手</string>
+    <string name="shortcut_pin_widget_short">添加桌面小组件</string>
+    <string name="shortcut_pin_widget_long">把经期天数小组件放到桌面</string>
+    <string name="cd_delete_special_record">删掉这条备注</string>
+    <string name="cd_splash_logo">应用图标</string>
+
+    <string name="privacy_dialog_title">隐私政策</string>
+    <!-- 正文中的 %1$s 将替换为可点击的【《隐私政策》】链接 -->
+    <string name="privacy_dialog_intro_template" formatted="false">为更好地保护您的权益，请阅读%1$s。本应用主要在设备本地保存您主动填写的经期与备注信息，不主动上传至开发者服务器。</string>
+    <string name="privacy_policy_link_text">【《隐私政策》】</string>
+    <!-- 正式网页地址稍后填写；留空时点链接会提示暂未配置 -->
+    <string name="privacy_policy_url" translatable="false" />
+    <string name="privacy_policy_url_pending">隐私政策链接暂未配置，请稍后在应用更新中查看</string>
+    <string name="privacy_agree">同意并继续</string>
+    <string name="privacy_disagree">不同意并退出</string>
+
+    <string name="home_today_line">今天 · %s</string>
+    <string name="home_greet_late_night">已经很晚啦，早点休息好不好 🌙</string>
+    <string name="home_greet_morning">早安呀，新的一天开始啦 ☀️</string>
+    <string name="home_greet_noon">午安，记得好好吃饭哦 🍱</string>
+    <string name="home_greet_afternoon">下午好呀，慢慢来不用急 🍃</string>
+    <string name="home_greet_evening">晚上好，今天也辛苦啦 ✨</string>
+
+    <string name="home_tip_title">今日贴心</string>
+    <string name="home_journey_title">这些天我都在陪你记录 💗</string>
+    <string name="home_journey_empty">记录第一次姨妈后，这里会慢慢出现你的专属总结哦。</string>
+    <string name="home_journey_count">已经陪你记录了 %d 次啦 ✨</string>
+    <string name="home_journey_avg">你的周期大约是 %.0f 天左右哦</string>
+    <string name="home_journey_open_chart">去看看变化曲线</string>
+    <string name="home_journey_special_hint">有备注的周期，都帮你悄悄记在「备注」里啦</string>
+
+    <string name="special_dialog_title">这次有点不一样吗？</string>
+    <string name="special_dialog_save">好啦，记住了</string>
+    <string name="special_dialog_save_record">保存这次记录</string>
+    <string name="special_dialog_skip">先不写啦，照样帮你记</string>
+    <string name="special_dialog_gap_title">间隔有点特别哦</string>
+    <string name="special_dialog_section_factors">最近的状态和小变化</string>
+    <string name="special_dialog_section_notes">悄悄写点什么</string>
+    <string name="special_dialog_note_hint">写一句备注吧（可以不写）</string>
+    <string name="cd_close_dialog">关闭</string>
+    <string name="cd_edit_special_record">改一改这条备注</string>
+
+    <string name="special_history_nav_title">我的记录本</string>
+    <string name="special_history_page_title">那些小原因</string>
+    <string name="special_history_subtitle">这里保存着你的周期备注。点小铅笔可以修改，点垃圾桶只会删文字，日期会一直在哦。</string>
+    <string name="special_history_summary_title">你的周期小习惯</string>
+    <string name="special_history_summary_empty">还没有记录备注哦～\n下次遇到不太一样的周期，可以顺手写下来。</string>
+    <string name="special_history_summary_with_avg">已经帮你记下 %1$d 条备注啦，平均周期大约 %2$.0f 天。慢慢记录，会更懂自己的身体哦 💗</string>
+    <string name="special_history_summary_count_only">已经帮你记下 %1$d 条备注啦，坚持记录真的很棒 ✨</string>
+    <string name="special_history_empty">这里还空空的呢\n下次记录时可以顺便写点备注</string>
+    <string name="special_record_badge_date">%1$d月\n%2$d日</string>
+
+    <string-array name="home_warm_tips">
+        <item>慢慢呼吸一下，去倒杯温水吧，你在好好照顾自己呢 💗</item>
+        <item>今天也可以对自己说一句：已经很棒啦 ✨</item>
+        <item>累了就休息一会儿，不用一直撑着哦</item>
+        <item>给自己一点柔软的小环境，会舒服很多 🌷</item>
+        <item>想吃点甜的或热的，就小小满足一下吧</item>
+        <item>肚子不舒服时，热敷一下会好很多哦</item>
+        <item>周期有变化很正常，我们只是一起慢慢了解它</item>
+        <item>睡前少刷一会儿手机，让自己好好休息一下 🌙</item>
+        <item>带一片备用用品，会更安心一点点</item>
+        <item>找人聊聊天，或者发会儿呆，也是在放松自己</item>
+        <item>伸个懒腰吧，身体会感谢你的</item>
+        <item>你已经在好好照顾自己了，这件事很值得被肯定 💗</item>
+    </string-array>
+</resources>

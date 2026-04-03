@@ -1,0 +1,222 @@
+[
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/drawable_bg_special_reason_sheet.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/drawable/bg_special_reason_sheet.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/layout_fragment_home.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/color_chip_unsure_stroke.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/color/chip_unsure_stroke.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/xml_period_cycle_widget_info.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/xml/period_cycle_widget_info.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/drawable_widget_period_accent_bar.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/drawable/widget_period_accent_bar.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/drawable_bg_duration_pill.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/drawable/bg_duration_pill.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/mipmap-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/drawable_bg_special_circle.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/drawable/bg_special_circle.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/color_chip_reason_background.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/color/chip_reason_background.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/mipmap-xxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/drawable_ic_shortcut_widget.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/drawable/ic_shortcut_widget.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/mipmap-hdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/color_chip_unsure_text.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/color/chip_unsure_text.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/layout_activity_splash.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/layout_item_special_record.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/item_special_record.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/drawable_ic_edit_record.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/drawable/ic_edit_record.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/drawable_bg_btn_save_gradient.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/drawable/bg_btn_save_gradient.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/raw_privacy_policy.txt.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/raw/privacy_policy.txt"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/xml_shortcuts.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/xml/shortcuts.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/drawable_bg_special_date_chip.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/drawable/bg_special_date_chip.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/layout_fragment_special_records.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/fragment_special_records.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/menu_bottom_nav_menu.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/menu/bottom_nav_menu.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/mipmap-xhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/drawable_special_records_bg.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/drawable/special_records_bg.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/anim_fragment_exit.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/anim/fragment_exit.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/color_chip_reason_stroke.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/color/chip_reason_stroke.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/color_chip_reason_text.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/color/chip_reason_text.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/drawable_ic_home_bloom.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/drawable/ic_home_bloom.xml"
+    },
+    {
+        "merged": "com.myaunt.app-debug-34:/drawable_dialog_privacy_white_bg.xml.flat",
+        "source": "com.myaunt.app-main-36:/drawable/dialog_privacy_white_bg.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/drawable_ic_note_edit.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/drawable/ic_note_edit.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/layout_fragment_chart.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/fragment_chart.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/drawable_bg_summary_monthly.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/drawable/bg_summary_monthly.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/layout_dialog_special_reason.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/dialog_special_reason.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/layout_dialog_month_range_picker.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/dialog_month_range_picker.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/drawable_bg_gap_notice_card.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/drawable/bg_gap_notice_card.xml"
+    },
+    {
+        "merged": "com.myaunt.app-debug-34:/layout_dialog_privacy_policy.xml.flat",
+        "source": "com.myaunt.app-main-36:/layout/dialog_privacy_policy.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/drawable_widget_period_rounded_bg.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/drawable/widget_period_rounded_bg.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/color_nav_item_color.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/color/nav_item_color.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/layout_widget_period_cycle.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/widget_period_cycle.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/layout_dialog_privacy_policy.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/dialog_privacy_policy.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/color_chip_unsure_background.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/color/chip_unsure_background.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/drawable_bg_splash_gradient.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/drawable/bg_splash_gradient.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/drawable_widget_period_bg.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/drawable/widget_period_bg.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/layout_item_chart_page.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/item_chart_page.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/layout_activity_main.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/mipmap-xxxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/anim_fragment_enter.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/anim/fragment_enter.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-debug-34:/drawable_ic_dialog_close.xml.flat",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/drawable/ic_dialog_close.xml"
+    }
+]

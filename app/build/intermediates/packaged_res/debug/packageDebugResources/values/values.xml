@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="home_warm_tips">
+        <item>慢慢呼吸一下，去倒杯温水吧，你在好好照顾自己呢 💗</item>
+        <item>今天也可以对自己说一句：已经很棒啦 ✨</item>
+        <item>累了就休息一会儿，不用一直撑着哦</item>
+        <item>给自己一点柔软的小环境，会舒服很多 🌷</item>
+        <item>想吃点甜的或热的，就小小满足一下吧</item>
+        <item>肚子不舒服时，热敷一下会好很多哦</item>
+        <item>周期有变化很正常，我们只是一起慢慢了解它</item>
+        <item>睡前少刷一会儿手机，让自己好好休息一下 🌙</item>
+        <item>带一片备用用品，会更安心一点点</item>
+        <item>找人聊聊天，或者发会儿呆，也是在放松自己</item>
+        <item>伸个懒腰吧，身体会感谢你的</item>
+        <item>你已经在好好照顾自己了，这件事很值得被肯定 💗</item>
+    </string-array>
+    <color name="chip_reason_bg_checked">@color/md_primary</color>
+    <color name="chip_reason_bg_unchecked">#FFE4F1</color>
+    <color name="chip_reason_stroke_unchecked">#FFADD2</color>
+    <color name="chip_reason_surface">#FFF8FC</color>
+    <color name="ic_launcher_background">#FFD4E3</color>
+    <color name="md_bg">#FFFFFF</color>
+    <color name="md_chart_abnormal_end">#F43F68</color>
+    <color name="md_chart_abnormal_start">#FF8A9B</color>
+    <color name="md_chart_abnormal_text">#D12A52</color>
+    <color name="md_chart_avg">#8B7FD9</color>
+    <color name="md_chart_bar_end">#EC5A9A</color>
+    <color name="md_chart_bar_start">#FFC8E0</color>
+    <color name="md_chart_grid">#20000000</color>
+    <color name="md_chart_label">#7A4A72</color>
+    <color name="md_chart_value">#4A2D45</color>
+    <color name="md_cycle_green_end">#3DDC9A</color>
+    <color name="md_cycle_green_start">#C6FCE3</color>
+    <color name="md_cycle_green_text">#0F766E</color>
+    <color name="md_cycle_purple_end">#B565F0</color>
+    <color name="md_cycle_purple_start">#EDD6FF</color>
+    <color name="md_cycle_purple_text">#6B21A8</color>
+    <color name="md_cycle_yellow_end">#FFC93D</color>
+    <color name="md_cycle_yellow_start">#FFF3B0</color>
+    <color name="md_cycle_yellow_text">#C2410C</color>
+    <color name="md_home_tip_surface">#FFF0FA</color>
+    <color name="md_home_welcome_surface">#FFE8F2</color>
+    <color name="md_on_surface">#4A2D45</color>
+    <color name="md_pink_soft">#33EC5A9A</color>
+    <color name="md_primary">#EC5A9A</color>
+    <color name="md_secondary">#8B7FD9</color>
+    <color name="md_surface">#FFFFFE</color>
+    <color name="md_text_secondary">#9B5C8C</color>
+    <color name="special_dialog_bottom_bar">#FFFFFF</color>
+    <color name="special_dialog_section_label">#8A7A88</color>
+    <color name="special_gap_body">#2D4A42</color>
+    <color name="special_gap_card_bg">#E6F4EA</color>
+    <color name="special_gap_title">#0D503C</color>
+    <color name="special_note_card_1">#FFF0F6</color>
+    <color name="special_note_card_1_stroke">#F5B8D9</color>
+    <color name="special_note_card_2">#F3E8FF</color>
+    <color name="special_note_card_2_stroke">#C9A8F0</color>
+    <color name="special_note_card_3">#E6FAF5</color>
+    <color name="special_note_card_3_stroke">#7FD4C1</color>
+    <color name="special_note_card_4">#FFF4E8</color>
+    <color name="special_note_card_4_stroke">#F5C09A</color>
+    <color name="special_note_card_5">#E8F2FC</color>
+    <color name="special_note_card_5_stroke">#9BC4EB</color>
+    <color name="special_note_card_6">#FDF8E8</color>
+    <color name="special_note_card_6_stroke">#E8D080</color>
+    <color name="special_unsure_chip_bg">#EDEDED</color>
+    <color name="special_unsure_chip_stroke">#CFC8D0</color>
+    <string name="app_name">我的姨妈</string>
+    <string name="cd_close_dialog">关闭</string>
+    <string name="cd_delete_special_record">删掉这条备注</string>
+    <string name="cd_edit_special_record">改一改这条备注</string>
+    <string name="cd_splash_logo">应用图标</string>
+    <string name="home_greet_afternoon">下午好呀，慢慢来不用急 🍃</string>
+    <string name="home_greet_evening">晚上好，今天也辛苦啦 ✨</string>
+    <string name="home_greet_late_night">已经很晚啦，早点休息好不好 🌙</string>
+    <string name="home_greet_morning">早安呀，新的一天开始啦 ☀️</string>
+    <string name="home_greet_noon">午安，记得好好吃饭哦 🍱</string>
+    <string name="home_journey_avg">你的周期大约是 %.0f 天左右哦</string>
+    <string name="home_journey_count">已经陪你记录了 %d 次啦 ✨</string>
+    <string name="home_journey_empty">记录第一次姨妈后，这里会慢慢出现你的专属总结哦。</string>
+    <string name="home_journey_open_chart">去看看变化曲线</string>
+    <string name="home_journey_special_hint">有备注的周期，都帮你悄悄记在「备注」里啦</string>
+    <string name="home_journey_title">这些天我都在陪你记录 💗</string>
+    <string name="home_tip_title">今日贴心</string>
+    <string name="home_today_line">今天 · %s</string>
+    <string name="privacy_agree">同意并继续</string>
+    <string formatted="false" name="privacy_dialog_intro_template">为更好地保护您的权益，请阅读%1$s。本应用主要在设备本地保存您主动填写的经期与备注信息，不主动上传至开发者服务器。</string>
+    <string name="privacy_dialog_title">隐私政策</string>
+    <string name="privacy_disagree">不同意并退出</string>
+    <string name="privacy_policy_link_text">【《隐私政策》】</string>
+    <string name="privacy_policy_url" translatable="false"/>
+    <string name="privacy_policy_url_pending">隐私政策链接暂未配置，请稍后在应用更新中查看</string>
+    <string name="shortcut_pin_widget_long">把经期天数小组件放到桌面</string>
+    <string name="shortcut_pin_widget_short">添加桌面小组件</string>
+    <string name="special_dialog_gap_title">间隔有点特别哦</string>
+    <string name="special_dialog_note_hint">写一句备注吧（可以不写）</string>
+    <string name="special_dialog_save">好啦，记住了</string>
+    <string name="special_dialog_save_record">保存这次记录</string>
+    <string name="special_dialog_section_factors">最近的状态和小变化</string>
+    <string name="special_dialog_section_notes">悄悄写点什么</string>
+    <string name="special_dialog_skip">先不写啦，照样帮你记</string>
+    <string name="special_dialog_title">这次有点不一样吗？</string>
+    <string name="special_history_empty">这里还空空的呢\n下次记录时可以顺便写点备注</string>
+    <string name="special_history_nav_title">我的记录本</string>
+    <string name="special_history_page_title">那些小原因</string>
+    <string name="special_history_subtitle">这里保存着你的周期备注。点小铅笔可以修改，点垃圾桶只会删文字，日期会一直在哦。</string>
+    <string name="special_history_summary_count_only">已经帮你记下 %1$d 条备注啦，坚持记录真的很棒 ✨</string>
+    <string name="special_history_summary_empty">还没有记录备注哦～\n下次遇到不太一样的周期，可以顺手写下来。</string>
+    <string name="special_history_summary_title">你的周期小习惯</string>
+    <string name="special_history_summary_with_avg">已经帮你记下 %1$d 条备注啦，平均周期大约 %2$.0f 天。慢慢记录，会更懂自己的身体哦 💗</string>
+    <string name="special_record_badge_date">%1$d月\n%2$d日</string>
+    <string name="widget_period_description">显示距离上次经期天数与预计下次</string>
+    <string name="widget_period_label">经期小助手</string>
+    <style name="TextAppearance.MyAunt.ChipReason" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+    <style name="Theme.MyAunt" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/md_surface</item>
+        <item name="colorPrimary">@color/md_primary</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorSecondary">@color/md_secondary</item>
+        <item name="colorSurface">@color/md_surface</item>
+        <item name="colorOnSurface">@color/md_on_surface</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowBackground">@color/md_bg</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.MyAunt.Dialog</item>
+    </style>
+    <style name="Theme.MyAunt.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">#FFFFF8FC</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowBackground">@drawable/bg_splash_gradient</item>
+        <item name="android:windowFullscreen">false</item>
+    </style>
+    <style name="Theme.MyAunt.WidgetPinTrampoline" parent="android:Theme.Translucent.NoTitleBar">
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+    <style name="ThemeOverlay.MyAunt.Dialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorPrimary">@color/md_primary</item>
+        <item name="colorOnSurface">@color/md_on_surface</item>
+    </style>
+    <style name="Widget.MyAunt.Chip.ReasonTag" parent="Widget.Material3.Chip.Filter">
+        <item name="android:textAppearance">@style/TextAppearance.MyAunt.ChipReason</item>
+        <item name="android:textColor">@color/chip_reason_text</item>
+        <item name="chipBackgroundColor">@color/chip_reason_background</item>
+        <item name="chipStrokeColor">@color/chip_reason_stroke</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipCornerRadius">22dp</item>
+        <item name="chipMinHeight">44dp</item>
+        <item name="chipStartPadding">16dp</item>
+        <item name="chipEndPadding">16dp</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="rippleColor">@color/md_pink_soft</item>
+    </style>
+    <style name="Widget.MyAunt.Chip.ReasonTagUnsure" parent="Widget.Material3.Chip.Filter">
+        <item name="android:textAppearance">@style/TextAppearance.MyAunt.ChipReason</item>
+        <item name="android:textColor">@color/chip_unsure_text</item>
+        <item name="chipBackgroundColor">@color/chip_unsure_background</item>
+        <item name="chipStrokeColor">@color/chip_unsure_stroke</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipCornerRadius">22dp</item>
+        <item name="chipMinHeight">44dp</item>
+        <item name="chipStartPadding">16dp</item>
+        <item name="chipEndPadding">16dp</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="rippleColor">@color/md_pink_soft</item>
+    </style>
+</resources>

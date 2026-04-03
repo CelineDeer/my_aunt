@@ -1,0 +1,180 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.myaunt.app"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+9        android:targetSdkVersion="35" />
+10
+11    <permission
+11-->[androidx.core:core:1.16.0] /Users/mac/.gradle/caches/8.11.1/transforms/4829c95503dd12634dcaee7780aba81f/transformed/core-1.16.0/AndroidManifest.xml:22:5-24:47
+12        android:name="com.myaunt.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+12-->[androidx.core:core:1.16.0] /Users/mac/.gradle/caches/8.11.1/transforms/4829c95503dd12634dcaee7780aba81f/transformed/core-1.16.0/AndroidManifest.xml:23:9-81
+13        android:protectionLevel="signature" />
+13-->[androidx.core:core:1.16.0] /Users/mac/.gradle/caches/8.11.1/transforms/4829c95503dd12634dcaee7780aba81f/transformed/core-1.16.0/AndroidManifest.xml:24:9-44
+14
+15    <uses-permission android:name="com.myaunt.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+15-->[androidx.core:core:1.16.0] /Users/mac/.gradle/caches/8.11.1/transforms/4829c95503dd12634dcaee7780aba81f/transformed/core-1.16.0/AndroidManifest.xml:26:5-97
+15-->[androidx.core:core:1.16.0] /Users/mac/.gradle/caches/8.11.1/transforms/4829c95503dd12634dcaee7780aba81f/transformed/core-1.16.0/AndroidManifest.xml:26:22-94
+16
+17    <application
+17-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:4:5-49:19
+18        android:allowBackup="true"
+18-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:5:9-35
+19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+19-->[androidx.core:core:1.16.0] /Users/mac/.gradle/caches/8.11.1/transforms/4829c95503dd12634dcaee7780aba81f/transformed/core-1.16.0/AndroidManifest.xml:28:18-86
+20        android:debuggable="true"
+21        android:extractNativeLibs="false"
+22        android:icon="@mipmap/ic_launcher"
+22-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:6:9-43
+23        android:label="@string/app_name"
+23-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:8:9-41
+24        android:roundIcon="@mipmap/ic_launcher_round"
+24-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:7:9-54
+25        android:supportsRtl="true"
+25-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:9:9-35
+26        android:testOnly="true"
+27        android:theme="@style/Theme.MyAunt" >
+27-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:10:9-44
+28        <activity
+28-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:11:9-19:20
+29            android:name="com.myaunt.app.SplashActivity"
+29-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:12:13-43
+30            android:exported="true"
+30-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:13:13-36
+31            android:theme="@style/Theme.MyAunt.Splash" >
+31-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:14:13-55
+32            <intent-filter>
+32-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:15:13-18:29
+33                <action android:name="android.intent.action.MAIN" />
+33-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:16:17-69
+33-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:16:25-66
+34
+35                <category android:name="android.intent.category.LAUNCHER" />
+35-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:17:17-77
+35-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:17:27-74
+36            </intent-filter>
+37        </activity>
+38        <activity
+38-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:21:9-27:20
+39            android:name="com.myaunt.app.MainActivity"
+39-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:22:13-41
+40            android:exported="true" >
+40-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:23:13-36
+41            <meta-data
+41-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:24:13-26:53
+42                android:name="android.app.shortcuts"
+42-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:25:17-53
+43                android:resource="@xml/shortcuts" />
+43-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:26:17-50
+44        </activity>
+45        <activity
+45-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:29:9-36:71
+46            android:name="com.myaunt.app.widget.PinWidgetActivity"
+46-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:30:13-53
+47            android:excludeFromRecents="true"
+47-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:32:13-46
+48            android:exported="true"
+48-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:31:13-36
+49            android:launchMode="singleTop"
+49-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:33:13-43
+50            android:noHistory="true"
+50-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:34:13-37
+51            android:taskAffinity=""
+51-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:35:13-36
+52            android:theme="@style/Theme.MyAunt.WidgetPinTrampoline" />
+52-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:36:13-68
+53
+54        <receiver
+54-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:38:9-48:20
+55            android:name="com.myaunt.app.widget.PeriodCycleAppWidget"
+55-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:39:13-56
+56            android:exported="true"
+56-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:40:13-36
+57            android:label="@string/widget_period_label" >
+57-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:41:13-56
+58            <intent-filter>
+58-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:42:13-44:29
+59                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+59-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:43:17-84
+59-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:43:25-81
+60            </intent-filter>
+61
+62            <meta-data
+62-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:45:13-47:68
+63                android:name="android.appwidget.provider"
+63-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:46:17-58
+64                android:resource="@xml/period_cycle_widget_info" />
+64-->/Users/mac/Documents/my_aunt/app/src/main/AndroidManifest.xml:47:17-65
+65        </receiver>
+66
+67        <provider
+67-->[androidx.emoji2:emoji2:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/035c39fc9a63c6d788486cf4d9aff72b/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+68            android:name="androidx.startup.InitializationProvider"
+68-->[androidx.emoji2:emoji2:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/035c39fc9a63c6d788486cf4d9aff72b/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+69            android:authorities="com.myaunt.app.androidx-startup"
+69-->[androidx.emoji2:emoji2:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/035c39fc9a63c6d788486cf4d9aff72b/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+70            android:exported="false" >
+70-->[androidx.emoji2:emoji2:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/035c39fc9a63c6d788486cf4d9aff72b/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+71            <meta-data
+71-->[androidx.emoji2:emoji2:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/035c39fc9a63c6d788486cf4d9aff72b/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+72                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+72-->[androidx.emoji2:emoji2:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/035c39fc9a63c6d788486cf4d9aff72b/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+73                android:value="androidx.startup" />
+73-->[androidx.emoji2:emoji2:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/035c39fc9a63c6d788486cf4d9aff72b/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+74            <meta-data
+74-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/mac/.gradle/caches/8.11.1/transforms/818b563e5fc2cabb3ea2da54c420a149/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:29:13-31:52
+75                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+75-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/mac/.gradle/caches/8.11.1/transforms/818b563e5fc2cabb3ea2da54c420a149/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:30:17-78
+76                android:value="androidx.startup" />
+76-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/mac/.gradle/caches/8.11.1/transforms/818b563e5fc2cabb3ea2da54c420a149/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:31:17-49
+77            <meta-data
+77-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:29:13-31:52
+78                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+78-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:30:17-85
+79                android:value="androidx.startup" />
+79-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:31:17-49
+80        </provider>
+81
+82        <receiver
+82-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:34:9-52:20
+83            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+83-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:35:13-76
+84            android:directBootAware="false"
+84-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:36:13-44
+85            android:enabled="true"
+85-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:37:13-35
+86            android:exported="true"
+86-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:38:13-36
+87            android:permission="android.permission.DUMP" >
+87-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:39:13-57
+88            <intent-filter>
+88-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:40:13-42:29
+89                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+89-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:17-91
+89-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:25-88
+90            </intent-filter>
+91            <intent-filter>
+91-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:43:13-45:29
+92                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+92-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:17-85
+92-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:25-82
+93            </intent-filter>
+94            <intent-filter>
+94-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:46:13-48:29
+95                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+95-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:17-88
+95-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:25-85
+96            </intent-filter>
+97            <intent-filter>
+97-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:49:13-51:29
+98                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+98-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:17-95
+98-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/mac/.gradle/caches/8.11.1/transforms/338262f38ca791b110e1f6f7cf225eaf/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:25-92
+99            </intent-filter>
+100        </receiver>
+101    </application>
+102
+103</manifest>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="pin_period_widget"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_widget"
+        android:shortcutShortLabel="@string/shortcut_pin_widget_short"
+        android:shortcutLongLabel="@string/shortcut_pin_widget_long">
+        <intent
+            android:action="com.myaunt.app.action.REQUEST_PIN_WIDGET"
+            android:targetPackage="com.myaunt.app"
+            android:targetClass="com.myaunt.app.widget.PinWidgetActivity" />
+    </shortcut>
+</shortcuts>
