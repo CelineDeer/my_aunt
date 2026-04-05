@@ -85,6 +85,9 @@ class PeriodRepository(context: Context) {
         return ChronoUnit.DAYS.between(lastPeriod, LocalDate.now())
     }
 
+    /**
+     * 相邻两次月经开始日之间的间隔（天），按时间从新到旧遍历。
+     */
     fun getCycleIntervals(): List<Long> {
         val periods = getAllPeriods().sortedDescending()
         if (periods.size < 2) return emptyList()
@@ -96,6 +99,12 @@ class PeriodRepository(context: Context) {
         return intervals
     }
 
+    /**
+     * 历史相邻月经间隔（天）的算术平均；至少 **2 条** 记录才有 1 个间隔，此时平均值即该间隔。
+     *
+     * UI 推测：`剩余天数 ≈ round(平均值) − 距上次月经天数`；
+     * `预计来潮日 ≈ 上次月经日 + round(平均值)`。
+     */
     fun getAverageCycle(): Double? {
         val intervals = getCycleIntervals()
         if (intervals.isEmpty()) return null

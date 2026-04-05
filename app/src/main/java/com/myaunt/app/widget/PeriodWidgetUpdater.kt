@@ -12,6 +12,7 @@ import com.myaunt.app.R
 import com.myaunt.app.data.PeriodRepository
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+import kotlin.math.round
 
 object PeriodWidgetUpdater {
 
@@ -41,7 +42,8 @@ object PeriodWidgetUpdater {
             rv.setTextViewText(R.id.widget_last, "上次 ${last.format(dateFormatter)}")
             val avg = repo.getAverageCycle()
             if (avg != null) {
-                val nextDays = avg.toInt() - days
+                val avgRounded = round(avg).toInt().coerceAtLeast(1)
+                val nextDays = avgRounded - days.toInt()
                 rv.setViewVisibility(R.id.widget_forecast, android.view.View.VISIBLE)
                 if (nextDays > 0) {
                     rv.setTextViewText(R.id.widget_forecast, "预计还有 ${nextDays} 天")

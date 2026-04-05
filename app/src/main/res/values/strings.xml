@@ -18,11 +18,23 @@
     <string name="privacy_disagree">不同意并退出</string>
 
     <string name="home_today_line">今天 · %s</string>
-    <string name="home_greet_late_night">已经很晚啦，早点休息好不好 🌙</string>
-    <string name="home_greet_morning">早安呀，新的一天开始啦 ☀️</string>
-    <string name="home_greet_noon">午安，记得好好吃饭哦 🍱</string>
-    <string name="home_greet_afternoon">下午好呀，慢慢来不用急 🍃</string>
-    <string name="home_greet_evening">晚上好，今天也辛苦啦 ✨</string>
+    <string name="home_mood_section_title">心情与激素（示意）</string>
+    <string name="home_mood_disclaimer">以上为常见周期与激素变化的通俗对应，不能代替医疗判断；你完全可以和示意不一样。</string>
+    <string name="home_mood_empty_title">先记下月经日吧</string>
+    <string name="home_mood_empty_sub">还没有记录。记下月经开始后，这里会根据周期阶段粗推当下可能偏「安静 / 回升 / 敏感」等心情倾向（激素示意）。\n今天 · %1$s</string>
+    <string name="home_mood_rough_cycle_note">暂按常见 28 天周期估算阶段；多记几次后会改用你的平均周期。</string>
+    <string name="home_mood_menstrual_title">可能在「低调休养期」</string>
+    <string name="home_mood_menstrual_body">雌激素、孕激素偏低，不少人容易乏力、想安静独处——慢一点也没关系。</string>
+    <string name="home_mood_follicular_title">可能在「慢慢回血期」</string>
+    <string name="home_mood_follicular_body">雌激素逐渐升高，有些人会感觉精力回升、情绪更稳一点。</string>
+    <string name="home_mood_ovulation_title">可能在「高光窗口期」</string>
+    <string name="home_mood_ovulation_body">雌激素接近峰值，有人会更想动、更想聊天；也有人毫无感觉，这都很正常。</string>
+    <string name="home_mood_luteal_title">可能在「身体更敏感期」</string>
+    <string name="home_mood_luteal_body">排卵后孕激素升高，胸胀、馋嘴或对小事更敏感都比较常见。</string>
+    <string name="home_mood_pms_title">可能在「经前波动期」</string>
+    <string name="home_mood_pms_body">孕激素回落、激素波动大，烦躁、想哭或睡不好都可能出现；若影响很大值得和医生聊聊。</string>
+    <string name="home_mood_waiting_title">身体可能在「等待下一次来潮」</string>
+    <string name="home_mood_waiting_body">已超过按周期推算的常见区间，激素节奏还不定型，恍惚或紧绷都常见；若推迟较久请关注身体信号。</string>
 
     <string name="home_tip_title">今日贴心</string>
     <string name="home_journey_title">这些天我都在陪你记录 💗</string>

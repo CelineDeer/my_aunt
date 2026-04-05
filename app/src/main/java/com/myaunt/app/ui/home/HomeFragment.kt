@@ -42,8 +42,8 @@ import com.myaunt.app.MainActivity
 import com.myaunt.app.widget.PeriodWidgetUpdater
 import java.time.Instant
 import java.time.LocalDate
-import java.time.LocalTime
 import java.time.ZoneId
+import kotlin.math.round
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
@@ -84,7 +84,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun updateUI() {
-        updateGreetingHeader()
+        updateMoodHeader()
         updateWarmTip()
         updateJourneyCard()
 
@@ -113,7 +113,8 @@ class HomeFragment : Fragment() {
 
             val avg = repository.getAverageCycle()
             if (avg != null) {
-                val nextDays = avg.toInt() - days
+                val avgRounded = round(avg).toInt().coerceAtLeast(1)
+                val nextDays = avgRounded - days.toInt()
                 val wasGone = binding.tvCycleInfo.visibility != View.VISIBLE
                 binding.tvCycleInfo.visibility = View.VISIBLE
                 binding.tvCycleInfo.text = if (nextDays > 0) {
@@ -182,21 +183,52 @@ class HomeFragment : Fragment() {
         heartFloatAnimator?.start()
     }
 
-    private fun updateGreetingHeader() {
-        binding.tvGreeting.text = greetingForHour(LocalTime.now().hour)
-        val today = LocalDate.now()
-        binding.tvTodayLine.text = getString(
-            R.string.home_today_line,
-            today.format(todayLineFormatter),
-        )
-    }
+    private fun updateMoodHeader() {
+        val todayStr = LocalDate.now().format(todayLineFormatter)
+        val periods = repository.getAllPeriods()
+        val days = repository.getDaysSinceLastPeriod()
 
-    private fun greetingForHour(hour: Int): String = when {
-        hour < 5 -> getString(R.string.home_greet_late_night)
-        hour < 11 -> getString(R.string.home_greet_morning)
-        hour < 14 -> getString(R.string.home_greet_noon)
-        hour < 18 -> getString(R.string.home_greet_afternoon)
-        else -> getString(R.string.home_greet_evening)
+        if (days == null || periods.isEmpty()) {
+            binding.tvGreeting.text = getString(R.string.home_mood_empty_title)
+            binding.tvTodayLine.text = getString(R.string.home_mood_empty_sub, todayStr)
+            return
+        }
+
+        val avg = repository.getAverageCycle()
+        val cycleLen = when {
+            avg != null -> round(avg).toInt().coerceIn(21, 50)
+            else -> 28
+        }
+        val usingRoughCycle = avg == null
+        val phase = CycleHormoneMood.inferPhase(days, cycleLen)
+
+        val (titleRes, bodyRes) = when (phase) {
+            HormoneMoodPhase.MENSTRUAL ->
+                R.string.home_mood_menstrual_title to R.string.home_mood_menstrual_body
+            HormoneMoodPhase.FOLLICULAR ->
+                R.string.home_mood_follicular_title to R.string.home_mood_follicular_body
+            HormoneMoodPhase.OVULATION ->
+                R.string.home_mood_ovulation_title to R.string.home_mood_ovulation_body
+            HormoneMoodPhase.LUTEAL ->
+                R.string.home_mood_luteal_title to R.string.home_mood_luteal_body
+            HormoneMoodPhase.PMS_LATE ->
+                R.string.home_mood_pms_title to R.string.home_mood_pms_body
+            HormoneMoodPhase.WAITING_NEXT_CYCLE ->
+                R.string.home_mood_waiting_title to R.string.home_mood_waiting_body
+        }
+
+        binding.tvGreeting.text = getString(titleRes)
+        binding.tvTodayLine.text = buildString {
+            append(getString(bodyRes))
+            if (usingRoughCycle) {
+                append("\n")
+                append(getString(R.string.home_mood_rough_cycle_note))
+            }
+            append("\n")
+            append(getString(R.string.home_mood_disclaimer))
+            append("\n")
+            append(getString(R.string.home_today_line, todayStr))
+        }
     }
 
     private fun updateWarmTip() {

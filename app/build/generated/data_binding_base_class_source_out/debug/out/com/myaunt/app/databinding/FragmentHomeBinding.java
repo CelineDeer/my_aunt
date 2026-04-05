@@ -66,6 +66,9 @@ public final class FragmentHomeBinding implements ViewBinding {
   public final TextView tvGreeting;
 
   @NonNull
+  public final TextView tvHomePredictionLabel;
+
+  @NonNull
   public final TextView tvJourneySummary;
 
   @NonNull
@@ -86,9 +89,9 @@ public final class FragmentHomeBinding implements ViewBinding {
       @NonNull CardView cardJourney, @NonNull CardView cardMainStats, @NonNull CardView cardWarmTip,
       @NonNull ImageView ivHomeBloom, @NonNull NestedScrollView scrollHome,
       @NonNull TextView tvCycleInfo, @NonNull TextView tvDaysCount, @NonNull TextView tvDaysLabel,
-      @NonNull TextView tvGreeting, @NonNull TextView tvJourneySummary,
-      @NonNull TextView tvLastDate, @NonNull TextView tvSuccessHint, @NonNull TextView tvTodayLine,
-      @NonNull TextView tvWarmTip) {
+      @NonNull TextView tvGreeting, @NonNull TextView tvHomePredictionLabel,
+      @NonNull TextView tvJourneySummary, @NonNull TextView tvLastDate,
+      @NonNull TextView tvSuccessHint, @NonNull TextView tvTodayLine, @NonNull TextView tvWarmTip) {
     this.rootView = rootView;
     this.barHomeActions = barHomeActions;
     this.btnBackfill = btnBackfill;
@@ -104,6 +107,7 @@ public final class FragmentHomeBinding implements ViewBinding {
     this.tvDaysCount = tvDaysCount;
     this.tvDaysLabel = tvDaysLabel;
     this.tvGreeting = tvGreeting;
+    this.tvHomePredictionLabel = tvHomePredictionLabel;
     this.tvJourneySummary = tvJourneySummary;
     this.tvLastDate = tvLastDate;
     this.tvSuccessHint = tvSuccessHint;
@@ -222,6 +226,12 @@ public final class FragmentHomeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvHomePredictionLabel;
+      TextView tvHomePredictionLabel = ViewBindings.findChildViewById(rootView, id);
+      if (tvHomePredictionLabel == null) {
+        break missingId;
+      }
+
       id = R.id.tvJourneySummary;
       TextView tvJourneySummary = ViewBindings.findChildViewById(rootView, id);
       if (tvJourneySummary == null) {
@@ -255,7 +265,8 @@ public final class FragmentHomeBinding implements ViewBinding {
       return new FragmentHomeBinding((LinearLayout) rootView, barHomeActions, btnBackfill,
           btnOpenChart, btnRecord, cardGreeting, cardJourney, cardMainStats, cardWarmTip,
           ivHomeBloom, scrollHome, tvCycleInfo, tvDaysCount, tvDaysLabel, tvGreeting,
-          tvJourneySummary, tvLastDate, tvSuccessHint, tvTodayLine, tvWarmTip);
+          tvHomePredictionLabel, tvJourneySummary, tvLastDate, tvSuccessHint, tvTodayLine,
+          tvWarmTip);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

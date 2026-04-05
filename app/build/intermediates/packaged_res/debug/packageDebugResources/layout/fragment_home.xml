@@ -52,22 +52,32 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvHomePredictionLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_mood_section_title"
+                            android:textSize="13sp"
+                            android:textColor="@color/md_text_secondary" />
+
+                        <TextView
                             android:id="@+id/tvGreeting"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="22sp"
+                            android:layout_marginTop="6dp"
+                            android:textSize="24sp"
                             android:textStyle="bold"
                             android:textColor="@color/md_on_surface"
-                            tools:text="早上好呀" />
+                            tools:text="可能在「慢慢回血期」" />
 
                         <TextView
                             android:id="@+id/tvTodayLine"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
+                            android:layout_marginTop="8dp"
                             android:textSize="14sp"
                             android:textColor="@color/md_text_secondary"
-                            tools:text="今天 · 4月3日 星期五" />
+                            android:lineSpacingMultiplier="1.15"
+                            tools:text="雌激素逐渐升高…" />
 
                     </LinearLayout>
 

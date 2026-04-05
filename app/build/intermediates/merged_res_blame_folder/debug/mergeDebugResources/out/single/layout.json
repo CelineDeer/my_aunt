@@ -24,8 +24,8 @@
         "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/activity_splash.xml"
     },
     {
-        "merged": "com.myaunt.app-mergeDebugResources-33:/layout/dialog_privacy_policy.xml",
-        "source": "com.myaunt.app-main-36:/layout/dialog_privacy_policy.xml"
+        "merged": "com.myaunt.app-mergeDebugResources-33:/layout/fragment_home.xml",
+        "source": "com.myaunt.app-main-36:/layout/fragment_home.xml"
     },
     {
         "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/fragment_special_records.xml",
