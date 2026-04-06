@@ -11,8 +11,8 @@
     <!-- 正文中的 %1$s 将替换为可点击的【《隐私政策》】链接 -->
     <string name="privacy_dialog_intro_template" formatted="false">为更好地保护您的权益，请阅读%1$s。本应用主要在设备本地保存您主动填写的经期与备注信息，不主动上传至开发者服务器。</string>
     <string name="privacy_policy_link_text">【《隐私政策》】</string>
-    <!-- 正式网页地址稍后填写；留空时点链接会提示暂未配置 -->
-    <string name="privacy_policy_url" translatable="false" />
+    <!-- 与仓库根目录 PRIVACY_POLICY.md 对应；应用内与商店填写同一公开地址 -->
+    <string name="privacy_policy_url" translatable="false">https://github.com/CelineDeer/my_aunt/blob/main/PRIVACY_POLICY.md</string>
     <string name="privacy_policy_url_pending">隐私政策链接暂未配置，请稍后在应用更新中查看</string>
     <string name="privacy_agree">同意并继续</string>
     <string name="privacy_disagree">不同意并退出</string>

@@ -1,0 +1,46 @@
+[
+    {
+        "merged": "com.myaunt.app-mergeReleaseResources-33:/layout/activity_splash.xml",
+        "source": "com.myaunt.app-main-35:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.myaunt.app-mergeReleaseResources-33:/layout/item_chart_page.xml",
+        "source": "com.myaunt.app-main-35:/layout/item_chart_page.xml"
+    },
+    {
+        "merged": "com.myaunt.app-mergeReleaseResources-33:/layout/fragment_special_records.xml",
+        "source": "com.myaunt.app-main-35:/layout/fragment_special_records.xml"
+    },
+    {
+        "merged": "com.myaunt.app-mergeReleaseResources-33:/layout/activity_main.xml",
+        "source": "com.myaunt.app-main-35:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.myaunt.app-mergeReleaseResources-33:/layout/item_special_record.xml",
+        "source": "com.myaunt.app-main-35:/layout/item_special_record.xml"
+    },
+    {
+        "merged": "com.myaunt.app-mergeReleaseResources-33:/layout/dialog_privacy_policy.xml",
+        "source": "com.myaunt.app-main-35:/layout/dialog_privacy_policy.xml"
+    },
+    {
+        "merged": "com.myaunt.app-mergeReleaseResources-33:/layout/dialog_month_range_picker.xml",
+        "source": "com.myaunt.app-main-35:/layout/dialog_month_range_picker.xml"
+    },
+    {
+        "merged": "com.myaunt.app-mergeReleaseResources-33:/layout/fragment_chart.xml",
+        "source": "com.myaunt.app-main-35:/layout/fragment_chart.xml"
+    },
+    {
+        "merged": "com.myaunt.app-mergeReleaseResources-33:/layout/dialog_special_reason.xml",
+        "source": "com.myaunt.app-main-35:/layout/dialog_special_reason.xml"
+    },
+    {
+        "merged": "com.myaunt.app-mergeReleaseResources-33:/layout/widget_period_cycle.xml",
+        "source": "com.myaunt.app-main-35:/layout/widget_period_cycle.xml"
+    },
+    {
+        "merged": "com.myaunt.app-mergeReleaseResources-33:/layout/fragment_home.xml",
+        "source": "com.myaunt.app-main-35:/layout/fragment_home.xml"
+    }
+]
