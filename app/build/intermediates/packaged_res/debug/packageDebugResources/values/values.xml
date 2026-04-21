@@ -28,6 +28,7 @@
     <color name="md_chart_bar_start">#FFC8E0</color>
     <color name="md_chart_grid">#20000000</color>
     <color name="md_chart_label">#7A4A72</color>
+    <color name="md_chart_orange">#FF9800</color>
     <color name="md_chart_value">#4A2D45</color>
     <color name="md_cycle_green_end">#3DDC9A</color>
     <color name="md_cycle_green_start">#C6FCE3</color>
@@ -100,7 +101,7 @@
     <string name="privacy_dialog_title">隐私政策</string>
     <string name="privacy_disagree">不同意并退出</string>
     <string name="privacy_policy_link_text">【《隐私政策》】</string>
-    <string name="privacy_policy_url" translatable="false"/>
+    <string name="privacy_policy_url" translatable="false">https://github.com/CelineDeer/my_aunt/blob/main/PRIVACY_POLICY.md</string>
     <string name="privacy_policy_url_pending">隐私政策链接暂未配置，请稍后在应用更新中查看</string>
     <string name="shortcut_pin_widget_long">把经期天数小组件放到桌面</string>
     <string name="shortcut_pin_widget_short">添加桌面小组件</string>
@@ -123,6 +124,10 @@
     <string name="special_record_badge_date">%1$d月\n%2$d日</string>
     <string name="widget_period_description">显示距离上次经期天数与预计下次</string>
     <string name="widget_period_label">经期小助手</string>
+    <style name="BottomNavText" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
     <style name="TextAppearance.MyAunt.ChipReason" parent="TextAppearance.Material3.LabelLarge">
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">sans-serif</item>

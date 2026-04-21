@@ -64,4 +64,5 @@
     <color name="special_dialog_bottom_bar">#FFFFFF</color>
     <color name="special_unsure_chip_bg">#EDEDED</color>
     <color name="special_unsure_chip_stroke">#CFC8D0</color>
+    <color name="md_chart_orange">#FF9800</color>
 </resources>

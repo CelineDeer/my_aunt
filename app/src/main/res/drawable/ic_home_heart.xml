@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- House outline -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#F43F68"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M3,9l9,-7 9,7v11a2,2 0,0 1,-2 2H5a2,2 0,0 1,-2 -2z" />
+    <!-- Heart inside -->
+    <path
+        android:fillColor="#F43F68"
+        android:pathData="M12,18.5l-0.5,-0.5C9.5,16.5 8,15.2 8,13.5c0,-1.2 0.8,-2.2 2,-2.2c0.7,0 1.3,0.3 1.7,0.8L12,12.8l0.3,-0.7c0.4,-0.5 1,-0.8 1.7,-0.8c1.2,0 2,1 2,2.2c0,1.7 -1.5,3 -3.5,4.5L12,18.5z"/>
+</vector>

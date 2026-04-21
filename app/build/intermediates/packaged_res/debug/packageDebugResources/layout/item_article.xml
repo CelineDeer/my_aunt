@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- 文章头部：图标和标题 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- 图标容器 -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardIcon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#FFF0F5">
+
+                <ImageView
+                    android:id="@+id/ivIcon"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:src="@android:drawable/ic_menu_info_details" />
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- 标题区域 -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="12dp">
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="文章标题"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/md_on_surface" />
+
+                <TextView
+                    android:id="@+id/tvSubtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="分类 · 阅读时间"
+                    android:textSize="12sp"
+                    android:textColor="@color/md_text_secondary"
+                    android:layout_marginTop="2dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- 文章内容摘要 -->
+        <TextView
+            android:id="@+id/tvSummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="文章内容摘要..."
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:lineSpacingMultiplier="1.2"
+            android:layout_marginTop="12dp" />
+
+        <!-- 展开按钮 -->
+        <TextView
+            android:id="@+id/tvExpand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="阅读完整科普"
+            android:textSize="13sp"
+            android:textColor="@color/md_primary"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"
+            android:drawableEnd="@drawable/ic_arrow_down"
+            android:drawableTint="@color/md_primary"
+            android:drawablePadding="4dp"
+            android:gravity="center_vertical" />
+
+        <!-- 展开的完整内容区域 -->
+        <TextView
+            android:id="@+id/tvFullContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="完整文章内容..."
+            android:textSize="14sp"
+            android:textColor="#555555"
+            android:lineSpacingMultiplier="1.3"
+            android:layout_marginTop="12dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

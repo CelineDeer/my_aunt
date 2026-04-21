@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="14dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="#FFF0FA"
+    app:strokeColor="@color/md_pink_soft"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="18dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="激素探测仪"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/md_on_surface" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnViewScience"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="查看科普"
+                android:textAllCaps="false"
+                android:textSize="13sp"
+                android:textColor="@color/md_primary"
+                app:rippleColor="@color/md_pink_soft" />
+
+        </LinearLayout>
+
+        <!-- 雌激素 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="14dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="6dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="雌激素"
+                    android:textSize="14sp"
+                    android:textColor="@color/md_on_surface" />
+
+                <TextView
+                    android:id="@+id/tvEstrogenStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="上升中 ↑"
+                    android:textSize="13sp"
+                    android:textColor="@color/md_primary"
+                    android:textStyle="bold"
+                    tools:text="上升中 ↑" />
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progressEstrogen"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:progress="70"
+                android:max="100"
+                android:progressDrawable="@drawable/progress_pink"
+                tools:progress="70" />
+
+        </LinearLayout>
+
+        <!-- 孕激素 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="6dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="孕激素"
+                    android:textSize="14sp"
+                    android:textColor="@color/md_on_surface" />
+
+                <TextView
+                    android:id="@+id/tvProgesteroneStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="平稳状态"
+                    android:textSize="13sp"
+                    android:textColor="@color/md_secondary"
+                    android:textStyle="bold"
+                    tools:text="平稳状态" />
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progressProgesterone"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:progress="20"
+                android:max="100"
+                android:progressDrawable="@drawable/progress_orange"
+                tools:progress="20" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

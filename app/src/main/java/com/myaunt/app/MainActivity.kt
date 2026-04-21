@@ -28,8 +28,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.myaunt.app.databinding.ActivityMainBinding
 import com.myaunt.app.privacy.PrivacyConsent
 import com.myaunt.app.ui.chart.ChartFragment
+import com.myaunt.app.ui.healthtreasury.HealthTreasuryFragment
 import com.myaunt.app.ui.home.HomeFragment
-import com.myaunt.app.ui.special.SpecialRecordsFragment
+import com.myaunt.app.ui.vaginaldischarge.VaginalDischargeRecordFragment
 import com.myaunt.app.widget.PeriodWidgetUpdater
 
 class MainActivity : AppCompatActivity() {
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity() {
             // 顶部不留白：Fragment 可全屏铺背景（如备注页渐变延伸到状态栏），由各 Fragment 自行加 statusBars padding。
             v.updatePadding(bars.left, 0, bars.right, 0)
             binding.bottomNav.updatePadding(bottom = bars.bottom)
+            binding.bottomNavContainer.updatePadding(bottom = bars.bottom)
             windowInsets
         }
 
@@ -68,7 +70,8 @@ class MainActivity : AppCompatActivity() {
     private fun setupNavigation() {
         val homeFragment = HomeFragment()
         val chartFragment = ChartFragment()
-        val specialFragment = SpecialRecordsFragment()
+        val healthTreasuryFragment = HealthTreasuryFragment()
+        val vaginalDischargeFragment = VaginalDischargeRecordFragment()
 
         setCurrentFragment(homeFragment)
 
@@ -78,17 +81,119 @@ class MainActivity : AppCompatActivity() {
                     setCurrentFragment(homeFragment)
                     true
                 }
-                R.id.nav_chart -> {
+                R.id.nav_list -> {
                     setCurrentFragment(chartFragment)
                     true
                 }
-                R.id.nav_special -> {
-                    setCurrentFragment(specialFragment)
+                R.id.nav_add -> {
+                    // 中间添加按钮点击处理
+                    showDatePickerDialog()
+                    false
+                }
+                R.id.nav_info -> {
+                    setCurrentFragment(healthTreasuryFragment)
+                    true
+                }
+                R.id.nav_record -> {
+                    setCurrentFragment(vaginalDischargeFragment)
                     true
                 }
                 else -> false
             }
         }
+
+        // 中央添加按钮点击
+        binding.centerAddButton.setOnClickListener {
+            showDatePickerDialog()
+        }
+    }
+
+    private fun showDatePickerDialog() {
+        val today = java.time.LocalDate.now()
+        val datePickerDialog = android.app.DatePickerDialog(
+            this,
+            { _, year, month, dayOfMonth ->
+                val selectedDate = java.time.LocalDate.of(year, month + 1, dayOfMonth)
+                showRecordConfirmDialog(selectedDate)
+            },
+            today.year,
+            today.monthValue - 1,
+            today.dayOfMonth
+        )
+        datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
+        datePickerDialog.show()
+    }
+
+    private fun showRecordConfirmDialog(selectedDate: java.time.LocalDate) {
+        val repository = com.myaunt.app.data.PeriodRepository(this)
+        val formatter = java.time.format.DateTimeFormatter.ofPattern("M月d日", java.util.Locale.CHINESE)
+        
+        val message = if (selectedDate == java.time.LocalDate.now()) {
+            "确认今天开始了吗？"
+        } else {
+            "确认 ${selectedDate.format(formatter)} 开始了吗？"
+        }
+        
+        MaterialAlertDialogBuilder(this)
+            .setTitle("来姨妈了？")
+            .setMessage(message)
+            .setNegativeButton("取消", null)
+            .setPositiveButton("确认记录") { _, _ ->
+                tryRecordDate(repository, selectedDate)
+            }
+            .show()
+    }
+
+    private fun tryRecordDate(repository: com.myaunt.app.data.PeriodRepository, recordDate: java.time.LocalDate) {
+        if (repository.getAllPeriods().contains(recordDate)) {
+            val formatter = java.time.format.DateTimeFormatter.ofPattern("M月d日", java.util.Locale.CHINESE)
+            MaterialAlertDialogBuilder(this)
+                .setTitle("该日期已有记录")
+                .setMessage("${recordDate.format(formatter)} 已经记过一次，无需重复添加。")
+                .setPositiveButton("知道了", null)
+                .show()
+            return
+        }
+
+        val abnormalGap = repository.getAbnormalGapForNewRecord(recordDate)
+        if (abnormalGap == null) {
+            repository.addPeriod(recordDate)
+            PeriodWidgetUpdater.updateAll(this)
+            showSuccessToast()
+            return
+        }
+
+        showAbnormalCycleDialog(abnormalGap.days, recordDate, abnormalGap.comparedToFollowingPeriod, repository)
+    }
+
+    private fun showAbnormalCycleDialog(
+        cycleLength: Long,
+        recordDate: java.time.LocalDate,
+        comparedToFollowingPeriod: Boolean,
+        repository: com.myaunt.app.data.PeriodRepository
+    ) {
+        val whenText = when {
+            recordDate == java.time.LocalDate.now() -> "本次"
+            comparedToFollowingPeriod ->
+                "为 ${recordDate.format(java.time.format.DateTimeFormatter.ofPattern("M月d日"))} 补录时，与之后最近一条记录"
+            else ->
+                "为 ${recordDate.format(java.time.format.DateTimeFormatter.ofPattern("M月d日"))} 补录时，相对上一次记录"
+        }
+        
+        MaterialAlertDialogBuilder(this)
+            .setTitle("周期提醒")
+            .setMessage("$whenText 间隔为 $cycleLength 天，超出常见 20-40 天范围。\n周期可能不太规律，仍要记录吗？")
+            .setNegativeButton("取消", null)
+            .setPositiveButton("仍要记录") { _, _ ->
+                repository.addPeriodWithSpecialReason(recordDate, "未填写")
+                PeriodWidgetUpdater.updateAll(this)
+                showSuccessToast()
+            }
+            .show()
+    }
+
+    private fun showSuccessToast() {
+        Toast.makeText(this, "记录成功", Toast.LENGTH_SHORT).show()
     }
 
     private fun setCurrentFragment(fragment: Fragment) {

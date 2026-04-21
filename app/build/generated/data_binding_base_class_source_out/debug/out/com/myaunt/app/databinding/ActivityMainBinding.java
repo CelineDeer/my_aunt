@@ -5,12 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.card.MaterialCardView;
 import com.myaunt.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -18,24 +19,33 @@ import java.lang.String;
 
 public final class ActivityMainBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final CoordinatorLayout rootView;
 
   @NonNull
   public final BottomNavigationView bottomNav;
 
   @NonNull
+  public final FrameLayout bottomNavContainer;
+
+  @NonNull
+  public final MaterialCardView centerAddButton;
+
+  @NonNull
   public final FrameLayout fragmentContainer;
 
-  private ActivityMainBinding(@NonNull LinearLayout rootView,
-      @NonNull BottomNavigationView bottomNav, @NonNull FrameLayout fragmentContainer) {
+  private ActivityMainBinding(@NonNull CoordinatorLayout rootView,
+      @NonNull BottomNavigationView bottomNav, @NonNull FrameLayout bottomNavContainer,
+      @NonNull MaterialCardView centerAddButton, @NonNull FrameLayout fragmentContainer) {
     this.rootView = rootView;
     this.bottomNav = bottomNav;
+    this.bottomNavContainer = bottomNavContainer;
+    this.centerAddButton = centerAddButton;
     this.fragmentContainer = fragmentContainer;
   }
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public CoordinatorLayout getRoot() {
     return rootView;
   }
 
@@ -66,13 +76,26 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.bottomNavContainer;
+      FrameLayout bottomNavContainer = ViewBindings.findChildViewById(rootView, id);
+      if (bottomNavContainer == null) {
+        break missingId;
+      }
+
+      id = R.id.centerAddButton;
+      MaterialCardView centerAddButton = ViewBindings.findChildViewById(rootView, id);
+      if (centerAddButton == null) {
+        break missingId;
+      }
+
       id = R.id.fragment_container;
       FrameLayout fragmentContainer = ViewBindings.findChildViewById(rootView, id);
       if (fragmentContainer == null) {
         break missingId;
       }
 
-      return new ActivityMainBinding((LinearLayout) rootView, bottomNav, fragmentContainer);
+      return new ActivityMainBinding((CoordinatorLayout) rootView, bottomNav, bottomNavContainer,
+          centerAddButton, fragmentContainer);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

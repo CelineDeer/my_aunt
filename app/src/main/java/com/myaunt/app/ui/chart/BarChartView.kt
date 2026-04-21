@@ -31,6 +31,11 @@ class BarChartView @JvmOverloads constructor(
         val intervalDays: Long,
     )
 
+    data class HormonePoint(
+        val estrogenLevel: Float,
+        val progesteroneLevel: Float,
+    )
+
     private val colorAbnormalStart = ContextCompat.getColor(context, R.color.md_chart_abnormal_start)
     private val colorAbnormalEnd = ContextCompat.getColor(context, R.color.md_chart_abnormal_end)
     private val colorAbnormalText = ContextCompat.getColor(context, R.color.md_chart_abnormal_text)
@@ -66,6 +71,17 @@ class BarChartView @JvmOverloads constructor(
         textSize = 24f
         isFakeBoldText = true
     }
+    private val estrogenPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        strokeWidth = 4f
+        style = Paint.Style.STROKE
+    }
+    private val progesteronePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        strokeWidth = 4f
+        style = Paint.Style.STROKE
+    }
+    private val hormoneLegendPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        textSize = 20f
+    }
 
     init {
         labelPaint.color = ContextCompat.getColor(context, R.color.md_chart_label)
@@ -74,9 +90,16 @@ class BarChartView @JvmOverloads constructor(
         val avg = ContextCompat.getColor(context, R.color.md_chart_avg)
         avgLinePaint.color = avg
         avgLabelPaint.color = avg
+        
+        // 激素曲线颜色
+        estrogenPaint.color = ContextCompat.getColor(context, R.color.md_primary)
+        progesteronePaint.color = ContextCompat.getColor(context, R.color.md_chart_orange)
+        hormoneLegendPaint.color = ContextCompat.getColor(context, R.color.md_text_secondary)
     }
 
     private var points: List<ChartPoint> = emptyList()
+    private var hormonePoints: List<HormonePoint> = emptyList()
+    private var showHormoneCurves = false
     private var animationProgress = 0f
     private val monthFormatter = DateTimeFormatter.ofPattern("M月", Locale.CHINESE)
     private var barAnimator: ValueAnimator? = null
@@ -99,6 +122,16 @@ class BarChartView @JvmOverloads constructor(
 
     fun setData(points: List<ChartPoint>) {
         this.points = points
+        this.hormonePoints = emptyList()
+        this.showHormoneCurves = false
+        startAnimation()
+        invalidate()
+    }
+
+    fun setData(points: List<ChartPoint>, hormonePoints: List<HormonePoint>) {
+        this.points = points
+        this.hormonePoints = hormonePoints
+        this.showHormoneCurves = hormonePoints.isNotEmpty()
         startAnimation()
         invalidate()
     }
@@ -160,7 +193,7 @@ class BarChartView @JvmOverloads constructor(
         val paddingLeft = 80f
         val paddingRight = 24f
         val paddingTop = 48f
-        val paddingBottom = 110f
+        val paddingBottom = if (showHormoneCurves) 140f else 110f
 
         val chartWidth = width - paddingLeft - paddingRight
         val chartHeight = height - paddingTop - paddingBottom
@@ -173,6 +206,7 @@ class BarChartView @JvmOverloads constructor(
         val barWidth = (chartWidth / barCount) * 0.58f
         val barSpacing = chartWidth / barCount
 
+        // 绘制网格线
         val gridLines = 4
         for (i in 0..gridLines) {
             val y = paddingTop + chartHeight - (i * chartHeight / gridLines)
@@ -182,10 +216,17 @@ class BarChartView @JvmOverloads constructor(
             canvas.drawText(label, paddingLeft - 8f, y + 8f, labelPaint)
         }
 
+        // 绘制平均值线
         val avgY = paddingTop + chartHeight - (avg / maxVal * chartHeight)
         canvas.drawLine(paddingLeft, avgY, paddingLeft + chartWidth, avgY, avgLinePaint)
         canvas.drawText("均值 ${avg.toInt()}天", paddingLeft + chartWidth - 100f, avgY - 10f, avgLabelPaint)
 
+        // 绘制激素曲线
+        if (showHormoneCurves && hormonePoints.size == points.size) {
+            drawHormoneCurves(canvas, paddingLeft, paddingTop, chartWidth, chartHeight, barSpacing, barWidth)
+        }
+
+        // 绘制柱状图
         for (i in points.indices) {
             val point = points[i]
             val value = point.intervalDays.toFloat()
@@ -237,5 +278,51 @@ class BarChartView @JvmOverloads constructor(
                 labelPaint
             )
         }
+
+        // 绘制激素图例
+        if (showHormoneCurves) {
+            drawHormoneLegend(canvas, width - 150f, paddingTop + 20f)
+        }
+    }
+
+    private fun drawHormoneCurves(
+        canvas: Canvas,
+        paddingLeft: Float,
+        paddingTop: Float,
+        chartWidth: Float,
+        chartHeight: Float,
+        barSpacing: Float,
+        barWidth: Float
+    ) {
+        val estrogenPath = android.graphics.Path()
+        val progesteronePath = android.graphics.Path()
+
+        for (i in hormonePoints.indices) {
+            val x = paddingLeft + i * barSpacing + barSpacing / 2
+            val estrogenY = paddingTop + chartHeight - (hormonePoints[i].estrogenLevel / 100f * chartHeight) * animationProgress
+            val progesteroneY = paddingTop + chartHeight - (hormonePoints[i].progesteroneLevel / 100f * chartHeight) * animationProgress
+
+            if (i == 0) {
+                estrogenPath.moveTo(x, estrogenY)
+                progesteronePath.moveTo(x, progesteroneY)
+            } else {
+                estrogenPath.lineTo(x, estrogenY)
+                progesteronePath.lineTo(x, progesteroneY)
+            }
+        }
+
+        canvas.drawPath(estrogenPath, estrogenPaint)
+        canvas.drawPath(progesteronePath, progesteronePaint)
+    }
+
+    private fun drawHormoneLegend(canvas: Canvas, x: Float, y: Float) {
+        // 雌激素图例
+        canvas.drawLine(x, y, x + 30f, y, estrogenPaint)
+        hormoneLegendPaint.textAlign = Paint.Align.LEFT
+        canvas.drawText("雌激素", x + 40f, y + 6f, hormoneLegendPaint)
+
+        // 孕激素图例
+        canvas.drawLine(x, y + 25f, x + 30f, y + 25f, progesteronePaint)
+        canvas.drawText("孕激素", x + 40f, y + 31f, hormoneLegendPaint)
     }
 }

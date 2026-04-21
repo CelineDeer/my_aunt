@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardBackgroundColor="@color/md_surface"
+    app:strokeColor="@color/md_pink_soft"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/md_on_surface"
+                tools:text="2026年4月20日" />
+
+            <TextView
+                android:id="@+id/tvCycleDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="@color/md_text_secondary"
+                android:background="@color/md_home_welcome_surface"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:layout_marginStart="8dp"
+                tools:text="周期第12天" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="分泌量："
+                android:textSize="14sp"
+                android:textColor="@color/md_text_secondary"
+                android:layout_marginEnd="4dp" />
+
+            <TextView
+                android:id="@+id/tvAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/md_on_surface"
+                tools:text="正常" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="颜色："
+                android:textSize="14sp"
+                android:textColor="@color/md_text_secondary"
+                android:layout_marginEnd="4dp" />
+
+            <TextView
+                android:id="@+id/tvColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/md_on_surface"
+                tools:text="白色" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="质地："
+                android:textSize="14sp"
+                android:textColor="@color/md_text_secondary"
+                android:layout_marginEnd="4dp" />
+
+            <TextView
+                android:id="@+id/tvTexture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/md_on_surface"
+                tools:text="水样" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="感觉："
+                android:textSize="14sp"
+                android:textColor="@color/md_text_secondary"
+                android:layout_marginEnd="4dp" />
+
+            <TextView
+                android:id="@+id/tvSensation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                android:textColor="@color/md_on_surface"
+                tools:text="轻微瘙痒" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutTags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipAbdominal"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="腹部不适"
+                android:layout_marginEnd="8dp"
+                android:visibility="gone" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipAfterIntercourse"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="同房后记录"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="@color/md_text_secondary"
+            android:layout_marginTop="4dp"
+            android:visibility="gone"
+            tools:text="备注内容"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

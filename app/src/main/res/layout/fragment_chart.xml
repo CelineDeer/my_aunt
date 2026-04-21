@@ -3,187 +3,253 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     android:background="@color/md_bg">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:clipToPadding="false"
+        android:paddingBottom="100dp">
 
-        <TextView
-            android:id="@+id/tvChartHeadline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="每月周期间隔"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="@color/md_on_surface" />
-
-        <TextView
-            android:id="@+id/tvChartLegend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:text="20–24天紫色，25–32天绿色，33–40天黄色；小于20或大于40天为异常（红色）。长按柱子可查看备注"
-            android:textSize="13sp"
-            android:textColor="@color/md_text_secondary" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnPickMonth"
-            style="@style/Widget.Material3.Button.OutlinedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="选择日期范围" />
-
-        <TextView
-            android:id="@+id/tvWindowRange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text=""
-            android:textColor="@color/md_text_secondary"
-            android:textSize="13sp" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardChartArea"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="320dp"
-            android:layout_marginTop="14dp"
-            app:cardCornerRadius="20dp"
-            app:cardBackgroundColor="@color/md_surface">
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/chartPager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <TextView
-            android:id="@+id/tvEmpty"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="记录两次以上后，才可以看到周期柱状图"
-            android:textSize="14sp"
-            android:textColor="@color/md_text_secondary" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="24dp">
+            
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_arrow_back"
+                android:background="@drawable/bg_warning_dot"
+                android:backgroundTint="#FFFAFC"
+                app:tint="#F43F68"
+                android:padding="8dp"
+                android:layout_marginEnd="16dp" />
+                
+            <TextView
+                android:id="@+id/tvChartHeadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的周期趋势"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#F43F68" />
+        </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardStats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardBackgroundColor="@color/md_surface"
-            app:strokeColor="@color/md_pink_soft"
-            app:strokeWidth="1dp">
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                android:orientation="horizontal">
+                
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#FFF0F6">
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="记录周期数"
-                        android:textColor="@color/md_text_secondary" />
-
-                    <TextView
-                        android:id="@+id/tvRecordCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/md_on_surface"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+                        
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="平均周期"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="#E8729A"/>
+                            
+                        <TextView
+                            android:id="@+id/tvAvgCycle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="28天"
+                            android:includeFontPadding="false"
+                            android:textSize="36sp"
+                            android:textStyle="bold"
+                            android:textColor="#D12A52"/>
+                            
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#FFF8F0">
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="平均周期"
-                        android:textColor="@color/md_text_secondary" />
-
-                    <TextView
-                        android:id="@+id/tvAvgCycle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/md_on_surface"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="最短 / 最长"
-                        android:textColor="@color/md_text_secondary" />
-
-                    <TextView
-                        android:id="@+id/tvMinCycle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/md_on_surface"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="  /  "
-                        android:textColor="@color/md_text_secondary" />
-
-                    <TextView
-                        android:id="@+id/tvMaxCycle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/md_on_surface"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="异常次数"
-                        android:textColor="@color/md_text_secondary" />
-
-                    <TextView
-                        android:id="@+id/tvAbnormal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/md_chart_abnormal_text"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                        android:orientation="vertical"
+                        android:padding="20dp">
+                        
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="记录次数"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="#D97706"/>
+                            
+                        <TextView
+                            android:id="@+id/tvRecordCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="5次"
+                            android:includeFontPadding="false"
+                            android:textSize="36sp"
+                            android:textStyle="bold"
+                            android:textColor="#C2410C"/>
+                            
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                
+                <TextView android:id="@+id/tvMinCycle" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
+                <TextView android:id="@+id/tvMaxCycle" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
+                <TextView android:id="@+id/tvAbnormal" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardChartArea"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:layout_marginTop="24dp"
+            app:cardCornerRadius="24dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:strokeColor="#FCE4EC"
+            app:strokeWidth="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="20dp"
+                android:paddingBottom="12dp"
+                android:paddingHorizontal="20dp">
+                
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="周期长度波动"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#333333" />
+                        
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPickMonth"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:padding="0dp"
+                        android:text="范围"
+                        android:textSize="13sp"
+                        android:background="@android:color/transparent"
+                        android:textColor="#888888" />
+                </RelativeLayout>
+                    
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/chartPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 激素变化曲线卡片 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="24dp"
+            app:cardCornerRadius="24dp"
+            app:cardBackgroundColor="#F0F5FF"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="激素变化曲线"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#3F51B5" />
+
+                <com.myaunt.app.ui.chart.HormoneCurveView
+                    android:id="@+id/hormoneCurveView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="12dp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 将不可视或次要组件隐藏放置最底 -->
+        <TextView
+            android:id="@+id/tvEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="记录两次以上后，才可以看到周期柱状图"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="@color/md_text_secondary" />
+            
+        <TextView
+            android:id="@+id/tvChartLegend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:text="长按点可查看备注"
+            android:textSize="12sp"
+            android:textColor="@color/md_text_secondary" />
+            
+        <TextView
+            android:id="@+id/tvWindowRange"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -2,14 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_home"
-        android:icon="@android:drawable/ic_menu_edit"
+        android:icon="@drawable/ic_home_heart_v2"
         android:title="首页" />
     <item
-        android:id="@+id/nav_chart"
-        android:icon="@android:drawable/ic_menu_sort_by_size"
-        android:title="图表" />
+        android:id="@+id/nav_list"
+        android:icon="@drawable/ic_list_v2"
+        android:title="列表" />
     <item
-        android:id="@+id/nav_special"
-        android:icon="@android:drawable/ic_menu_agenda"
-        android:title="备注" />
+        android:id="@+id/nav_add"
+        android:icon="@drawable/ic_transparent_placeholder"
+        android:title="" />
+    <item
+        android:id="@+id/nav_info"
+        android:icon="@drawable/ic_info_v2"
+        android:title="信息" />
+    <item
+        android:id="@+id/nav_record"
+        android:icon="@drawable/ic_record_v2"
+        android:title="记录" />
 </menu>

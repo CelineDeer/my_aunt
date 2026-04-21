@@ -32,6 +32,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.myaunt.app.R
+import com.myaunt.app.data.HormoneStatus
+import com.myaunt.app.data.HormoneTrend
 import com.myaunt.app.data.PeriodRepository
 import com.myaunt.app.ui.CycleIntervalBand
 import com.myaunt.app.ui.applyStatusBarPaddingTop
@@ -87,6 +89,7 @@ class HomeFragment : Fragment() {
         updateMoodHeader()
         updateWarmTip()
         updateJourneyCard()
+        updateHormoneDetector()
 
         val days = repository.getDaysSinceLastPeriod()
         val periods = repository.getAllPeriods()
@@ -145,8 +148,8 @@ class HomeFragment : Fragment() {
         binding.cardGreeting,
         binding.cardMainStats,
         binding.cardWarmTip,
+        binding.hormoneDetector.root,
         binding.cardJourney,
-        binding.barHomeActions,
     )
 
     private fun prepHomeEntranceLayout() {
@@ -274,6 +277,27 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun updateHormoneDetector() {
+        val days = repository.getDaysSinceLastPeriod()
+        if (days == null) {
+            // 没有记录时隐藏激素探测仪
+            binding.hormoneDetector.root.visibility = View.GONE
+            return
+        }
+
+        binding.hormoneDetector.root.visibility = View.VISIBLE
+        val cycleDay = days.toInt() + 1
+        val hormoneStatus = repository.calculateHormoneStatus(cycleDay)
+
+        // 更新雌激素
+        binding.hormoneDetector.tvEstrogenStatus.text = "${hormoneStatus.estrogenTrend.displayName} ${hormoneStatus.estrogenTrend.arrowSymbol}"
+        binding.hormoneDetector.progressEstrogen.progress = hormoneStatus.estrogenLevel
+
+        // 更新孕激素
+        binding.hormoneDetector.tvProgesteroneStatus.text = "${hormoneStatus.progesteroneTrend.displayName} ${hormoneStatus.progesteroneTrend.arrowSymbol}"
+        binding.hormoneDetector.progressProgesterone.progress = hormoneStatus.progesteroneLevel
+    }
+
     private fun animateCounter(targetDays: Long) {
         binding.tvDaysCount.text = targetDays.toString()
 
@@ -289,29 +313,40 @@ class HomeFragment : Fragment() {
 
     private fun updateFlowerAnimation(days: Long?) {
         recordPulseAnimator?.cancel()
-        val scaleX = ObjectAnimator.ofFloat(binding.btnRecord, "scaleX", 1f, 1.05f, 1f).apply {
-            repeatCount = ObjectAnimator.INFINITE
-        }
-        val scaleY = ObjectAnimator.ofFloat(binding.btnRecord, "scaleY", 1f, 1.05f, 1f).apply {
-            repeatCount = ObjectAnimator.INFINITE
-        }
-        val set = AnimatorSet()
-        set.playTogether(scaleX, scaleY)
-        set.duration = 1500
-        recordPulseAnimator = set
-        set.start()
+        // 简化动画，不再使用按钮脉冲
     }
 
     private fun setupClickListeners() {
-        binding.btnRecord.setOnClickListener {
-            showRecordConfirmDialog()
-        }
-        binding.btnBackfill.setOnClickListener {
-            showBackfillDatePicker()
-        }
         binding.btnOpenChart.setOnClickListener {
-            (activity as? MainActivity)?.selectBottomNav(R.id.nav_chart)
+            (activity as? MainActivity)?.selectBottomNav(R.id.nav_list)
         }
+        binding.hormoneDetector.btnViewScience.setOnClickListener {
+            showScienceDialog()
+        }
+    }
+
+    private fun showScienceDialog() {
+        val scienceText = """
+            激素科普：
+            
+            雌激素：
+            - 促进子宫内膜增厚
+            - 排卵前达到高峰
+            - 影响情绪和皮肤状态
+            
+            孕激素：
+            - 排卵后开始上升
+            - 黄体期达到高峰
+            - 维持妊娠和体温
+            
+            提示：此功能仅供参考，不能替代医疗诊断。
+        """.trimIndent()
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("激素科普")
+            .setMessage(scienceText)
+            .setPositiveButton("知道了", null)
+            .show()
     }
 
     private fun showRecordConfirmDialog() {
@@ -510,30 +545,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun showSuccessAnimation() {
-        val hint = _binding?.tvSuccessHint ?: return
-        hint.visibility = View.VISIBLE
-        hint.alpha = 0f
-        hint.translationY = 50f
-
-        val fadeIn = ObjectAnimator.ofFloat(hint, "alpha", 0f, 1f)
-        val moveUp = ObjectAnimator.ofFloat(hint, "translationY", 50f, 0f)
-
-        val inSet = AnimatorSet()
-        inSet.playTogether(fadeIn, moveUp)
-        inSet.duration = 400
-        inSet.start()
-
-        hint.postDelayed({
-            val h = _binding?.tvSuccessHint ?: return@postDelayed
-            val fadeOut = ObjectAnimator.ofFloat(h, "alpha", 1f, 0f)
-            val outAnim = AnimatorSet()
-            outAnim.play(fadeOut)
-            outAnim.duration = 600
-            outAnim.start()
-            h.postDelayed({
-                _binding?.tvSuccessHint?.visibility = View.GONE
-            }, 600)
-        }, 1500)
+        // 成功动画已移除，因为不再显示成功提示
     }
 
     override fun onDestroyView() {
@@ -547,10 +559,6 @@ class HomeFragment : Fragment() {
         }
         recordPulseAnimator?.cancel()
         recordPulseAnimator = null
-        _binding?.tvSuccessHint?.let { hint ->
-            hint.animate().cancel()
-            hint.handler?.removeCallbacksAndMessages(null)
-        }
         super.onDestroyView()
         _binding = null
     }

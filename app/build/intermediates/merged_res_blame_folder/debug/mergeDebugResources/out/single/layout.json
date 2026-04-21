@@ -1,5 +1,13 @@
 [
     {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/item_vaginal_discharge_history.xml",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/item_vaginal_discharge_history.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/fragment_health_treasury.xml",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/fragment_health_treasury.xml"
+    },
+    {
         "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/fragment_chart.xml",
         "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/fragment_chart.xml"
     },
@@ -10,6 +18,10 @@
     {
         "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/dialog_privacy_policy.xml",
         "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/dialog_privacy_policy.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/fragment_vaginal_discharge_record.xml",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/fragment_vaginal_discharge_record.xml"
     },
     {
         "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/item_special_record.xml",
@@ -24,12 +36,16 @@
         "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/activity_splash.xml"
     },
     {
-        "merged": "com.myaunt.app-mergeDebugResources-33:/layout/fragment_home.xml",
-        "source": "com.myaunt.app-main-36:/layout/fragment_home.xml"
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/item_article.xml",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/item_article.xml"
     },
     {
         "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/fragment_special_records.xml",
         "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/fragment_special_records.xml"
+    },
+    {
+        "merged": "com.myaunt.app-mergeDebugResources-33:/layout/activity_main.xml",
+        "source": "com.myaunt.app-main-36:/layout/activity_main.xml"
     },
     {
         "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/activity_main.xml",
@@ -44,7 +60,15 @@
         "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/widget_period_cycle.xml"
     },
     {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/fragment_vaginal_discharge_history.xml",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/fragment_vaginal_discharge_history.xml"
+    },
+    {
         "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/dialog_month_range_picker.xml",
         "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/dialog_month_range_picker.xml"
+    },
+    {
+        "merged": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-mergeDebugResources-33:/layout/hormone_detector_module.xml",
+        "source": "/Users/mac/.gradle/daemon/8.11.1/com.myaunt.app-main-36:/layout/hormone_detector_module.xml"
     }
 ]

@@ -23,27 +23,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp"
-            android:paddingBottom="12dp"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="42dp"
+            android:gravity="center_horizontal"
             android:clipChildren="false"
             android:clipToPadding="false">
 
+            <!-- 顶部日期与用户问候区 -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardGreeting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="22dp"
+                app:cardCornerRadius="0dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/md_home_welcome_surface"
-                app:strokeColor="@color/md_pink_soft"
-                app:strokeWidth="1dp">
+                app:cardBackgroundColor="@android:color/transparent"
+                android:layout_marginBottom="32dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:padding="20dp">
+                    android:paddingHorizontal="8dp">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -56,137 +58,192 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/home_mood_section_title"
-                            android:textSize="13sp"
-                            android:textColor="@color/md_text_secondary" />
+                            android:textSize="14sp"
+                            android:textColor="#FF8A9B"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tvGreeting"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:textSize="24sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/md_on_surface"
-                            tools:text="可能在「慢慢回血期」" />
-
+                            android:layout_marginTop="4dp"
+                            android:textSize="22sp"
+                            android:textColor="#EC5A9A"
+                            android:textStyle="bold" />
+                            
                         <TextView
                             android:id="@+id/tvTodayLine"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="4dp"
                             android:textSize="14sp"
                             android:textColor="@color/md_text_secondary"
-                            android:lineSpacingMultiplier="1.15"
-                            tools:text="雌激素逐渐升高…" />
+                            android:visibility="gone" />
 
                     </LinearLayout>
 
                     <ImageView
                         android:id="@+id/ivHomeBloom"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:importantForAccessibility="no"
-                        android:src="@drawable/ic_home_bloom"
-                        android:contentDescription="@null" />
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_sunface"
+                        android:background="@drawable/bg_warning_dot"
+                        android:backgroundTint="#2DFFC8E0"
+                        android:padding="8dp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <!-- 中央表盘区域 -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardMainStats"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                app:cardCornerRadius="24dp"
-                app:cardBackgroundColor="@color/md_surface"
-                app:strokeColor="@color/md_pink_soft"
-                app:strokeWidth="1dp">
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                android:layout_marginBottom="32dp">
+                
+                <FrameLayout
+                    android:id="@+id/layoutMainDial"
+                    android:layout_width="280dp"
+                    android:layout_height="280dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="24dp">
+                    <!-- 环形背景（带点划线的效果）-->
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/bg_home_circle" />
 
-                    <TextView
-                        android:id="@+id/tvDaysCount"
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_home_bloom"
+                        android:layout_gravity="top|end"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="0dp" />
+
+                    <!-- 表盘内部居中数据文案 -->
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="--"
-                        android:textSize="64sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/md_primary" />
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:gravity="center_horizontal">
 
-                    <TextView
-                        android:id="@+id/tvDaysLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="距离上次姨妈已经"
-                        android:textSize="18sp"
-                        android:textColor="@color/md_on_surface" />
+                        <TextView
+                            android:id="@+id/tvDaysLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="距离下次月经还有"
+                            android:textSize="15sp"
+                            android:textColor="#888888" />
 
-                    <TextView
-                        android:id="@+id/tvLastDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="18dp"
-                        android:textSize="15sp"
-                        android:textColor="@color/md_text_secondary"
-                        android:text="等待第一次记录 🌸" />
+                        <TextView
+                            android:id="@+id/tvDaysCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="--"
+                            android:textSize="80sp"
+                            android:textStyle="bold"
+                            android:textColor="#F43F68"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="0dp"
+                            android:layout_marginTop="-4dp"
+                            android:layout_marginBottom="-4dp" />
 
-                    <TextView
-                        android:id="@+id/tvCycleInfo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:textSize="15sp"
-                        android:textColor="@color/md_secondary"
-                        android:visibility="gone" />
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/tvLastDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="天"
+                            android:textSize="18sp"
+                            android:textColor="#F43F68"
+                            android:layout_marginBottom="16dp" />
+
+                        <TextView
+                            android:id="@+id/tvCycleInfo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="当前阶段"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="#F43F68"
+                            android:background="@drawable/bg_cycle_day_tag"
+                            android:backgroundTint="#19F43F68"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="6dp" />
+
+                    </LinearLayout>
+                </FrameLayout>
             </androidx.cardview.widget.CardView>
 
+            <!-- 贴心建议卡片 -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardWarmTip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
+                android:layout_marginBottom="16dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/md_home_tip_surface"
-                app:strokeColor="@color/md_pink_soft"
-                app:strokeWidth="1dp">
+                app:cardBackgroundColor="#FFF8F0"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="18dp">
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="24dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/home_tip_title"
-                        android:textColor="@color/md_on_surface"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/ic_sunface"
+                        android:background="@drawable/bg_cycle_day_tag"
+                        android:backgroundTint="#FFFFFF"
+                        android:padding="8dp"
+                        android:layout_marginEnd="16dp"/>
 
-                    <TextView
-                        android:id="@+id/tvWarmTip"
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:lineSpacingMultiplier="1.15"
-                        android:textColor="@color/md_text_secondary"
-                        android:textSize="14sp"
-                        tools:text="小贴士示例" />
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="今日贴心建议"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#C2410C"
+                            android:layout_marginBottom="8dp"/>
+
+                        <TextView
+                            android:id="@+id/tvWarmTip"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="处于贴心建议部分..."
+                            android:textSize="13sp"
+                            android:textColor="#D97706"
+                            android:lineSpacingMultiplier="1.3"/>
+                    </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+            <!-- 激素探测仪模块 -->
+            <include
+                android:id="@+id/hormoneDetector"
+                layout="@layout/hormone_detector_module"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardJourney"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
                 app:cardCornerRadius="20dp"
                 app:cardBackgroundColor="@color/md_surface"
                 app:strokeColor="@color/md_pink_soft"
@@ -230,77 +287,9 @@
                         app:rippleColor="@color/md_pink_soft" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+            
+            <View android:layout_width="match_parent" android:layout_height="32dp"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/barHomeActions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="12dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:clipToOutline="false"
-        app:cardCornerRadius="22dp"
-        app:cardElevation="6dp"
-        app:cardBackgroundColor="@color/md_surface"
-        app:strokeColor="@color/md_pink_soft"
-        app:strokeWidth="1dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="16dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="14dp"
-            android:clipChildren="false"
-            android:clipToPadding="false">
-
-            <TextView
-                android:id="@+id/tvSuccessHint"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:gravity="center"
-                android:text="已记录，抱抱你，照顾好自己"
-                android:textColor="@color/md_secondary"
-                android:textSize="14sp"
-                android:visibility="gone" />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipChildren="false"
-                android:clipToPadding="false"
-                android:paddingVertical="4dp">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnRecord"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:text="记录今天"
-                    android:textStyle="bold"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    app:cornerRadius="18dp"
-                    android:backgroundTint="@color/md_primary" />
-            </FrameLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnBackfill"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:minHeight="48dp"
-                android:text="补录其他日期"
-                android:textAllCaps="false"
-                android:textColor="@color/md_primary"
-                app:cornerRadius="18dp"
-                app:strokeColor="@color/md_primary" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
 </LinearLayout>

@@ -33,4 +33,9 @@
         <item name="checkedIconVisible">false</item>
         <item name="rippleColor">@color/md_pink_soft</item>
     </style>
+
+    <style name="BottomNavText" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 </resources>

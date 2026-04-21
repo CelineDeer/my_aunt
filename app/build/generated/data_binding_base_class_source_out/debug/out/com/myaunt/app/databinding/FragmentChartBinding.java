@@ -14,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.myaunt.app.R;
+import com.myaunt.app.ui.chart.HormoneCurveView;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -33,6 +34,9 @@ public final class FragmentChartBinding implements ViewBinding {
 
   @NonNull
   public final ViewPager2 chartPager;
+
+  @NonNull
+  public final HormoneCurveView hormoneCurveView;
 
   @NonNull
   public final TextView tvAbnormal;
@@ -64,7 +68,8 @@ public final class FragmentChartBinding implements ViewBinding {
   private FragmentChartBinding(@NonNull NestedScrollView rootView,
       @NonNull MaterialButton btnPickMonth, @NonNull MaterialCardView cardChartArea,
       @NonNull MaterialCardView cardStats, @NonNull ViewPager2 chartPager,
-      @NonNull TextView tvAbnormal, @NonNull TextView tvAvgCycle, @NonNull TextView tvChartHeadline,
+      @NonNull HormoneCurveView hormoneCurveView, @NonNull TextView tvAbnormal,
+      @NonNull TextView tvAvgCycle, @NonNull TextView tvChartHeadline,
       @NonNull TextView tvChartLegend, @NonNull TextView tvEmpty, @NonNull TextView tvMaxCycle,
       @NonNull TextView tvMinCycle, @NonNull TextView tvRecordCount,
       @NonNull TextView tvWindowRange) {
@@ -73,6 +78,7 @@ public final class FragmentChartBinding implements ViewBinding {
     this.cardChartArea = cardChartArea;
     this.cardStats = cardStats;
     this.chartPager = chartPager;
+    this.hormoneCurveView = hormoneCurveView;
     this.tvAbnormal = tvAbnormal;
     this.tvAvgCycle = tvAvgCycle;
     this.tvChartHeadline = tvChartHeadline;
@@ -135,6 +141,12 @@ public final class FragmentChartBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.hormoneCurveView;
+      HormoneCurveView hormoneCurveView = ViewBindings.findChildViewById(rootView, id);
+      if (hormoneCurveView == null) {
+        break missingId;
+      }
+
       id = R.id.tvAbnormal;
       TextView tvAbnormal = ViewBindings.findChildViewById(rootView, id);
       if (tvAbnormal == null) {
@@ -190,8 +202,8 @@ public final class FragmentChartBinding implements ViewBinding {
       }
 
       return new FragmentChartBinding((NestedScrollView) rootView, btnPickMonth, cardChartArea,
-          cardStats, chartPager, tvAbnormal, tvAvgCycle, tvChartHeadline, tvChartLegend, tvEmpty,
-          tvMaxCycle, tvMinCycle, tvRecordCount, tvWindowRange);
+          cardStats, chartPager, hormoneCurveView, tvAbnormal, tvAvgCycle, tvChartHeadline,
+          tvChartLegend, tvEmpty, tvMaxCycle, tvMinCycle, tvRecordCount, tvWindowRange);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

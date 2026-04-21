@@ -39,6 +39,7 @@ class ChartFragment : Fragment() {
         val startMonth: YearMonth,
         val endMonth: YearMonth,
         val cycles: List<MonthlyCycle>,
+        val hormonePoints: List<BarChartView.HormonePoint>,
     )
 
     private var _binding: FragmentChartBinding? = null
@@ -82,11 +83,15 @@ class ChartFragment : Fragment() {
         binding.btnPickMonth.setOnClickListener { showMonthRangePickerDialog() }
         refreshAllData()
         scheduleChartEntrance()
+
+        // 启动激素曲线动画
+        binding.hormoneCurveView.startAnimation()
     }
 
     override fun onResume() {
         super.onResume()
         refreshAllData()
+        binding.hormoneCurveView.startAnimation()
     }
 
     private fun refreshAllData() {
@@ -207,13 +212,26 @@ class ChartFragment : Fragment() {
     private fun buildWindows(rangeStart: YearMonth, rangeEnd: YearMonth): List<ChartWindow> {
         val out = mutableListOf<ChartWindow>()
         var cursor = rangeStart
+        val periods = repository.getAllPeriods()
+        val basePeriodDate = periods.firstOrNull() ?: LocalDate.now()
+        
         while (!cursor.isAfter(rangeEnd)) {
             val endMonth = cursor
             val startMonth = endMonth.minusMonths(7)
             val cycles = monthlyCycles.filter {
                 it.month >= startMonth && it.month <= endMonth && it.month >= rangeStart && it.month <= rangeEnd
             }
-            out.add(ChartWindow(startMonth = startMonth, endMonth = endMonth, cycles = cycles))
+            
+            // 计算激素数据
+            val hormonePoints = if (cycles.isNotEmpty()) {
+                val startDate = cycles.first().periodDate
+                val endDate = cycles.last().periodDate
+                repository.calculateHormoneCurveData(startDate, endDate, basePeriodDate)
+            } else {
+                emptyList()
+            }
+            
+            out.add(ChartWindow(startMonth = startMonth, endMonth = endMonth, cycles = cycles, hormonePoints = hormonePoints))
             cursor = cursor.plusMonths(1)
         }
         return out
@@ -420,7 +438,14 @@ class ChartFragment : Fragment() {
                     intervalDays = it.intervalDays,
                 )
             }
-            holder.binding.pageChartView.setData(chartPoints)
+            
+            // 传递激素数据到图表
+            if (window.hormonePoints.isNotEmpty() && window.hormonePoints.size == chartPoints.size) {
+                holder.binding.pageChartView.setData(chartPoints, window.hormonePoints)
+            } else {
+                holder.binding.pageChartView.setData(chartPoints)
+            }
+            
             holder.binding.pageChartView.onBarLongPressListener = { periodDate, intervalDays ->
                 val note = repository.getSpecialReason(periodDate)
                 val title = "${periodDate.format(fullDateFormat)} · 间隔 ${intervalDays} 天"
