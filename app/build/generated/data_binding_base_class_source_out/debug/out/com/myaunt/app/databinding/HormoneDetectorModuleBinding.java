@@ -8,10 +8,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.myaunt.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -19,10 +18,10 @@ import java.lang.String;
 
 public final class HormoneDetectorModuleBinding implements ViewBinding {
   @NonNull
-  private final CardView rootView;
+  private final MaterialCardView rootView;
 
   @NonNull
-  public final MaterialButton btnViewScience;
+  public final TextView btnViewScience;
 
   @NonNull
   public final ProgressBar progressEstrogen;
@@ -36,8 +35,8 @@ public final class HormoneDetectorModuleBinding implements ViewBinding {
   @NonNull
   public final TextView tvProgesteroneStatus;
 
-  private HormoneDetectorModuleBinding(@NonNull CardView rootView,
-      @NonNull MaterialButton btnViewScience, @NonNull ProgressBar progressEstrogen,
+  private HormoneDetectorModuleBinding(@NonNull MaterialCardView rootView,
+      @NonNull TextView btnViewScience, @NonNull ProgressBar progressEstrogen,
       @NonNull ProgressBar progressProgesterone, @NonNull TextView tvEstrogenStatus,
       @NonNull TextView tvProgesteroneStatus) {
     this.rootView = rootView;
@@ -50,7 +49,7 @@ public final class HormoneDetectorModuleBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public CardView getRoot() {
+  public MaterialCardView getRoot() {
     return rootView;
   }
 
@@ -76,7 +75,7 @@ public final class HormoneDetectorModuleBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.btnViewScience;
-      MaterialButton btnViewScience = ViewBindings.findChildViewById(rootView, id);
+      TextView btnViewScience = ViewBindings.findChildViewById(rootView, id);
       if (btnViewScience == null) {
         break missingId;
       }
@@ -105,8 +104,8 @@ public final class HormoneDetectorModuleBinding implements ViewBinding {
         break missingId;
       }
 
-      return new HormoneDetectorModuleBinding((CardView) rootView, btnViewScience, progressEstrogen,
-          progressProgesterone, tvEstrogenStatus, tvProgesteroneStatus);
+      return new HormoneDetectorModuleBinding((MaterialCardView) rootView, btnViewScience,
+          progressEstrogen, progressProgesterone, tvEstrogenStatus, tvProgesteroneStatus);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

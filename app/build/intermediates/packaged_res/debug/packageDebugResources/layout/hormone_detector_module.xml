@@ -1,95 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="14dp"
-    app:cardCornerRadius="20dp"
+    android:layout_marginBottom="@dimen/spacing_md"
+    app:cardBackgroundColor="@color/ui_hormone_module_surface"
+    app:cardCornerRadius="@dimen/card_radius_lg"
     app:cardElevation="0dp"
-    app:cardBackgroundColor="#FFF0FA"
-    app:strokeColor="@color/md_pink_soft"
-    app:strokeWidth="1dp">
+    app:strokeColor="@color/ui_card_border_soft"
+    app:strokeWidth="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="18dp">
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
             android:gravity="center_vertical"
-            android:layout_marginBottom="16dp">
+            android:orientation="horizontal">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="激素探测仪"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/md_on_surface" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-            <com.google.android.material.button.MaterialButton
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_chart"
+                    app:tint="@color/md_primary_soft" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="激素探测仪"
+                    android:textColor="@color/ui_hormone_module_title"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
                 android:id="@+id/btnViewScience"
-                style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_science_pill"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
                 android:text="查看科普"
-                android:textAllCaps="false"
-                android:textSize="13sp"
-                android:textColor="@color/md_primary"
-                app:rippleColor="@color/md_pink_soft" />
-
+                android:textColor="@color/md_primary_soft"
+                android:textSize="10sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <!-- 雌激素 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="14dp">
+            android:layout_marginBottom="14dp"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginBottom="6dp"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="6dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="雌激素"
-                    android:textSize="14sp"
-                    android:textColor="@color/md_on_surface" />
+                    android:text="雌激素 (Estrogen)"
+                    android:textColor="@color/ui_hormone_module_label"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tvEstrogenStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="上升中 ↑"
-                    android:textSize="13sp"
-                    android:textColor="@color/md_primary"
+                    android:textColor="@color/ui_hormone_module_label"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     tools:text="上升中 ↑" />
-
             </LinearLayout>
 
             <ProgressBar
                 android:id="@+id/progressEstrogen"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
-                android:layout_height="8dp"
-                android:progress="70"
+                android:layout_height="12dp"
                 android:max="100"
+                android:progress="70"
                 android:progressDrawable="@drawable/progress_pink"
                 tools:progress="70" />
-
         </LinearLayout>
 
         <!-- 孕激素 -->
@@ -101,42 +116,37 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginBottom="6dp"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="6dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="孕激素"
-                    android:textSize="14sp"
-                    android:textColor="@color/md_on_surface" />
+                    android:text="孕激素 (Progesterone)"
+                    android:textColor="@color/ui_hormone_module_label"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tvProgesteroneStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="平稳状态"
-                    android:textSize="13sp"
-                    android:textColor="@color/md_secondary"
-                    android:textStyle="bold"
+                    android:textColor="@color/ui_hormone_module_label"
+                    android:textSize="12sp"
                     tools:text="平稳状态" />
-
             </LinearLayout>
 
             <ProgressBar
                 android:id="@+id/progressProgesterone"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
-                android:layout_height="8dp"
-                android:progress="20"
+                android:layout_height="12dp"
                 android:max="100"
+                android:progress="20"
                 android:progressDrawable="@drawable/progress_orange"
                 tools:progress="20" />
-
         </LinearLayout>
-
     </LinearLayout>
-
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

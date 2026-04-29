@@ -3,23 +3,25 @@
     <!-- 启动图标自适应背景（与月牙图外圈粉调接近） -->
     <color name="ic_launcher_background">#FFD4E3</color>
 
-    <!-- 糖果 pastel：粉奶底 + 玫红主色，少灰多彩 -->
-    <color name="md_bg">#FFFFFF</color>
-    <color name="md_surface">#FFFFFE</color>
-    <color name="md_on_surface">#4A2D45</color>
-    <color name="md_text_secondary">#9B5C8C</color>
-    <color name="md_primary">#EC5A9A</color>
-    <color name="md_secondary">#8B7FD9</color>
-    <color name="md_pink_soft">#33EC5A9A</color>
+    <!-- doc 原型：Tailwind rose 系 + 浅粉底 #FFF5F5 -->
+    <color name="md_bg">#FFF5F5</color>
+    <color name="ui_page_background">@color/md_bg</color>
+    <color name="md_surface">#FFFFFF</color>
+    <color name="md_on_surface">#1F2937</color>
+    <color name="md_text_secondary">#6B7280</color>
+    <color name="md_primary">#F43F5E</color>
+    <color name="md_primary_soft">#FB7185</color>
+    <color name="md_secondary">#818CF8</color>
+    <color name="md_pink_soft">#1AF43F5E</color>
 
-    <color name="md_home_welcome_surface">#FFE8F2</color>
-    <color name="md_home_tip_surface">#FFF0FA</color>
+    <color name="md_home_welcome_surface">#FFF0F5</color>
+    <color name="md_home_tip_surface">#FFF2F7</color>
 
-    <color name="md_chart_bar_start">#FFC8E0</color>
-    <color name="md_chart_bar_end">#EC5A9A</color>
-    <color name="md_chart_grid">#20000000</color>
-    <color name="md_chart_label">#7A4A72</color>
-    <color name="md_chart_value">#4A2D45</color>
+    <color name="md_chart_bar_start">#FFC2D1</color>
+    <color name="md_chart_bar_end">#FF6B8B</color>
+    <color name="md_chart_grid">#1A000000</color>
+    <color name="md_chart_label">#8A6B7E</color>
+    <color name="md_chart_value">#4A333D</color>
     <color name="md_chart_avg">#8B7FD9</color>
     <!-- 异常：草莓糖红 -->
     <color name="md_chart_abnormal_start">#FF8A9B</color>
@@ -37,10 +39,10 @@
     <color name="md_cycle_yellow_end">#FFC93D</color>
     <color name="md_cycle_yellow_text">#C2410C</color>
 
-    <color name="chip_reason_bg_unchecked">#FFE4F1</color>
+    <color name="chip_reason_bg_unchecked">#FFF0F5</color>
     <color name="chip_reason_bg_checked">@color/md_primary</color>
-    <color name="chip_reason_stroke_unchecked">#FFADD2</color>
-    <color name="chip_reason_surface">#FFF8FC</color>
+    <color name="chip_reason_stroke_unchecked">#FFC2D1</color>
+    <color name="chip_reason_surface">#FFF5F8</color>
 
     <!-- 备注列表卡片：柔和底色 + 描边（按记录轮换） -->
     <color name="special_note_card_1">#FFF0F6</color>
@@ -65,4 +67,39 @@
     <color name="special_unsure_chip_bg">#EDEDED</color>
     <color name="special_unsure_chip_stroke">#CFC8D0</color>
     <color name="md_chart_orange">#FF9800</color>
+
+    <!-- 界面结构：导航、强调、图表页（语义化，避免布局里写散色值） -->
+    <color name="ui_nav_bar">#FFFFFF</color>
+    <color name="ui_nav_divider">#FFF1F2</color>
+    <color name="ui_fab_stroke">#FFFFFF</color>
+    <color name="ui_greeting_kicker">#FDA4AF</color>
+    <color name="ui_dial_number">#F43F5E</color>
+    <color name="ui_dial_muted">#9CA3AF</color>
+    <color name="ui_avatar_ring">#33FFC2D1</color>
+    <color name="ui_header_avatar_fill">#FFE4E6</color>
+    <color name="ui_header_avatar_stroke">#FECDD3</color>
+    <color name="ui_warm_card_bg">#FFF7ED</color>
+    <color name="ui_warm_title">#C2410C</color>
+    <color name="ui_warm_body">#EA580C</color>
+    <color name="ui_card_border_soft">#FFFFFF</color>
+    <color name="ui_chart_stats_pink_surface">#FFF1F2</color>
+    <color name="ui_chart_stats_orange_surface">#FFF7ED</color>
+    <color name="ui_chart_area_stroke">#FFE4E6</color>
+    <color name="ui_hormone_curve_surface">#EEF2FF</color>
+    <color name="ui_hormone_curve_title">#4338CA</color>
+    <color name="ui_hormone_module_surface">#FFF1F2</color>
+    <color name="ui_hormone_module_title">#BE123C</color>
+    <color name="ui_hormone_module_label">#E11D48</color>
+    <color name="ui_companion_card_bg">#EEF2FF</color>
+    <color name="ui_companion_title">#4338CA</color>
+    <color name="ui_companion_chip_border">#C7D2FE</color>
+    <color name="ui_companion_chip_text">#818CF8</color>
+    <color name="nav_item_inactive">#FECDD3</color>
+    <color name="ui_chart_label_pink">#FB7185</color>
+    <color name="ui_chart_label_amber">#FB923C</color>
+    <color name="ui_chart_history_row_stroke">#F3F4F6</color>
+    <color name="ui_chart_history_icon_bg">#FFF1F2</color>
+    <color name="ui_search_bar_bg">#FFF1F2</color>
+    <color name="ui_search_bar_stroke">#FFE4E6</color>
+    <color name="ui_chip_outline_text">#FB7185</color>
 </resources>

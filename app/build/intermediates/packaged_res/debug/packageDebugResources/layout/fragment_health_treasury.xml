@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_bg">
+    android:background="@drawable/bg_hand_pattern">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -30,45 +30,43 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="你想知道的，这里都有"
-                android:textSize="14sp"
-                android:textColor="@color/md_text_secondary"
                 android:layout_marginTop="4dp"
-                android:layout_marginBottom="20dp" />
+                android:layout_marginBottom="20dp"
+                android:text="@string/health_treasury_subtitle"
+                android:textColor="@color/ui_greeting_kicker"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
-            <!-- 搜索栏 -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutSearch"
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="#FFF5F7"
-                android:layout_marginBottom="16dp">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:hint="@string/health_treasury_search_hint"
+                app:boxBackgroundColor="@color/ui_search_bar_bg"
+                app:boxCollapsedPaddingTop="0dp"
+                app:boxCornerRadiusBottomEnd="999dp"
+                app:boxCornerRadiusBottomStart="999dp"
+                app:boxCornerRadiusTopEnd="999dp"
+                app:boxCornerRadiusTopStart="999dp"
+                app:boxStrokeColor="@color/ui_search_bar_stroke"
+                app:boxStrokeWidth="1dp"
+                app:boxStrokeWidthFocused="1dp"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/ui_greeting_kicker"
+                app:startIconDrawable="@android:drawable/ic_menu_search"
+                app:startIconTint="@color/ui_greeting_kicker">
 
-                <LinearLayout
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSearch"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingHorizontal="16dp">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@android:drawable/ic_menu_search"
-                        android:tint="#FFB6C1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="搜索经期痛、补血食谱..."
-                        android:textSize="14sp"
-                        android:textColor="#FFB6C1"
-                        android:layout_marginStart="8dp" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- 分类标签 -->
             <HorizontalScrollView
@@ -101,9 +99,9 @@
                         android:layout_height="wrap_content"
                         android:text="经期护理"
                         app:chipBackgroundColor="@android:color/white"
-                        app:chipStrokeColor="#FFE4E9"
+                        app:chipStrokeColor="@color/chip_reason_stroke_unchecked"
                         app:chipStrokeWidth="1dp"
-                        android:textColor="@color/md_primary" />
+                        android:textColor="@color/ui_chip_outline_text" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipHealthDiet"
@@ -112,20 +110,20 @@
                         android:layout_height="wrap_content"
                         android:text="健康饮食"
                         app:chipBackgroundColor="@android:color/white"
-                        app:chipStrokeColor="#FFE4E9"
+                        app:chipStrokeColor="@color/chip_reason_stroke_unchecked"
                         app:chipStrokeWidth="1dp"
-                        android:textColor="@color/md_primary" />
+                        android:textColor="@color/ui_chip_outline_text" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipLifestyle"
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="生活方式"
+                        android:text="情绪调节"
                         app:chipBackgroundColor="@android:color/white"
-                        app:chipStrokeColor="#FFE4E9"
+                        app:chipStrokeColor="@color/chip_reason_stroke_unchecked"
                         app:chipStrokeWidth="1dp"
-                        android:textColor="@color/md_primary" />
+                        android:textColor="@color/ui_chip_outline_text" />
 
                 </com.google.android.material.chip.ChipGroup>
 
@@ -137,8 +135,69 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
-                android:paddingBottom="80dp"
+                android:paddingBottom="24dp"
                 tools:listitem="@layout/item_article" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="@color/md_surface"
+                app:cardCornerRadius="@dimen/card_radius_lg"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/ui_chart_area_stroke"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/data_backup_title"
+                        android:textColor="@color/md_on_surface"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:lineSpacingMultiplier="1.15"
+                        android:text="@string/data_backup_desc"
+                        android:textColor="@color/md_text_secondary"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnImportData"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/import_data"
+                            android:textAllCaps="false" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnExportData"
+                            style="@style/Widget.Material3.Button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/export_data"
+                            android:textAllCaps="false" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 

@@ -2,49 +2,27 @@ package com.myaunt.app.ui.home
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.app.Dialog
-import android.graphics.Color
-import android.graphics.Typeface
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.StyleSpan
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.view.WindowManager
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.OvershootInterpolator
 import android.view.animation.PathInterpolator
-import android.widget.Button
-import android.widget.GridLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.google.android.material.chip.Chip
-import com.google.android.material.datepicker.CalendarConstraints
-import com.google.android.material.datepicker.DateValidatorPointBackward
-import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import com.myaunt.app.R
 import com.myaunt.app.data.HormoneStatus
 import com.myaunt.app.data.HormoneTrend
 import com.myaunt.app.data.PeriodRepository
-import com.myaunt.app.ui.CycleIntervalBand
 import com.myaunt.app.ui.applyStatusBarPaddingTop
 import com.myaunt.app.ui.UiMotion
-import com.myaunt.app.ui.bandForCycleDays
 import com.myaunt.app.databinding.FragmentHomeBinding
 import com.myaunt.app.MainActivity
 import com.myaunt.app.widget.PeriodWidgetUpdater
-import java.time.Instant
 import java.time.LocalDate
-import java.time.ZoneId
 import kotlin.math.round
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -55,7 +33,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var repository: PeriodRepository
     private val dateFormatter = DateTimeFormatter.ofPattern("M月d日", Locale.CHINESE)
-    private val todayLineFormatter = DateTimeFormatter.ofPattern("M月d日 EEEE", Locale.CHINESE)
+    private val headerDateFormatter = DateTimeFormatter.ofPattern("yyyy年MM月dd日", Locale.CHINESE)
     private var recordPulseAnimator: AnimatorSet? = null
     private var heartFloatAnimator: ObjectAnimator? = null
 
@@ -85,6 +63,11 @@ class HomeFragment : Fragment() {
         updateUI()
     }
 
+    fun refreshAfterRecord() {
+        if (!isAdded || _binding == null) return
+        updateUI()
+    }
+
     private fun updateUI() {
         updateMoodHeader()
         updateWarmTip()
@@ -93,62 +76,63 @@ class HomeFragment : Fragment() {
 
         val days = repository.getDaysSinceLastPeriod()
         val periods = repository.getAllPeriods()
+        val primaryRose = ContextCompat.getColor(requireContext(), R.color.md_primary)
 
         if (days == null) {
             binding.tvDaysCount.text = "--"
-            binding.tvDaysCount.setTextColor(ContextCompat.getColor(requireContext(), R.color.md_primary))
-            binding.tvDaysLabel.text = "还没开始记录，今天先记一笔吧"
-            binding.tvLastDate.text = "等待第一次记录 🌸"
+            binding.tvDaysCount.setTextColor(primaryRose)
+            binding.tvDaysLabel.text = "距离下次月经还有"
+            binding.tvLastDate.text = "天"
             binding.tvCycleInfo.visibility = View.GONE
         } else {
-            animateCounter(days)
-            val countColor = when (bandForCycleDays(days)) {
-                CycleIntervalBand.ABNORMAL -> ContextCompat.getColor(requireContext(), R.color.md_chart_abnormal_text)
-                CycleIntervalBand.PURPLE -> ContextCompat.getColor(requireContext(), R.color.md_cycle_purple_text)
-                CycleIntervalBand.GREEN -> ContextCompat.getColor(requireContext(), R.color.md_cycle_green_text)
-                CycleIntervalBand.YELLOW -> ContextCompat.getColor(requireContext(), R.color.md_cycle_yellow_text)
-            }
-            binding.tvDaysCount.setTextColor(countColor)
-            binding.tvDaysLabel.text = "距离上次姨妈已经"
+            val avgRounded = repository.getAverageCycle()
+                ?.let { round(it).toInt().coerceIn(21, 50) }
+                ?: 28
+            val daysUntil = (avgRounded - days.toInt()).coerceAtLeast(0)
+            animateCounter(daysUntil.toLong())
+            binding.tvDaysCount.setTextColor(primaryRose)
+            binding.tvDaysLabel.text = "距离下次月经还有"
+            binding.tvLastDate.text = "天"
 
-            val lastDate = periods.first()
-            binding.tvLastDate.text = "上次：${lastDate.format(dateFormatter)}"
-
-            val avg = repository.getAverageCycle()
-            if (avg != null) {
-                val avgRounded = round(avg).toInt().coerceAtLeast(1)
-                val nextDays = avgRounded - days.toInt()
-                val wasGone = binding.tvCycleInfo.visibility != View.VISIBLE
-                binding.tvCycleInfo.visibility = View.VISIBLE
-                binding.tvCycleInfo.text = if (nextDays > 0) {
-                    "预计还有 ${nextDays} 天，提前照顾好自己"
-                } else {
-                    "这两天可能会来，记得早点休息"
-                }
-                if (wasGone) {
-                    binding.tvCycleInfo.alpha = 0f
-                    binding.tvCycleInfo.animate()
-                        .alpha(1f)
-                        .setDuration(320)
-                        .setInterpolator(DecelerateInterpolator())
-                        .start()
-                }
-            } else {
-                binding.tvCycleInfo.animate().cancel()
-                binding.tvCycleInfo.visibility = View.GONE
-                binding.tvCycleInfo.alpha = 1f
+            val cycleLen = avgRounded
+            val phase = CycleHormoneMood.inferPhase(days, cycleLen)
+            val cycleDay = days.toInt() + 1
+            val wasGone = binding.tvCycleInfo.visibility != View.VISIBLE
+            binding.tvCycleInfo.visibility = View.VISIBLE
+            binding.tvCycleInfo.text = getString(
+                R.string.home_cycle_phase_pill,
+                phaseDisplayName(phase),
+                cycleDay,
+            )
+            if (wasGone) {
+                binding.tvCycleInfo.alpha = 0f
+                binding.tvCycleInfo.animate()
+                    .alpha(1f)
+                    .setDuration(320)
+                    .setInterpolator(DecelerateInterpolator())
+                    .start()
             }
         }
 
-        // Set flower animation based on day count
         updateFlowerAnimation(days)
+    }
+
+    private fun phaseDisplayName(phase: HormoneMoodPhase): String {
+        return when (phase) {
+            HormoneMoodPhase.MENSTRUAL -> getString(R.string.home_phase_menstrual)
+            HormoneMoodPhase.FOLLICULAR -> getString(R.string.home_phase_follicular)
+            HormoneMoodPhase.OVULATION -> getString(R.string.home_phase_ovulation)
+            HormoneMoodPhase.LUTEAL -> getString(R.string.home_phase_luteal)
+            HormoneMoodPhase.PMS_LATE -> getString(R.string.home_phase_pms)
+            HormoneMoodPhase.WAITING_NEXT_CYCLE -> getString(R.string.home_phase_waiting)
+        }
     }
 
     private fun homeEntranceViews(): List<View> = listOf(
         binding.cardGreeting,
         binding.cardMainStats,
-        binding.cardWarmTip,
         binding.hormoneDetector.root,
+        binding.cardWarmTip,
         binding.cardJourney,
     )
 
@@ -187,51 +171,17 @@ class HomeFragment : Fragment() {
     }
 
     private fun updateMoodHeader() {
-        val todayStr = LocalDate.now().format(todayLineFormatter)
-        val periods = repository.getAllPeriods()
-        val days = repository.getDaysSinceLastPeriod()
+        val today = LocalDate.now()
+        binding.tvHomePredictionLabel.text = today.format(headerDateFormatter)
+        binding.tvTodayLine.visibility = View.GONE
 
-        if (days == null || periods.isEmpty()) {
-            binding.tvGreeting.text = getString(R.string.home_mood_empty_title)
-            binding.tvTodayLine.text = getString(R.string.home_mood_empty_sub, todayStr)
-            return
+        val hour = java.time.LocalTime.now().hour
+        val salute = when {
+            hour < 12 -> getString(R.string.home_salute_morning)
+            hour < 18 -> getString(R.string.home_salute_noon)
+            else -> getString(R.string.home_salute_evening)
         }
-
-        val avg = repository.getAverageCycle()
-        val cycleLen = when {
-            avg != null -> round(avg).toInt().coerceIn(21, 50)
-            else -> 28
-        }
-        val usingRoughCycle = avg == null
-        val phase = CycleHormoneMood.inferPhase(days, cycleLen)
-
-        val (titleRes, bodyRes) = when (phase) {
-            HormoneMoodPhase.MENSTRUAL ->
-                R.string.home_mood_menstrual_title to R.string.home_mood_menstrual_body
-            HormoneMoodPhase.FOLLICULAR ->
-                R.string.home_mood_follicular_title to R.string.home_mood_follicular_body
-            HormoneMoodPhase.OVULATION ->
-                R.string.home_mood_ovulation_title to R.string.home_mood_ovulation_body
-            HormoneMoodPhase.LUTEAL ->
-                R.string.home_mood_luteal_title to R.string.home_mood_luteal_body
-            HormoneMoodPhase.PMS_LATE ->
-                R.string.home_mood_pms_title to R.string.home_mood_pms_body
-            HormoneMoodPhase.WAITING_NEXT_CYCLE ->
-                R.string.home_mood_waiting_title to R.string.home_mood_waiting_body
-        }
-
-        binding.tvGreeting.text = getString(titleRes)
-        binding.tvTodayLine.text = buildString {
-            append(getString(bodyRes))
-            if (usingRoughCycle) {
-                append("\n")
-                append(getString(R.string.home_mood_rough_cycle_note))
-            }
-            append("\n")
-            append(getString(R.string.home_mood_disclaimer))
-            append("\n")
-            append(getString(R.string.home_today_line, todayStr))
-        }
+        binding.tvGreeting.text = getString(R.string.home_greeting_line, salute, getString(R.string.home_display_name))
     }
 
     private fun updateWarmTip() {
@@ -245,36 +195,13 @@ class HomeFragment : Fragment() {
     private fun updateJourneyCard() {
         val periods = repository.getAllPeriods()
         val n = periods.size
+        binding.layoutJourneyActions.visibility = View.GONE
         if (n == 0) {
-            binding.btnOpenChart.animate().cancel()
-            binding.btnOpenChart.visibility = View.GONE
-            binding.btnOpenChart.alpha = 1f
-            binding.btnOpenChart.scaleX = 1f
-            binding.btnOpenChart.scaleY = 1f
-            binding.tvJourneySummary.text = getString(R.string.home_journey_empty)
+            binding.tvJourneySummary.visibility = View.GONE
             return
         }
-        val lines = mutableListOf<String>()
-        lines.add(getString(R.string.home_journey_count, n))
-        repository.getAverageCycle()?.let { avg ->
-            lines.add(getString(R.string.home_journey_avg, avg))
-        }
-        lines.add(getString(R.string.home_journey_special_hint))
-        binding.tvJourneySummary.text = lines.joinToString("\n")
-        val wasGone = binding.btnOpenChart.visibility != View.VISIBLE
-        binding.btnOpenChart.visibility = View.VISIBLE
-        if (wasGone) {
-            binding.btnOpenChart.alpha = 0f
-            binding.btnOpenChart.scaleX = 0.94f
-            binding.btnOpenChart.scaleY = 0.94f
-            binding.btnOpenChart.animate()
-                .alpha(1f)
-                .scaleX(1f)
-                .scaleY(1f)
-                .setDuration(340)
-                .setInterpolator(DecelerateInterpolator(1.2f))
-                .start()
-        }
+        binding.tvJourneySummary.visibility = View.VISIBLE
+        binding.tvJourneySummary.text = getString(R.string.home_journey_count, n)
     }
 
     private fun updateHormoneDetector() {
@@ -320,6 +247,9 @@ class HomeFragment : Fragment() {
         binding.btnOpenChart.setOnClickListener {
             (activity as? MainActivity)?.selectBottomNav(R.id.nav_list)
         }
+        binding.btnOpenPeriodHistory.setOnClickListener {
+            (activity as? MainActivity)?.openPeriodHistory()
+        }
         binding.hormoneDetector.btnViewScience.setOnClickListener {
             showScienceDialog()
         }
@@ -347,205 +277,6 @@ class HomeFragment : Fragment() {
             .setMessage(scienceText)
             .setPositiveButton("知道了", null)
             .show()
-    }
-
-    private fun showRecordConfirmDialog() {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle("来姨妈了？")
-            .setMessage("确认今天开始了吗？点“是”会记录今天的日期。")
-            .setNegativeButton("还没有", null)
-            .setPositiveButton("是") { _, _ ->
-                handleRecordToday()
-            }
-            .show()
-    }
-
-    private fun handleRecordToday() {
-        tryRecordPeriod(LocalDate.now())
-    }
-
-    private fun showBackfillDatePicker() {
-        val constraints = CalendarConstraints.Builder()
-            .setValidator(DateValidatorPointBackward.now())
-            .build()
-        val picker = MaterialDatePicker.Builder.datePicker()
-            .setTitleText("补录：来月经的日期")
-            .setCalendarConstraints(constraints)
-            .build()
-        picker.addOnPositiveButtonClickListener { utcMillis ->
-            val picked = Instant.ofEpochMilli(utcMillis)
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate()
-            if (picked.isAfter(LocalDate.now())) return@addOnPositiveButtonClickListener
-            // 与日期选择器关闭同一帧链式弹窗时，部分机型上后续对话框无法显示
-            binding.root.post {
-                if (!isAdded) return@post
-                tryRecordPeriod(picked)
-            }
-        }
-        picker.show(parentFragmentManager, "backfill_date")
-    }
-
-    private fun tryRecordPeriod(recordDate: LocalDate) {
-        if (repository.getAllPeriods().contains(recordDate)) {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle("该日期已有记录")
-                .setMessage("${recordDate.format(dateFormatter)} 已经记过一次，无需重复添加。")
-                .setPositiveButton("知道了", null)
-                .show()
-            return
-        }
-
-        val abnormalGap = repository.getAbnormalGapForNewRecord(recordDate)
-        if (abnormalGap == null) {
-            repository.addPeriod(recordDate)
-            PeriodWidgetUpdater.updateAll(requireContext())
-            updateUI()
-            showSuccessAnimation()
-            return
-        }
-
-        showAbnormalCycleDialog(abnormalGap.days, recordDate, abnormalGap.comparedToFollowingPeriod)
-    }
-
-    private fun showAbnormalCycleDialog(
-        cycleLength: Long,
-        recordDate: LocalDate,
-        comparedToFollowingPeriod: Boolean,
-    ) {
-        val whenText = when {
-            recordDate == LocalDate.now() -> "本次"
-            comparedToFollowingPeriod ->
-                "为 ${recordDate.format(dateFormatter)} 补录时，与之后最近一条记录"
-            else ->
-                "为 ${recordDate.format(dateFormatter)} 补录时，相对上一次记录"
-        }
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle("周期提醒")
-            .setMessage("$whenText 间隔为 $cycleLength 天，超出常见 20-40 天范围。\n周期可能不太规律，仍要记录吗？")
-            .setNegativeButton("取消", null)
-            .setPositiveButton("仍要记录") { _, _ ->
-                showSpecialReasonDialog(cycleLength, recordDate, comparedToFollowingPeriod)
-            }
-            .show()
-    }
-
-    private fun showSpecialReasonDialog(
-        cycleLength: Long,
-        recordDate: LocalDate,
-        comparedToFollowingPeriod: Boolean,
-    ) {
-        val dialogView = layoutInflater.inflate(R.layout.dialog_special_reason, null, false)
-        val tvGapBody = dialogView.findViewById<TextView>(R.id.tv_gap_card_body)
-        val tvSubtitle = dialogView.findViewById<TextView>(R.id.tv_dialog_subtitle)
-        val gridChips = dialogView.findViewById<GridLayout>(R.id.grid_reason_chips)
-        val noteLayout = dialogView.findViewById<TextInputLayout>(R.id.layout_special_note)
-        val noteInput = dialogView.findViewById<TextInputEditText>(R.id.edit_special_note)
-
-        tvSubtitle.text = recordDate.format(dateFormatter)
-
-        val prefix = if (comparedToFollowingPeriod) {
-            "本次补录与之后最近一条记录的间隔为 "
-        } else {
-            "本次记录相对上一次的间隔为 "
-        }
-        val days = "${cycleLength}天"
-        val suffix =
-            "，已超出常见的 20–40 天范围。\n请勾选相关标签（可多选）或写一句备注，帮助以后更懂自己的周期。"
-        val span = SpannableString(prefix + days + suffix)
-        span.setSpan(
-            StyleSpan(Typeface.BOLD),
-            prefix.length,
-            prefix.length + days.length,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
-        )
-        tvGapBody.text = span
-
-        fun clearNoteError() {
-            noteLayout.error = null
-        }
-        for (i in 0 until gridChips.childCount) {
-            val child = gridChips.getChildAt(i)
-            if (child is Chip) {
-                child.setOnCheckedChangeListener { _, _ -> clearNoteError() }
-            }
-        }
-
-        val dialog = Dialog(requireContext())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(dialogView)
-        dialog.setCanceledOnTouchOutside(true)
-        dialog.window?.apply {
-            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            setLayout(ViewGroup.LayoutParams.MATCH_PARENT, (resources.displayMetrics.heightPixels * 0.92f).toInt())
-            setGravity(Gravity.BOTTOM)
-        }
-        @Suppress("DEPRECATION")
-        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-
-        fun performSave() {
-            val tags = collectCheckedReasonChips(gridChips)
-            val note = noteInput.text?.toString()?.trim().orEmpty()
-            if (tags.isEmpty() && note.isEmpty()) {
-                noteLayout.error = "请至少选一个标签，或填写补充说明"
-                return
-            }
-            noteLayout.error = null
-            val reason = buildSpecialReasonText(cycleLength, tags, note)
-            repository.addPeriodWithSpecialReason(recordDate, reason)
-            PeriodWidgetUpdater.updateAll(requireContext())
-            dialog.dismiss()
-            updateUI()
-            showSuccessAnimation()
-        }
-
-        dialogView.findViewById<View>(R.id.btn_dialog_close).setOnClickListener {
-            dialog.dismiss()
-        }
-        dialogView.findViewById<TextView>(R.id.btn_dialog_save_top).setOnClickListener {
-            performSave()
-        }
-        dialogView.findViewById<Button>(R.id.btn_save_record).setOnClickListener {
-            performSave()
-        }
-        dialogView.findViewById<TextView>(R.id.tv_skip_record).setOnClickListener {
-            repository.addPeriodWithSpecialReason(recordDate, "未填写")
-            PeriodWidgetUpdater.updateAll(requireContext())
-            dialog.dismiss()
-            updateUI()
-            showSuccessAnimation()
-        }
-
-        dialog.show()
-    }
-
-    private fun collectCheckedReasonChips(grid: GridLayout): List<String> {
-        val out = mutableListOf<String>()
-        for (i in 0 until grid.childCount) {
-            val child = grid.getChildAt(i)
-            if (child is Chip && child.isChecked) {
-                out.add(child.text.toString())
-            }
-        }
-        return out
-    }
-
-    private fun buildSpecialReasonText(cycleLength: Long, tags: List<String>, note: String): String {
-        return buildString {
-            append("周期${cycleLength}天")
-            if (tags.isNotEmpty()) {
-                append(" · ")
-                append(tags.joinToString("、"))
-            }
-            if (note.isNotEmpty()) {
-                append(" · ")
-                append(note)
-            }
-        }
-    }
-
-    private fun showSuccessAnimation() {
-        // 成功动画已移除，因为不再显示成功提示
     }
 
     override fun onDestroyView() {

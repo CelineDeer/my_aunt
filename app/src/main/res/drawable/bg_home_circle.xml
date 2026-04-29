@@ -3,14 +3,14 @@
     <item>
         <shape android:shape="oval">
             <size android:width="280dp" android:height="280dp" />
-            <stroke android:width="4dp" android:color="#FFD4E3" android:dashWidth="8dp" android:dashGap="8dp" />
+            <stroke android:width="4dp" android:color="#FECDD3" android:dashWidth="8dp" android:dashGap="8dp" />
         </shape>
     </item>
     <item>
         <rotate android:fromDegrees="135" android:toDegrees="135">
             <shape android:shape="oval">
                 <size android:width="280dp" android:height="280dp" />
-                <stroke android:width="8dp" android:color="#FA5A7A" />
+                <stroke android:width="8dp" android:color="#FB7185" />
             </shape>
         </rotate>
     </item>

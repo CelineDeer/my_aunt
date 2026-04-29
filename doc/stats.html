@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>周期统计 - 月遇</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.3.4.3.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.1.0.7.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/echarts.min.5.4.3.js"></script>
+<style>
+        .hand-drawn-card {
+            border-radius: 15px 225px 15px 255px/255px 15px 225px 15px;
+            border: 2px solid #FBCFE8;
+        }
+        .bg-hand-pattern {
+            background-color: #FFF5F5;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fecaca' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* 隐藏滚动轴 */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        html, body {
+            overflow: hidden;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body class="bg-hand-pattern font-sans text-gray-800 flex justify-center items-center min-h-screen m-0 p-0 overflow-hidden">
+<div class="w-[375px] h-[812px] bg-white rounded-[3rem] overflow-hidden shadow-2xl border-[8px] border-white relative flex flex-col mx-auto">
+<!-- Header -->
+<div class="px-8 pt-12 pb-6 flex items-center gap-4">
+<a class="w-10 h-10 rounded-full border border-rose-100 flex items-center justify-center text-rose-400" href="index.html">
+<iconify-icon icon="fluent:chevron-left-24-filled" width="24"></iconify-icon>
+</a>
+<h1 class="text-2xl font-black text-rose-500">我的周期趋势</h1>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto px-6 pb-24 hide-scrollbar">
+<!-- Overall Stats -->
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-rose-50 p-4 rounded-3xl border-2 border-white shadow-sm">
+<p class="text-[10px] text-rose-400 font-bold uppercase mb-1">平均周期</p>
+<div class="flex items-baseline gap-1">
+<span class="text-3xl font-black text-rose-600">28</span>
+<span class="text-xs text-rose-400">天</span>
+</div>
+</div>
+<div class="bg-orange-50 p-4 rounded-3xl border-2 border-white shadow-sm">
+<p class="text-[10px] text-orange-400 font-bold uppercase mb-1">平均经期</p>
+<div class="flex items-baseline gap-1">
+<span class="text-3xl font-black text-orange-600">5</span>
+<span class="text-xs text-orange-400">天</span>
+</div>
+</div>
+</div>
+<!-- Chart Section -->
+<div class="bg-white p-4 rounded-3xl border-2 border-rose-100 shadow-sm mb-8">
+<h3 class="font-bold text-gray-700 mb-4 flex items-center gap-2">
+<iconify-icon class="text-rose-400" icon="fluent:line-trend-24-filled"></iconify-icon>
+                    周期长度波动
+                </h3>
+<div class="w-full h-48" id="cycleChart"></div>
+</div>
+<!-- Hormone Trend Visualization -->
+<div class="bg-indigo-50 p-5 rounded-3xl border-2 border-white shadow-sm mb-8">
+<h3 class="font-bold text-indigo-700 mb-4">激素变化曲线</h3>
+<div class="w-full h-48" id="hormoneChart"></div>
+<p class="text-[10px] text-indigo-400 mt-2 text-center italic">数据基于你的记录与算法预测</p>
+</div>
+<!-- History List -->
+<div>
+<h3 class="font-bold text-gray-700 mb-4 px-2">历史记录</h3>
+<div class="space-y-3">
+<div class="bg-white p-4 rounded-2xl border border-gray-100 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center text-rose-500">
+<iconify-icon icon="fluent:calendar-ltr-24-filled"></iconify-icon>
+</div>
+<div>
+<p class="text-sm font-bold text-gray-700">3月周期</p>
+<p class="text-[10px] text-gray-400">03.12 - 03.17 (共6天)</p>
+</div>
+</div>
+<span class="text-sm font-black text-rose-400">29天</span>
+</div>
+<div class="bg-white p-4 rounded-2xl border border-gray-100 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-rose-400">
+<iconify-icon icon="fluent:calendar-ltr-24-filled"></iconify-icon>
+</div>
+<div>
+<p class="text-sm font-bold text-gray-700">2月周期</p>
+<p class="text-[10px] text-gray-400">02.10 - 02.15 (共5天)</p>
+</div>
+</div>
+<span class="text-sm font-black text-rose-300">28天</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation -->
+<div class="h-20 bg-white border-t border-rose-50 flex items-center justify-around px-2 relative">
+<a class="flex flex-col items-center min-w-[64px] text-rose-200 hover:text-rose-400" href="index.html">
+<iconify-icon icon="fluent:home-heart-24-regular" width="24"></iconify-icon>
+<span class="text-[10px] mt-1 font-bold">首页</span>
+</a>
+<a class="flex flex-col items-center min-w-[64px] text-rose-500" href="stats.html">
+<iconify-icon icon="fluent:list-24-filled" width="24"></iconify-icon>
+<span class="text-[10px] mt-1 font-bold">列表</span>
+</a>
+<!-- Center Add Button -->
+<div class="flex flex-col items-center -mt-8">
+<a class="w-14 h-14 bg-rose-500 rounded-full flex items-center justify-center shadow-lg shadow-rose-200 border-4 border-white active:scale-90 transition-transform" href="record_leucorrhea.html">
+<iconify-icon class="text-white" icon="fluent:add-24-filled" width="32"></iconify-icon>
+</a>
+<span class="text-[10px] mt-1 font-bold text-rose-400">添加</span>
+</div>
+<a class="flex flex-col items-center min-w-[64px] text-rose-200 hover:text-rose-400" href="tips.html">
+<iconify-icon icon="fluent:info-24-regular" width="24"></iconify-icon>
+<span class="text-[10px] mt-1 font-bold">信息</span>
+</a>
+<a class="flex flex-col items-center min-w-[64px] text-rose-200 hover:text-rose-400" href="record_leucorrhea.html">
+<iconify-icon icon="fluent:notepad-24-regular" width="24"></iconify-icon>
+<span class="text-[10px] mt-1 font-bold">记录</span>
+</a>
+</div>
+</div>
+<script>
+        // Cycle Length Chart
+        const cycleDom = document.getElementById('cycleChart');
+        const cycleChart = echarts.init(cycleDom);
+        cycleChart.setOption({
+            grid: { top: 10, bottom: 20, left: 30, right: 10 },
+            xAxis: { type: 'category', data: ['11月', '12月', '1月', '2月', '3月'], axisLine: { show: false }, axisTick: { show: false } },
+            yAxis: { type: 'value', min: 25, splitLine: { lineStyle: { type: 'dashed' } } },
+            series: [{
+                data: [27, 28, 30, 28, 29],
+                type: 'line',
+                smooth: true,
+                symbol: 'circle',
+                symbolSize: 8,
+                itemStyle: { color: '#FB7185' },
+                lineStyle: { width: 4, color: '#FB7185' },
+                areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: '#FFE4E6' }, { offset: 1, color: '#ffffff' }]) }
+            }]
+        });
+
+        // Hormone Chart
+        const hormoneDom = document.getElementById('hormoneChart');
+        const hormoneChart = echarts.init(hormoneDom);
+        hormoneChart.setOption({
+            grid: { top: 10, bottom: 20, left: 10, right: 10 },
+            xAxis: { show: false, type: 'category', data: Array.from({length: 28}, (_, i) => i + 1) },
+            yAxis: { show: false },
+            series: [
+                {
+                    name: '雌激素',
+                    type: 'line',
+                    smooth: true,
+                    showSymbol: false,
+                    data: [10, 15, 20, 30, 50, 80, 100, 90, 70, 50, 40, 30, 25, 20, 25, 30, 40, 50, 60, 55, 45, 35, 25, 20, 15, 12, 10, 8],
+                    lineStyle: { color: '#FB7185', width: 3 }
+                },
+                {
+                    name: '孕激素',
+                    type: 'line',
+                    smooth: true,
+                    showSymbol: false,
+                    data: [5, 5, 5, 5, 5, 6, 8, 12, 20, 35, 55, 75, 85, 90, 85, 70, 55, 40, 30, 20, 15, 10, 8, 6, 5, 5, 5, 5],
+                    lineStyle: { color: '#818CF8', width: 3, type: 'dotted' }
+                }
+            ]
+        });
+    </script>
+</body>
+</html>

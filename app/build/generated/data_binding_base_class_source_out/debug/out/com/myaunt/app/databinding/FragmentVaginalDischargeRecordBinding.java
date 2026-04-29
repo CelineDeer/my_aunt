@@ -15,6 +15,9 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.myaunt.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -79,6 +82,18 @@ public final class FragmentVaginalDischargeRecordBinding implements ViewBinding 
   public final Chip chipSensationPain;
 
   @NonNull
+  public final TextInputEditText etDischargeNotes;
+
+  @NonNull
+  public final TextInputLayout layoutDischargeNotes;
+
+  @NonNull
+  public final SwitchMaterial switchAbdominal;
+
+  @NonNull
+  public final SwitchMaterial switchAfterIntercourse;
+
+  @NonNull
   public final Toolbar toolbar;
 
   @NonNull
@@ -96,8 +111,10 @@ public final class FragmentVaginalDischargeRecordBinding implements ViewBinding 
       @NonNull MaterialCardView cardTextureStretchy, @NonNull MaterialCardView cardTextureThick,
       @NonNull MaterialCardView cardTextureWatery, @NonNull ChipGroup chipGroupSensation,
       @NonNull Chip chipSensationFresh, @NonNull Chip chipSensationItchy,
-      @NonNull Chip chipSensationOdor, @NonNull Chip chipSensationPain, @NonNull Toolbar toolbar,
-      @NonNull TextView tvDateHeader, @NonNull TextView tvToolbarTitle) {
+      @NonNull Chip chipSensationOdor, @NonNull Chip chipSensationPain,
+      @NonNull TextInputEditText etDischargeNotes, @NonNull TextInputLayout layoutDischargeNotes,
+      @NonNull SwitchMaterial switchAbdominal, @NonNull SwitchMaterial switchAfterIntercourse,
+      @NonNull Toolbar toolbar, @NonNull TextView tvDateHeader, @NonNull TextView tvToolbarTitle) {
     this.rootView = rootView;
     this.btnSave = btnSave;
     this.cardAmountLess = cardAmountLess;
@@ -117,6 +134,10 @@ public final class FragmentVaginalDischargeRecordBinding implements ViewBinding 
     this.chipSensationItchy = chipSensationItchy;
     this.chipSensationOdor = chipSensationOdor;
     this.chipSensationPain = chipSensationPain;
+    this.etDischargeNotes = etDischargeNotes;
+    this.layoutDischargeNotes = layoutDischargeNotes;
+    this.switchAbdominal = switchAbdominal;
+    this.switchAfterIntercourse = switchAfterIntercourse;
     this.toolbar = toolbar;
     this.tvDateHeader = tvDateHeader;
     this.tvToolbarTitle = tvToolbarTitle;
@@ -257,6 +278,30 @@ public final class FragmentVaginalDischargeRecordBinding implements ViewBinding 
         break missingId;
       }
 
+      id = R.id.etDischargeNotes;
+      TextInputEditText etDischargeNotes = ViewBindings.findChildViewById(rootView, id);
+      if (etDischargeNotes == null) {
+        break missingId;
+      }
+
+      id = R.id.layoutDischargeNotes;
+      TextInputLayout layoutDischargeNotes = ViewBindings.findChildViewById(rootView, id);
+      if (layoutDischargeNotes == null) {
+        break missingId;
+      }
+
+      id = R.id.switchAbdominal;
+      SwitchMaterial switchAbdominal = ViewBindings.findChildViewById(rootView, id);
+      if (switchAbdominal == null) {
+        break missingId;
+      }
+
+      id = R.id.switchAfterIntercourse;
+      SwitchMaterial switchAfterIntercourse = ViewBindings.findChildViewById(rootView, id);
+      if (switchAfterIntercourse == null) {
+        break missingId;
+      }
+
       id = R.id.toolbar;
       Toolbar toolbar = ViewBindings.findChildViewById(rootView, id);
       if (toolbar == null) {
@@ -279,7 +324,8 @@ public final class FragmentVaginalDischargeRecordBinding implements ViewBinding 
           cardAmountLess, cardAmountMedium, cardAmountMore, cardAmountNone, cardColorBrown,
           cardColorTransparent, cardColorWhite, cardColorYellowish, cardTextureClumpy,
           cardTextureStretchy, cardTextureThick, cardTextureWatery, chipGroupSensation,
-          chipSensationFresh, chipSensationItchy, chipSensationOdor, chipSensationPain, toolbar,
+          chipSensationFresh, chipSensationItchy, chipSensationOdor, chipSensationPain,
+          etDischargeNotes, layoutDischargeNotes, switchAbdominal, switchAfterIntercourse, toolbar,
           tvDateHeader, tvToolbarTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);

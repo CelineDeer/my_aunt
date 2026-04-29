@@ -14,6 +14,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.myaunt.app.R
 import com.myaunt.app.data.PeriodRepository
 import com.myaunt.app.ui.applyStatusBarPaddingTop
+import com.myaunt.app.ui.recordbook.RecordBookFragment
 import com.myaunt.app.data.SpecialRecord
 import com.myaunt.app.databinding.FragmentSpecialRecordsBinding
 import java.time.format.DateTimeFormatter
@@ -44,7 +45,9 @@ class SpecialRecordsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         repository = PeriodRepository(requireContext())
-        binding.root.applyStatusBarPaddingTop()
+        if (parentFragment !is RecordBookFragment) {
+            binding.root.applyStatusBarPaddingTop()
+        }
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
         binding.recycler.adapter = adapter
         refreshList()

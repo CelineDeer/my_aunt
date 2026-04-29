@@ -15,8 +15,8 @@ data class HormoneStatus(
  */
 enum class HormoneTrend(val displayName: String, val arrowSymbol: String) {
     RISING("上升中", "↑"),
-    STABLE("平稳状态", ""),
+    STABLE("平稳状态", "·"),
     FALLING("下降中", "↓"),
-    LOW("较低", "↓"),
+    LOW("较低", "↑"),
     HIGH("较高", "↑")
 }

@@ -1,11 +1,32 @@
 <resources>
     <string name="app_name">我的姨妈</string>
+    <string name="record_book_tab_period_notes">周期备注</string>
+    <string name="record_book_tab_discharge">分泌物</string>
+    <string name="record_book_tab_discharge_history">分泌物历史</string>
     <string name="widget_period_description">显示距离上次经期天数与预计下次</string>
     <string name="widget_period_label">经期小助手</string>
     <string name="shortcut_pin_widget_short">添加桌面小组件</string>
     <string name="shortcut_pin_widget_long">把经期天数小组件放到桌面</string>
     <string name="cd_delete_special_record">删掉这条备注</string>
     <string name="cd_splash_logo">应用图标</string>
+    <string name="cd_record_period_fab">记录月经开始日</string>
+
+    <string name="discharge_section_other">其他</string>
+    <string name="discharge_abdominal">小腹不适</string>
+    <string name="discharge_after_intercourse">同房后</string>
+    <string name="discharge_notes_hint">备注（选填）</string>
+    <string name="data_backup_title">本地数据备份</string>
+    <string name="data_backup_desc">导出为 JSON 文件可换机保留记录；从备份恢复会覆盖本机当前数据，请先导出再操作。</string>
+    <string name="export_data">导出备份</string>
+    <string name="import_data">从文件恢复</string>
+    <string name="export_ok">已保存到所选位置</string>
+    <string name="import_ok">数据已恢复</string>
+    <string name="import_fail">无法导入，请检查是否为应用导出的 .json 文件</string>
+    <string name="data_import_confirm">从文件恢复会覆盖本机当前月经、备注与分泌物数据。建议先点「导出备份」保存。是否继续？</string>
+    <string name="data_import_choose_file">选择备份文件</string>
+    <string name="medical_summary_title">就诊摘要</string>
+    <string name="health_treasury_search_hint">搜索经期痛、补血食谱…</string>
+    <string name="health_treasury_subtitle">你想知道的，这里都有 🤍</string>
 
     <string name="privacy_dialog_title">隐私政策</string>
     <!-- 正文中的 %1$s 将替换为可点击的【《隐私政策》】链接 -->
@@ -18,6 +39,18 @@
     <string name="privacy_disagree">不同意并退出</string>
 
     <string name="home_today_line">今天 · %s</string>
+    <string name="home_display_name">悦悦</string>
+    <string name="home_salute_morning">早安</string>
+    <string name="home_salute_noon">午安</string>
+    <string name="home_salute_evening">晚安</string>
+    <string name="home_greeting_line">%1$s，%2$s ✨</string>
+    <string name="home_cycle_phase_pill">当前：%1$s (Day %2$d)</string>
+    <string name="home_phase_menstrual">月经期</string>
+    <string name="home_phase_follicular">卵泡期</string>
+    <string name="home_phase_ovulation">排卵期</string>
+    <string name="home_phase_luteal">黄体期</string>
+    <string name="home_phase_pms">经前期</string>
+    <string name="home_phase_waiting">等待下次来潮</string>
     <string name="home_mood_section_title">心情与激素（示意）</string>
     <string name="home_mood_disclaimer">以上为常见周期与激素变化的通俗对应，不能代替医疗判断；你完全可以和示意不一样。</string>
     <string name="home_mood_empty_title">先记下月经日吧</string>
@@ -42,12 +75,43 @@
     <string name="home_journey_count">已经陪你记录了 %d 次啦 ✨</string>
     <string name="home_journey_avg">你的周期大约是 %.0f 天左右哦</string>
     <string name="home_journey_open_chart">去看看变化曲线</string>
+    <string name="home_open_period_history">查看月经历史</string>
+    <string name="home_quick_record_today">记录今天开始</string>
+    <string name="home_quick_backfill">补录日期</string>
     <string name="home_journey_special_hint">有备注的周期，都帮你悄悄记在「备注」里啦</string>
+
+    <string name="period_history_title">月经历史</string>
+    <string name="period_history_empty">还没有记录月经开始日</string>
+    <string name="period_history_delete_title">删除记录</string>
+    <string name="period_history_delete_message">确定删除这天的月经开始日吗？该日关联的周期备注会一并删除。</string>
+    <string name="period_history_delete_confirm">删除</string>
+    <string name="period_history_interval">与上一条间隔：%1$d 天</string>
+    <string name="period_history_has_note">有周期备注</string>
+    <string name="cd_delete_period_record">删除该条月经记录</string>
+    <string name="cd_edit_period_record">编辑该条月经记录</string>
+    <string name="period_history_deleted">已删除该条记录</string>
+    <string name="action_undo">撤销</string>
+
+    <string name="chart_range_3m">近3个月</string>
+    <string name="chart_range_6m">近6个月</string>
+    <string name="chart_range_12m">近12个月</string>
+    <string name="chart_range_custom">自定义</string>
+    <string name="chart_pick_custom_range">选择范围</string>
+    <string name="chart_back_cd">返回首页</string>
+    <string name="chart_hormone_footer">数据基于你的记录与算法预测</string>
+    <string name="chart_history_month_title">%d月周期</string>
+    <string name="chart_history_subtitle">%1$s 起 · 周期间隔 %2$d 天</string>
+    <string name="chart_history_interval_end">%d天</string>
+    <string name="chart_avg_menses_days">5天</string>
 
     <string name="special_dialog_title">这次有点不一样吗？</string>
     <string name="special_dialog_save">好啦，记住了</string>
     <string name="special_dialog_save_record">保存这次记录</string>
     <string name="special_dialog_skip">先不写啦，照样帮你记</string>
+    <string name="confirm_skip_title">确认跳过记录</string>
+    <string name="confirm_skip_message">确定要将这次记录标记为「未填写」吗？
+
+这样可以避免记录大量无意义的「未填写」数据。</string>
     <string name="special_dialog_gap_title">间隔有点特别哦</string>
     <string name="special_dialog_section_factors">最近的状态和小变化</string>
     <string name="special_dialog_section_notes">悄悄写点什么</string>

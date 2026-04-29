@@ -47,17 +47,63 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
                 // 设置图标
                 ivIcon.setImageResource(article.iconRes)
 
-                // 设置标题和副标题
                 tvTitle.text = article.title
-                tvTitle.setTextColor(Color.parseColor(if (article.category.name == "HEALTH_DIET") "#E91E63" else "#5C6BC0"))
-
                 tvSubtitle.text = article.subtitle
                 tvSummary.text = article.summary
+                tvFullContent.text = article.body
+
+                val titleColor: Int
+                val subtitleColor: Int
+                val summaryColor: Int
+                val expandColor: Int
+                when (article.id) {
+                    "1" -> {
+                        titleColor = Color.parseColor("#BE123C")
+                        subtitleColor = Color.parseColor("#FB7185")
+                        summaryColor = Color.parseColor("#E11D48")
+                        expandColor = Color.parseColor("#F43F5E")
+                    }
+                    "2" -> {
+                        titleColor = Color.parseColor("#4338CA")
+                        subtitleColor = Color.parseColor("#818CF8")
+                        summaryColor = Color.parseColor("#4F46E5")
+                        expandColor = Color.parseColor("#6366F1")
+                    }
+                    "3" -> {
+                        titleColor = Color.parseColor("#C2410C")
+                        subtitleColor = Color.parseColor("#FB923C")
+                        summaryColor = Color.parseColor("#EA580C")
+                        expandColor = Color.parseColor("#F97316")
+                    }
+                    "4" -> {
+                        titleColor = Color.parseColor("#0F766E")
+                        subtitleColor = Color.parseColor("#2DD4BF")
+                        summaryColor = Color.parseColor("#0D9488")
+                        expandColor = Color.parseColor("#14B8A6")
+                    }
+                    "5" -> {
+                        titleColor = Color.parseColor("#BE123C")
+                        subtitleColor = Color.parseColor("#FB7185")
+                        summaryColor = Color.parseColor("#E11D48")
+                        expandColor = Color.parseColor("#F43F5E")
+                    }
+                    else -> {
+                        titleColor = Color.parseColor("#BE123C")
+                        subtitleColor = Color.parseColor("#FB7185")
+                        summaryColor = Color.parseColor("#E11D48")
+                        expandColor = Color.parseColor("#F43F5E")
+                    }
+                }
+                tvTitle.setTextColor(titleColor)
+                tvSubtitle.setTextColor(subtitleColor)
+                tvSummary.setTextColor(summaryColor)
 
                 // 展开状态
                 val isExpanded = expandedPositions.contains(position)
                 tvFullContent.visibility = if (isExpanded) View.VISIBLE else View.GONE
                 tvExpand.text = if (isExpanded) "收起" else "阅读完整科普"
+                tvExpand.setTextColor(expandColor)
+                tvExpand.visibility = if (article.body.isNotBlank()) View.VISIBLE else View.GONE
 
                 // 点击展开/收起
                 tvExpand.setOnClickListener {

@@ -10,8 +10,11 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.myaunt.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -20,6 +23,12 @@ import java.lang.String;
 public final class FragmentHealthTreasuryBinding implements ViewBinding {
   @NonNull
   private final CoordinatorLayout rootView;
+
+  @NonNull
+  public final MaterialButton btnExportData;
+
+  @NonNull
+  public final MaterialButton btnImportData;
 
   @NonNull
   public final Chip chipAll;
@@ -37,18 +46,30 @@ public final class FragmentHealthTreasuryBinding implements ViewBinding {
   public final Chip chipPeriodCare;
 
   @NonNull
+  public final TextInputEditText etSearch;
+
+  @NonNull
+  public final TextInputLayout layoutSearch;
+
+  @NonNull
   public final RecyclerView recyclerArticles;
 
-  private FragmentHealthTreasuryBinding(@NonNull CoordinatorLayout rootView, @NonNull Chip chipAll,
-      @NonNull ChipGroup chipGroupCategory, @NonNull Chip chipHealthDiet,
+  private FragmentHealthTreasuryBinding(@NonNull CoordinatorLayout rootView,
+      @NonNull MaterialButton btnExportData, @NonNull MaterialButton btnImportData,
+      @NonNull Chip chipAll, @NonNull ChipGroup chipGroupCategory, @NonNull Chip chipHealthDiet,
       @NonNull Chip chipLifestyle, @NonNull Chip chipPeriodCare,
+      @NonNull TextInputEditText etSearch, @NonNull TextInputLayout layoutSearch,
       @NonNull RecyclerView recyclerArticles) {
     this.rootView = rootView;
+    this.btnExportData = btnExportData;
+    this.btnImportData = btnImportData;
     this.chipAll = chipAll;
     this.chipGroupCategory = chipGroupCategory;
     this.chipHealthDiet = chipHealthDiet;
     this.chipLifestyle = chipLifestyle;
     this.chipPeriodCare = chipPeriodCare;
+    this.etSearch = etSearch;
+    this.layoutSearch = layoutSearch;
     this.recyclerArticles = recyclerArticles;
   }
 
@@ -79,6 +100,18 @@ public final class FragmentHealthTreasuryBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.btnExportData;
+      MaterialButton btnExportData = ViewBindings.findChildViewById(rootView, id);
+      if (btnExportData == null) {
+        break missingId;
+      }
+
+      id = R.id.btnImportData;
+      MaterialButton btnImportData = ViewBindings.findChildViewById(rootView, id);
+      if (btnImportData == null) {
+        break missingId;
+      }
+
       id = R.id.chipAll;
       Chip chipAll = ViewBindings.findChildViewById(rootView, id);
       if (chipAll == null) {
@@ -109,14 +142,27 @@ public final class FragmentHealthTreasuryBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.etSearch;
+      TextInputEditText etSearch = ViewBindings.findChildViewById(rootView, id);
+      if (etSearch == null) {
+        break missingId;
+      }
+
+      id = R.id.layoutSearch;
+      TextInputLayout layoutSearch = ViewBindings.findChildViewById(rootView, id);
+      if (layoutSearch == null) {
+        break missingId;
+      }
+
       id = R.id.recyclerArticles;
       RecyclerView recyclerArticles = ViewBindings.findChildViewById(rootView, id);
       if (recyclerArticles == null) {
         break missingId;
       }
 
-      return new FragmentHealthTreasuryBinding((CoordinatorLayout) rootView, chipAll,
-          chipGroupCategory, chipHealthDiet, chipLifestyle, chipPeriodCare, recyclerArticles);
+      return new FragmentHealthTreasuryBinding((CoordinatorLayout) rootView, btnExportData,
+          btnImportData, chipAll, chipGroupCategory, chipHealthDiet, chipLifestyle, chipPeriodCare,
+          etSearch, layoutSearch, recyclerArticles);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

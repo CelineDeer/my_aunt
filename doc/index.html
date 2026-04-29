@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>月遇 - 你的贴心生理期助手</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.3.4.3.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.1.0.7.js"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap');
+        
+        .hand-drawn-border {
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+            border: 2px solid #F87171;
+        }
+        
+        .soft-shadow {
+            box-shadow: 0 10px 25px -5px rgba(248, 113, 113, 0.2);
+        }
+
+        .bg-hand-pattern {
+            background-color: #FFF5F5;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fecaca' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* 隐藏滚动轴 */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        html, body {
+            overflow: hidden;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body class="bg-hand-pattern font-sans text-gray-800 flex justify-center items-center min-h-screen m-0 p-0 overflow-hidden">
+<div class="w-[375px] h-[812px] bg-white rounded-[3rem] overflow-hidden shadow-2xl border-[8px] border-white relative flex flex-col mx-auto">
+<!-- Top Status Bar -->
+<div class="px-8 pt-10 pb-4 flex justify-between items-center">
+<div>
+<h2 class="text-xs text-rose-300 font-bold tracking-widest uppercase">2026年04月20日</h2>
+<h1 class="text-xl font-bold text-rose-500">早安，悦悦 ✨</h1>
+</div>
+<div class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center border-2 border-rose-200">
+<iconify-icon icon="fluent-emoji:sun-with-face" width="24"></iconify-icon>
+</div>
+</div>
+<!-- Main Content (Scrollable) -->
+<div class="flex-1 overflow-y-auto px-6 pb-24 hide-scrollbar">
+<!-- Hero: Big Countdown -->
+<div class="relative py-8 flex flex-col items-center">
+<div class="w-64 h-64 rounded-full border-4 border-dashed border-rose-200 flex flex-col items-center justify-center relative">
+<!-- Progress Arc (SVG) -->
+<svg class="absolute inset-0 w-full h-full -rotate-90">
+<circle cx="128" cy="128" fill="transparent" r="110" stroke="#FFE4E6" stroke-width="8"></circle>
+<circle cx="128" cy="128" fill="transparent" r="110" stroke="#FB7185" stroke-dasharray="690" stroke-dashoffset="400" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<span class="text-gray-400 text-sm mb-1">距离下次月经还有</span>
+<span class="text-7xl font-black text-rose-500 tracking-tighter">12</span>
+<span class="text-rose-400 font-medium">天</span>
+<div class="mt-4 px-4 py-1 bg-rose-50 rounded-full text-rose-500 text-xs font-bold">
+                        当前：卵泡期 (Day 14)
+                    </div>
+</div>
+<!-- Cute Illustration -->
+<div class="absolute -right-2 top-4 floating">
+<iconify-icon icon="fluent-emoji:cherry-blossom" width="48"></iconify-icon>
+</div>
+<div class="absolute -left-2 bottom-12 floating" style="animation-delay: 1s">
+<iconify-icon icon="fluent-emoji:cloud-with-rain" width="40"></iconify-icon>
+</div>
+</div>
+<!-- Hormone Section -->
+<div class="bg-rose-50 rounded-3xl p-5 mb-6 soft-shadow border-2 border-white">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-bold text-rose-700 flex items-center gap-2">
+<iconify-icon class="text-rose-400" icon="fluent:pulse-24-filled"></iconify-icon>
+                        激素探测仪
+                    </h3>
+<button class="text-[10px] bg-white px-2 py-1 rounded-full text-rose-400 font-bold border border-rose-100">查看科普</button>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs mb-1 text-rose-600">
+<span>雌激素 (Estrogen)</span>
+<span class="font-bold">上升中 ↑</span>
+</div>
+<div class="w-full h-3 bg-white rounded-full overflow-hidden p-0.5">
+<div class="h-full bg-rose-400 rounded-full" style="width: 75%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1 text-rose-600">
+<span>孕激素 (Progesterone)</span>
+<span>平稳状态</span>
+</div>
+<div class="w-full h-3 bg-white rounded-full overflow-hidden p-0.5">
+<div class="h-full bg-orange-200 rounded-full" style="width: 20%"></div>
+</div>
+</div>
+</div>
+<!-- Collapsible content (Hidden by default) -->
+<div class="mt-4 pt-4 border-t border-rose-100 text-[11px] text-rose-500/80 leading-relaxed hidden" id="hormoneDetail">
+                    此刻雌激素正在努力工作中，你会感到精力充沛，皮肤状态也变好了哦！这是尝试新运动的好时机。
+                </div>
+</div>
+<!-- Daily Suggestion -->
+<div class="bg-orange-50 rounded-3xl p-5 mb-6 soft-shadow border-2 border-white relative overflow-hidden">
+<div class="flex gap-4">
+<div class="flex-shrink-0">
+<div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center border-2 border-orange-100">
+<iconify-icon icon="fluent-emoji:woman-lifting-weights" width="40"></iconify-icon>
+</div>
+</div>
+<div>
+<h3 class="font-bold text-orange-700 mb-1">今日贴心建议</h3>
+<p class="text-xs text-orange-600 leading-relaxed">
+                            处于卵泡期的你正值“活力期”，非常适合进行中高强度的力量训练或有氧，让身体线条更紧致吧！
+                        </p>
+</div>
+</div>
+</div>
+<!-- Companion Record -->
+<div class="bg-indigo-50 rounded-3xl p-5 mb-6 soft-shadow border-2 border-white">
+<h3 class="font-bold text-indigo-700 mb-3 flex items-center gap-2">
+<iconify-icon class="text-indigo-400" icon="fluent:heart-sparkle-24-filled"></iconify-icon>
+                    记录陪伴
+                </h3>
+<div class="flex gap-3 overflow-x-auto pb-2 hide-scrollbar">
+<div class="flex-shrink-0 w-20 h-24 bg-white rounded-2xl flex flex-col items-center justify-center border-2 border-indigo-100">
+<iconify-icon icon="fluent-emoji:grinning-face-with-smiling-eyes" width="32"></iconify-icon>
+<span class="text-[10px] mt-2 font-bold text-indigo-400">心情好</span>
+</div>
+<div class="flex-shrink-0 w-20 h-24 bg-white rounded-2xl flex flex-col items-center justify-center border-2 border-indigo-100">
+<iconify-icon icon="fluent-emoji:sparkles" width="32"></iconify-icon>
+<span class="text-[10px] mt-2 font-bold text-indigo-400">皮肤亮</span>
+</div>
+<div class="flex-shrink-0 w-20 h-24 bg-white rounded-2xl flex flex-col items-center justify-center border-2 border-indigo-100">
+<iconify-icon icon="fluent-emoji:sleeping-face" width="32"></iconify-icon>
+<span class="text-[10px] mt-2 font-bold text-indigo-400">睡得香</span>
+</div>
+<div class="flex-shrink-0 w-20 h-24 bg-white/50 rounded-2xl border-2 border-dashed border-indigo-200 flex items-center justify-center">
+<iconify-icon class="text-indigo-300" icon="fluent:add-24-regular" width="24"></iconify-icon>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation -->
+<div class="h-20 bg-white border-t border-rose-50 flex items-center justify-around px-2 relative">
+<a class="flex flex-col items-center min-w-[64px] text-rose-500" href="index.html">
+<iconify-icon icon="fluent:home-heart-24-filled" width="24"></iconify-icon>
+<span class="text-[10px] mt-1 font-bold">首页</span>
+</a>
+<a class="flex flex-col items-center min-w-[64px] text-rose-200 hover:text-rose-400" href="stats.html">
+<iconify-icon icon="fluent:list-24-regular" width="24"></iconify-icon>
+<span class="text-[10px] mt-1 font-bold">列表</span>
+</a>
+<!-- Center Add Button -->
+<div class="flex flex-col items-center -mt-8">
+<a class="w-14 h-14 bg-rose-500 rounded-full flex items-center justify-center shadow-lg shadow-rose-200 border-4 border-white active:scale-90 transition-transform" href="record_leucorrhea.html">
+<iconify-icon class="text-white" icon="fluent:add-24-filled" width="32"></iconify-icon>
+</a>
+<span class="text-[10px] mt-1 font-bold text-rose-400">添加</span>
+</div>
+<a class="flex flex-col items-center min-w-[64px] text-rose-200 hover:text-rose-400" href="tips.html">
+<iconify-icon icon="fluent:info-24-regular" width="24"></iconify-icon>
+<span class="text-[10px] mt-1 font-bold">信息</span>
+</a>
+<a class="flex flex-col items-center min-w-[64px] text-rose-200 hover:text-rose-400" href="record_leucorrhea.html">
+<iconify-icon icon="fluent:notepad-24-regular" width="24"></iconify-icon>
+<span class="text-[10px] mt-1 font-bold">记录</span>
+</a>
+</div>
+</div>
+</body>
+</html>

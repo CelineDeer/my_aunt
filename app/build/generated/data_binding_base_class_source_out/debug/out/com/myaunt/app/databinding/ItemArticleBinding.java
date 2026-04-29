@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.card.MaterialCardView;
 import com.myaunt.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -18,7 +19,7 @@ import java.lang.String;
 
 public final class ItemArticleBinding implements ViewBinding {
   @NonNull
-  private final CardView rootView;
+  private final MaterialCardView rootView;
 
   @NonNull
   public final CardView cardIcon;
@@ -41,7 +42,7 @@ public final class ItemArticleBinding implements ViewBinding {
   @NonNull
   public final TextView tvTitle;
 
-  private ItemArticleBinding(@NonNull CardView rootView, @NonNull CardView cardIcon,
+  private ItemArticleBinding(@NonNull MaterialCardView rootView, @NonNull CardView cardIcon,
       @NonNull ImageView ivIcon, @NonNull TextView tvExpand, @NonNull TextView tvFullContent,
       @NonNull TextView tvSubtitle, @NonNull TextView tvSummary, @NonNull TextView tvTitle) {
     this.rootView = rootView;
@@ -56,7 +57,7 @@ public final class ItemArticleBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public CardView getRoot() {
+  public MaterialCardView getRoot() {
     return rootView;
   }
 
@@ -123,8 +124,8 @@ public final class ItemArticleBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ItemArticleBinding((CardView) rootView, cardIcon, ivIcon, tvExpand, tvFullContent,
-          tvSubtitle, tvSummary, tvTitle);
+      return new ItemArticleBinding((MaterialCardView) rootView, cardIcon, ivIcon, tvExpand,
+          tvFullContent, tvSubtitle, tvSummary, tvTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

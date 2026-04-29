@@ -10,11 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.core.widget.NestedScrollView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.myaunt.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -28,22 +28,28 @@ public final class FragmentHomeBinding implements ViewBinding {
   public final MaterialButton btnOpenChart;
 
   @NonNull
-  public final CardView cardGreeting;
+  public final MaterialButton btnOpenPeriodHistory;
 
   @NonNull
-  public final CardView cardJourney;
+  public final LinearLayout cardGreeting;
 
   @NonNull
-  public final CardView cardMainStats;
+  public final MaterialCardView cardJourney;
 
   @NonNull
-  public final CardView cardWarmTip;
+  public final MaterialCardView cardMainStats;
+
+  @NonNull
+  public final MaterialCardView cardWarmTip;
 
   @NonNull
   public final HormoneDetectorModuleBinding hormoneDetector;
 
   @NonNull
   public final ImageView ivHomeBloom;
+
+  @NonNull
+  public final LinearLayout layoutJourneyActions;
 
   @NonNull
   public final FrameLayout layoutMainDial;
@@ -79,9 +85,10 @@ public final class FragmentHomeBinding implements ViewBinding {
   public final TextView tvWarmTip;
 
   private FragmentHomeBinding(@NonNull LinearLayout rootView, @NonNull MaterialButton btnOpenChart,
-      @NonNull CardView cardGreeting, @NonNull CardView cardJourney,
-      @NonNull CardView cardMainStats, @NonNull CardView cardWarmTip,
-      @NonNull HormoneDetectorModuleBinding hormoneDetector, @NonNull ImageView ivHomeBloom,
+      @NonNull MaterialButton btnOpenPeriodHistory, @NonNull LinearLayout cardGreeting,
+      @NonNull MaterialCardView cardJourney, @NonNull MaterialCardView cardMainStats,
+      @NonNull MaterialCardView cardWarmTip, @NonNull HormoneDetectorModuleBinding hormoneDetector,
+      @NonNull ImageView ivHomeBloom, @NonNull LinearLayout layoutJourneyActions,
       @NonNull FrameLayout layoutMainDial, @NonNull NestedScrollView scrollHome,
       @NonNull TextView tvCycleInfo, @NonNull TextView tvDaysCount, @NonNull TextView tvDaysLabel,
       @NonNull TextView tvGreeting, @NonNull TextView tvHomePredictionLabel,
@@ -89,12 +96,14 @@ public final class FragmentHomeBinding implements ViewBinding {
       @NonNull TextView tvTodayLine, @NonNull TextView tvWarmTip) {
     this.rootView = rootView;
     this.btnOpenChart = btnOpenChart;
+    this.btnOpenPeriodHistory = btnOpenPeriodHistory;
     this.cardGreeting = cardGreeting;
     this.cardJourney = cardJourney;
     this.cardMainStats = cardMainStats;
     this.cardWarmTip = cardWarmTip;
     this.hormoneDetector = hormoneDetector;
     this.ivHomeBloom = ivHomeBloom;
+    this.layoutJourneyActions = layoutJourneyActions;
     this.layoutMainDial = layoutMainDial;
     this.scrollHome = scrollHome;
     this.tvCycleInfo = tvCycleInfo;
@@ -141,26 +150,32 @@ public final class FragmentHomeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btnOpenPeriodHistory;
+      MaterialButton btnOpenPeriodHistory = ViewBindings.findChildViewById(rootView, id);
+      if (btnOpenPeriodHistory == null) {
+        break missingId;
+      }
+
       id = R.id.cardGreeting;
-      CardView cardGreeting = ViewBindings.findChildViewById(rootView, id);
+      LinearLayout cardGreeting = ViewBindings.findChildViewById(rootView, id);
       if (cardGreeting == null) {
         break missingId;
       }
 
       id = R.id.cardJourney;
-      CardView cardJourney = ViewBindings.findChildViewById(rootView, id);
+      MaterialCardView cardJourney = ViewBindings.findChildViewById(rootView, id);
       if (cardJourney == null) {
         break missingId;
       }
 
       id = R.id.cardMainStats;
-      CardView cardMainStats = ViewBindings.findChildViewById(rootView, id);
+      MaterialCardView cardMainStats = ViewBindings.findChildViewById(rootView, id);
       if (cardMainStats == null) {
         break missingId;
       }
 
       id = R.id.cardWarmTip;
-      CardView cardWarmTip = ViewBindings.findChildViewById(rootView, id);
+      MaterialCardView cardWarmTip = ViewBindings.findChildViewById(rootView, id);
       if (cardWarmTip == null) {
         break missingId;
       }
@@ -175,6 +190,12 @@ public final class FragmentHomeBinding implements ViewBinding {
       id = R.id.ivHomeBloom;
       ImageView ivHomeBloom = ViewBindings.findChildViewById(rootView, id);
       if (ivHomeBloom == null) {
+        break missingId;
+      }
+
+      id = R.id.layoutJourneyActions;
+      LinearLayout layoutJourneyActions = ViewBindings.findChildViewById(rootView, id);
+      if (layoutJourneyActions == null) {
         break missingId;
       }
 
@@ -244,10 +265,11 @@ public final class FragmentHomeBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentHomeBinding((LinearLayout) rootView, btnOpenChart, cardGreeting,
-          cardJourney, cardMainStats, cardWarmTip, binding_hormoneDetector, ivHomeBloom,
-          layoutMainDial, scrollHome, tvCycleInfo, tvDaysCount, tvDaysLabel, tvGreeting,
-          tvHomePredictionLabel, tvJourneySummary, tvLastDate, tvTodayLine, tvWarmTip);
+      return new FragmentHomeBinding((LinearLayout) rootView, btnOpenChart, btnOpenPeriodHistory,
+          cardGreeting, cardJourney, cardMainStats, cardWarmTip, binding_hormoneDetector,
+          ivHomeBloom, layoutJourneyActions, layoutMainDial, scrollHome, tvCycleInfo, tvDaysCount,
+          tvDaysLabel, tvGreeting, tvHomePredictionLabel, tvJourneySummary, tvLastDate, tvTodayLine,
+          tvWarmTip);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

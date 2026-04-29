@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_bg">
+    android:background="@drawable/bg_hand_pattern">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFB"
+        android:background="@android:color/transparent"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
             app:navigationIcon="@drawable/ic_arrow_back">
 
             <RelativeLayout
@@ -29,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:text="白带记录"
-                    android:textColor="#EC5A9A"
+                    android:textColor="@color/md_primary"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -39,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:textColor="#FF9DBC"
+                    android:textColor="@color/md_text_secondary"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     tools:text="2026年04月20日" />
@@ -53,7 +54,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFB"
+        android:background="@color/md_surface"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -76,14 +77,14 @@
                 <View
                     android:layout_width="4dp"
                     android:layout_height="18dp"
-                    android:background="#EC5A9A" />
+                    android:background="@color/md_primary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="分泌量"
-                    android:textColor="#333333"
+                    android:textColor="@color/md_on_surface"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -102,7 +103,7 @@
                     android:layout_height="90dp"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="#FFF0F3"
+                    app:cardBackgroundColor="@color/chip_reason_surface"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp">
 
@@ -122,7 +123,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="无"
-                            android:textColor="#EC5A9A"
+                            android:textColor="@color/md_primary"
                             android:textSize="12sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -135,7 +136,7 @@
                     android:layout_height="90dp"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="#FFF0F3"
+                    app:cardBackgroundColor="@color/chip_reason_surface"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp">
 
@@ -155,7 +156,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="少量"
-                            android:textColor="#EC5A9A"
+                            android:textColor="@color/md_primary"
                             android:textSize="12sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -168,7 +169,7 @@
                     android:layout_height="90dp"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="#FFF0F3"
+                    app:cardBackgroundColor="@color/chip_reason_surface"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp">
 
@@ -188,7 +189,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="中量"
-                            android:textColor="#EC5A9A"
+                            android:textColor="@color/md_primary"
                             android:textSize="12sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -200,7 +201,7 @@
                     android:layout_width="0dp"
                     android:layout_height="90dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="#FFF0F3"
+                    app:cardBackgroundColor="@color/chip_reason_surface"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp">
 
@@ -220,7 +221,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="大量"
-                            android:textColor="#EC5A9A"
+                            android:textColor="@color/md_primary"
                             android:textSize="12sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -239,14 +240,14 @@
                 <View
                     android:layout_width="4dp"
                     android:layout_height="18dp"
-                    android:background="#EC5A9A" />
+                    android:background="@color/md_primary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="颜色"
-                    android:textColor="#333333"
+                    android:textColor="@color/md_on_surface"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -265,7 +266,7 @@
                     android:layout_height="90dp"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="#FFF0F3"
+                    app:cardBackgroundColor="@color/chip_reason_surface"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp">
 
@@ -285,7 +286,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="透明"
-                            android:textColor="#FF9DBC"
+                            android:textColor="@color/md_text_secondary"
                             android:textSize="12sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -298,7 +299,7 @@
                     android:layout_height="90dp"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="#FFF0F3"
+                    app:cardBackgroundColor="@color/chip_reason_surface"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp">
 
@@ -318,7 +319,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="乳白"
-                            android:textColor="#FF9DBC"
+                            android:textColor="@color/md_text_secondary"
                             android:textSize="12sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -331,7 +332,7 @@
                     android:layout_height="90dp"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="#FFF0F3"
+                    app:cardBackgroundColor="@color/chip_reason_surface"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp">
 
@@ -351,7 +352,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="发黄"
-                            android:textColor="#FF9DBC"
+                            android:textColor="@color/md_text_secondary"
                             android:textSize="12sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -363,7 +364,7 @@
                     android:layout_width="0dp"
                     android:layout_height="90dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="#FFF0F3"
+                    app:cardBackgroundColor="@color/chip_reason_surface"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp">
 
@@ -383,7 +384,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="褐色"
-                            android:textColor="#FF9DBC"
+                            android:textColor="@color/md_text_secondary"
                             android:textSize="12sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -402,14 +403,14 @@
                 <View
                     android:layout_width="4dp"
                     android:layout_height="18dp"
-                    android:background="#EC5A9A" />
+                    android:background="@color/md_primary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="质地"
-                    android:textColor="#333333"
+                    android:textColor="@color/md_on_surface"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -428,7 +429,7 @@
                     android:layout_height="80dp"
                     android:layout_margin="5dp"
                     android:layout_columnWeight="1"
-                    app:cardBackgroundColor="#FFF0F3"
+                    app:cardBackgroundColor="@color/chip_reason_surface"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp">
 
@@ -449,7 +450,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
                             android:text="水样/清稀"
-                            android:textColor="#EC5A9A"
+                            android:textColor="@color/md_primary"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -462,7 +463,7 @@
                     android:layout_height="80dp"
                     android:layout_margin="5dp"
                     android:layout_columnWeight="1"
-                    app:cardBackgroundColor="#FFF0F3"
+                    app:cardBackgroundColor="@color/chip_reason_surface"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp">
 
@@ -483,7 +484,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
                             android:text="蛋清状/拉丝"
-                            android:textColor="#EC5A9A"
+                            android:textColor="@color/md_primary"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -496,7 +497,7 @@
                     android:layout_height="80dp"
                     android:layout_margin="5dp"
                     android:layout_columnWeight="1"
-                    app:cardBackgroundColor="#FFF0F3"
+                    app:cardBackgroundColor="@color/chip_reason_surface"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp">
 
@@ -517,7 +518,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
                             android:text="乳酪状/粘稠"
-                            android:textColor="#EC5A9A"
+                            android:textColor="@color/md_primary"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -530,7 +531,7 @@
                     android:layout_height="80dp"
                     android:layout_margin="5dp"
                     android:layout_columnWeight="1"
-                    app:cardBackgroundColor="#FFF0F3"
+                    app:cardBackgroundColor="@color/chip_reason_surface"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp">
 
@@ -551,7 +552,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
                             android:text="豆腐渣样"
-                            android:textColor="#EC5A9A"
+                            android:textColor="@color/md_primary"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -570,14 +571,14 @@
                 <View
                     android:layout_width="4dp"
                     android:layout_height="18dp"
-                    android:background="#EC5A9A" />
+                    android:background="@color/md_primary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="伴随感觉"
-                    android:textColor="#333333"
+                    android:textColor="@color/md_on_surface"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -598,8 +599,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:text="清爽"
-                    android:textColor="#EC5A9A"
-                    app:chipBackgroundColor="#FDF1F5"
+                    android:textColor="@color/md_primary"
+                    app:chipBackgroundColor="@color/chip_reason_bg_unchecked"
                     app:chipCornerRadius="24dp"
                     app:chipIcon="@drawable/ic_sensation_fresh"
                     app:chipStrokeWidth="0dp" />
@@ -610,8 +611,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:text="瘙痒"
-                    android:textColor="#EC5A9A"
-                    app:chipBackgroundColor="#FDF1F5"
+                    android:textColor="@color/md_primary"
+                    app:chipBackgroundColor="@color/chip_reason_bg_unchecked"
                     app:chipCornerRadius="24dp"
                     app:chipIcon="@drawable/ic_sensation_itchy"
                     app:chipStrokeWidth="0dp" />
@@ -622,8 +623,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:text="异味"
-                    android:textColor="#EC5A9A"
-                    app:chipBackgroundColor="#FDF1F5"
+                    android:textColor="@color/md_primary"
+                    app:chipBackgroundColor="@color/chip_reason_bg_unchecked"
                     app:chipCornerRadius="24dp"
                     app:chipIcon="@drawable/ic_sensation_odor"
                     app:chipStrokeWidth="0dp" />
@@ -634,23 +635,83 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:text="疼痛/灼热"
-                    android:textColor="#EC5A9A"
-                    app:chipBackgroundColor="#FDF1F5"
+                    android:textColor="@color/md_primary"
+                    app:chipBackgroundColor="@color/chip_reason_bg_unchecked"
                     app:chipCornerRadius="24dp"
                     app:chipIcon="@drawable/ic_sensation_pain"
                     app:chipStrokeWidth="0dp" />
 
             </com.google.android.material.chip.ChipGroup>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="4dp"
+                    android:layout_height="18dp"
+                    android:background="@color/md_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/discharge_section_other"
+                    android:textColor="@color/md_on_surface"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchAbdominal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/discharge_abdominal"
+                android:textSize="15sp" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchAfterIntercourse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="@string/discharge_after_intercourse"
+                android:textSize="15sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutDischargeNotes"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:hint="@string/discharge_notes_hint"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDischargeNotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:maxLines="4"
+                    android:minLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <!-- 保存按钮 -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSave"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:backgroundTint="#EC5A9A"
+                android:backgroundTint="@color/md_primary"
                 android:text="保存记录"
                 android:textAllCaps="false"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/md_surface"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:cornerRadius="28dp" />

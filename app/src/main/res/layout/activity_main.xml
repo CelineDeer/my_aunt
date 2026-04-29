@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_bg"
+    android:background="@drawable/bg_hand_pattern"
     android:clipChildren="false">
 
     <FrameLayout
@@ -27,14 +27,14 @@
         <!-- Top Pink Border Line -->
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="#FFE4F1" />
+            android:layout_height="1dp"
+            android:background="@color/ui_nav_divider" />
 
         <FrameLayout
             android:id="@+id/bottomNavContainer"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@android:color/white"
+            android:layout_height="@dimen/bottom_nav_bar_height"
+            android:background="@color/ui_nav_bar"
             android:clipChildren="false"
             android:clipToPadding="false"
             android:paddingBottom="0dp">
@@ -55,26 +55,43 @@
                 app:itemTextAppearanceActive="@style/BottomNavText"
                 app:itemTextAppearanceInactive="@style/BottomNavText" />
 
-            <!-- Elevated Central Add Button -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/centerAddButton"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
+            <!-- 中间「添加」与 doc 一致：圆形按钮 + 文案 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|top"
-                android:layout_marginTop="-24dp"
-                app:cardCornerRadius="32dp"
-                app:cardBackgroundColor="#EC5A9A"
-                app:cardElevation="8dp"
-                app:strokeWidth="0dp">
+                android:layout_marginTop="-22dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_plus"
-                    app:tint="@android:color/white" />
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/centerAddButton"
+                    android:layout_width="@dimen/fab_size"
+                    android:layout_height="@dimen/fab_size"
+                    app:cardBackgroundColor="@color/md_primary"
+                    app:cardCornerRadius="28dp"
+                    app:cardElevation="@dimen/fab_elevation"
+                    app:strokeColor="@color/ui_fab_stroke"
+                    app:strokeWidth="4dp">
 
-            </com.google.android.material.card.MaterialCardView>
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/cd_record_period_fab"
+                        android:src="@drawable/ic_plus"
+                        app:tint="@android:color/white" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="添加"
+                    android:textColor="@color/md_primary_soft"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
         </FrameLayout>
 

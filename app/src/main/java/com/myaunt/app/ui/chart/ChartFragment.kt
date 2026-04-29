@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.NumberPicker
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.myaunt.app.ui.UiMotion
 import com.myaunt.app.ui.applyStatusBarPaddingTop
+import com.myaunt.app.MainActivity
 import com.myaunt.app.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.myaunt.app.data.PeriodRepository
@@ -46,6 +48,7 @@ class ChartFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var repository: PeriodRepository
     private val fullDateFormat = DateTimeFormatter.ofPattern("M月d日", Locale.CHINESE)
+    private val chartHistoryDayFormat = DateTimeFormatter.ofPattern("MM.dd", Locale.CHINESE)
     private val monthFormat = DateTimeFormatter.ofPattern("yyyy年M月", Locale.CHINESE)
     private var chartEntrancePlayedForView = false
     private var chartEntrancePostPending = false
@@ -53,6 +56,7 @@ class ChartFragment : Fragment() {
     private var windows: List<ChartWindow> = emptyList()
     private var selectedRangeStartMonth: YearMonth? = null
     private var selectedRangeEndMonth: YearMonth? = null
+    private var rangePresetMonths: Int? = 6
     private var resolvedRange: ResolvedRange? = null
     private lateinit var pagerAdapter: ChartPagerAdapter
     private var pagerCallback: ViewPager2.OnPageChangeCallback? = null
@@ -80,7 +84,10 @@ class ChartFragment : Fragment() {
             }
         }
         binding.chartPager.registerOnPageChangeCallback(pagerCallback!!)
-        binding.btnPickMonth.setOnClickListener { showMonthRangePickerDialog() }
+        setupRangeQuickFilters()
+        binding.btnChartBack.setOnClickListener {
+            (activity as? MainActivity)?.selectBottomNav(R.id.nav_home)
+        }
         refreshAllData()
         scheduleChartEntrance()
 
@@ -99,7 +106,11 @@ class ChartFragment : Fragment() {
         val dataMinMonth = monthlyCycles.minByOrNull { it.month }?.month
         val dataMaxMonth = monthlyCycles.maxByOrNull { it.month }?.month
         val defaultEnd = dataMaxMonth ?: YearMonth.now()
-        val defaultStart = dataMinMonth ?: defaultEnd.minusMonths(7)
+        val defaultMonths = (rangePresetMonths ?: 6).toLong()
+        val defaultStart = maxOf(
+            dataMinMonth ?: defaultEnd.minusMonths(defaultMonths - 1),
+            defaultEnd.minusMonths(defaultMonths - 1),
+        )
         if (selectedRangeStartMonth == null && selectedRangeEndMonth == null) {
             selectedRangeStartMonth = defaultStart
             selectedRangeEndMonth = defaultEnd
@@ -109,6 +120,32 @@ class ChartFragment : Fragment() {
             selectedRangeEndMonth = selectedRangeEndMonth?.coerceAtMost(nowMonth)
         }
         rebuildWindowsAndRender()
+        populateChartHistory()
+    }
+
+    private fun populateChartHistory() {
+        val container = binding.containerChartHistory
+        container.removeAllViews()
+        val cycles = monthlyCycles.sortedByDescending { it.periodDate }.take(5)
+        if (cycles.isEmpty()) {
+            binding.sectionChartHistory.visibility = View.GONE
+            return
+        }
+        binding.sectionChartHistory.visibility = View.VISIBLE
+        val inflater = layoutInflater
+        for (mc in cycles) {
+            val row = inflater.inflate(R.layout.item_chart_history_row, container, false)
+            row.findViewById<TextView>(R.id.tvHistoryTitle).text =
+                getString(R.string.chart_history_month_title, mc.month.monthValue)
+            row.findViewById<TextView>(R.id.tvHistorySubtitle).text = getString(
+                R.string.chart_history_subtitle,
+                mc.periodDate.format(chartHistoryDayFormat),
+                mc.intervalDays,
+            )
+            row.findViewById<TextView>(R.id.tvHistoryInterval).text =
+                getString(R.string.chart_history_interval_end, mc.intervalDays)
+            container.addView(row)
+        }
     }
 
     private fun buildMonthlyCycles(periodsDesc: List<LocalDate>): List<MonthlyCycle> {
@@ -137,6 +174,7 @@ class ChartFragment : Fragment() {
         resolvedRange = resolved
         selectedRangeStartMonth = resolved.startMonth
         selectedRangeEndMonth = resolved.endMonth
+        syncRangeControls()
 
         windows = buildWindows(resolved.startMonth, resolved.endMonth)
         pagerAdapter.submit(windows)
@@ -150,7 +188,7 @@ class ChartFragment : Fragment() {
     }
 
     private fun resolveRangeSelection(): ResolvedRange {
-        val maxSpanMonths = 8L
+        val maxSpanMonths = 12L
         val rawStart = selectedRangeStartMonth
         val rawEnd = selectedRangeEndMonth
         val nowMonth = YearMonth.now()
@@ -172,7 +210,7 @@ class ChartFragment : Fragment() {
                     startMonth = start,
                     endMonth = clippedEnd,
                     buttonText = "日期范围：${start.atDay(1).format(monthFormat)} - ${clippedEnd.atDay(1).format(monthFormat)}",
-                    hintText = "所选范围超过8个月，已按起始月份截取前8个月",
+                    hintText = "所选范围超过12个月，已按起始月份截取前12个月",
                 )
             }
         }
@@ -184,7 +222,7 @@ class ChartFragment : Fragment() {
                 startMonth = start,
                 endMonth = end,
                 buttonText = "开始月份：${start.atDay(1).format(monthFormat)}",
-                hintText = "仅选了开始月份，已自动向后展示最多8个月",
+                hintText = "仅选了开始月份，已自动向后展示最多12个月",
             )
         }
 
@@ -195,7 +233,7 @@ class ChartFragment : Fragment() {
                 startMonth = start,
                 endMonth = end,
                 buttonText = "结束月份：${end.atDay(1).format(monthFormat)}",
-                hintText = "仅选了结束月份，已自动向前展示最多8个月",
+                hintText = "仅选了结束月份，已自动向前展示最多12个月",
             )
         }
 
@@ -205,7 +243,7 @@ class ChartFragment : Fragment() {
             startMonth = fallbackStart,
             endMonth = fallbackEnd,
             buttonText = "日期范围：${fallbackStart.atDay(1).format(monthFormat)} - ${fallbackEnd.atDay(1).format(monthFormat)}",
-            hintText = "默认展示最近8个月",
+            hintText = "默认展示最近12个月",
         )
     }
 
@@ -217,7 +255,7 @@ class ChartFragment : Fragment() {
         
         while (!cursor.isAfter(rangeEnd)) {
             val endMonth = cursor
-            val startMonth = endMonth.minusMonths(7)
+            val startMonth = endMonth.minusMonths(11)
             val cycles = monthlyCycles.filter {
                 it.month >= startMonth && it.month <= endMonth && it.month >= rangeStart && it.month <= rangeEnd
             }
@@ -262,7 +300,7 @@ class ChartFragment : Fragment() {
         val range = resolvedRange ?: return
         binding.btnPickMonth.text = range.buttonText
         binding.tvWindowRange.text =
-            "${range.hintText}；窗口：${window.startMonth.atDay(1).format(monthFormat)} - ${window.endMonth.atDay(1).format(monthFormat)}（最多8个月）"
+            "${range.hintText}；窗口：${window.startMonth.atDay(1).format(monthFormat)} - ${window.endMonth.atDay(1).format(monthFormat)}（最多12个月）"
 
         binding.chartPager.visibility = View.VISIBLE
         if (chartPoints.isEmpty()) {
@@ -273,7 +311,8 @@ class ChartFragment : Fragment() {
             binding.tvEmpty.visibility = View.GONE
             binding.cardStats.visibility = View.VISIBLE
 
-            binding.tvRecordCount.text = "${chartPoints.size}次"
+            // 应用内未单独记录经期天数时，与 doc 一致展示常见均值示意
+            binding.tvRecordCount.text = getString(R.string.chart_avg_menses_days)
             avg?.let {
                 binding.tvAvgCycle.text = "%.0f天".format(it)
             }
@@ -286,8 +325,8 @@ class ChartFragment : Fragment() {
         }
     }
 
-    private fun showMonthRangePickerDialog() {
-        val currentStart = selectedRangeStartMonth ?: YearMonth.now().minusMonths(7)
+    private fun showMonthRangePickerDialog(markAsCustom: Boolean) {
+        val currentStart = selectedRangeStartMonth ?: YearMonth.now().minusMonths(11)
         val currentEnd = selectedRangeEndMonth ?: YearMonth.now()
         val baseMin = minOf(monthlyCycles.minByOrNull { it.month }?.month ?: currentStart, currentStart)
         val baseMax = maxOf(monthlyCycles.maxByOrNull { it.month }?.month ?: currentEnd, currentEnd)
@@ -321,10 +360,12 @@ class ChartFragment : Fragment() {
         setupMonthPicker(startMonthPicker, currentStart)
         setupMonthPicker(endMonthPicker, currentEnd)
 
-        MaterialAlertDialogBuilder(requireContext())
+        val dialog = MaterialAlertDialogBuilder(requireContext())
             .setTitle("选择月份范围")
             .setView(dialogView)
-            .setNegativeButton("取消", null)
+            .setNegativeButton("取消") { _, _ ->
+                syncRangeControls()
+            }
             .setPositiveButton("确定") { _, _ ->
                 val pickedStart = allMonths.getOrNull(startMonthPicker.value - 1)
                 val pickedEnd = allMonths.getOrNull(endMonthPicker.value - 1)
@@ -334,6 +375,7 @@ class ChartFragment : Fragment() {
                         .setMessage("请至少选择开始月份或结束月份其中一个。")
                         .setPositiveButton("知道了", null)
                         .show()
+                    syncRangeControls()
                     return@setPositiveButton
                 }
                 if (pickedStart != null && pickedEnd != null && pickedStart.isAfter(pickedEnd)) {
@@ -342,22 +384,59 @@ class ChartFragment : Fragment() {
                         .setMessage("起始月份不能晚于结束月份。")
                         .setPositiveButton("知道了", null)
                         .show()
+                    syncRangeControls()
                     return@setPositiveButton
+                }
+                if (markAsCustom) {
+                    rangePresetMonths = null
                 }
                 selectedRangeStartMonth = pickedStart
                 selectedRangeEndMonth = pickedEnd
                 rebuildWindowsAndRender()
             }
-            .show()
+            .create()
+        dialog.setOnCancelListener { syncRangeControls() }
+        dialog.show()
+    }
+
+    private fun setupRangeQuickFilters() {
+        binding.chipRange3m.setOnClickListener { applyPresetRange(3) }
+        binding.chipRange6m.setOnClickListener { applyPresetRange(6) }
+        binding.chipRange12m.setOnClickListener { applyPresetRange(12) }
+        binding.chipRangeCustom.setOnClickListener { showMonthRangePickerDialog(markAsCustom = true) }
+        binding.btnPickMonth.setOnClickListener { showMonthRangePickerDialog(markAsCustom = true) }
+    }
+
+    private fun applyPresetRange(months: Int) {
+        rangePresetMonths = months
+        val endMonth = monthlyCycles.maxByOrNull { it.month }?.month ?: YearMonth.now()
+        val startMonth = endMonth.minusMonths((months - 1).toLong())
+        selectedRangeStartMonth = startMonth
+        selectedRangeEndMonth = endMonth
+        rebuildWindowsAndRender()
+    }
+
+    private fun syncRangeControls() {
+        when (rangePresetMonths) {
+            3 -> binding.chipRange3m.isChecked = true
+            6 -> binding.chipRange6m.isChecked = true
+            12 -> binding.chipRange12m.isChecked = true
+            else -> binding.chipRangeCustom.isChecked = true
+        }
+        binding.btnPickMonth.visibility = if (rangePresetMonths == null) View.VISIBLE else View.GONE
     }
 
     private fun chartEntranceTargets(): List<View> {
         val out = mutableListOf<View>(
+            binding.btnChartBack,
             binding.tvChartHeadline,
+            binding.chipGroupRange,
             binding.tvChartLegend,
             binding.btnPickMonth,
             binding.tvWindowRange,
             binding.cardChartArea,
+            binding.cardHormoneCurve,
+            binding.sectionChartHistory,
         )
         if (binding.tvEmpty.visibility == View.VISIBLE) {
             out.add(binding.tvEmpty)
@@ -386,15 +465,23 @@ class ChartFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        binding.btnChartBack.animate().cancel()
         binding.tvChartHeadline.animate().cancel()
+        binding.chipGroupRange.animate().cancel()
         binding.tvChartLegend.animate().cancel()
         binding.btnPickMonth.animate().cancel()
         binding.tvWindowRange.animate().cancel()
         binding.cardChartArea.animate().cancel()
+        binding.cardHormoneCurve.animate().cancel()
+        binding.sectionChartHistory.animate().cancel()
         binding.tvEmpty.animate().cancel()
         binding.cardStats.animate().cancel()
+        binding.btnChartBack.alpha = 1f
+        binding.btnChartBack.translationY = 0f
         binding.tvChartHeadline.alpha = 1f
         binding.tvChartHeadline.translationY = 0f
+        binding.chipGroupRange.alpha = 1f
+        binding.chipGroupRange.translationY = 0f
         binding.tvChartLegend.alpha = 1f
         binding.tvChartLegend.translationY = 0f
         binding.btnPickMonth.alpha = 1f
@@ -403,6 +490,10 @@ class ChartFragment : Fragment() {
         binding.tvWindowRange.translationY = 0f
         binding.cardChartArea.alpha = 1f
         binding.cardChartArea.translationY = 0f
+        binding.cardHormoneCurve.alpha = 1f
+        binding.cardHormoneCurve.translationY = 0f
+        binding.sectionChartHistory.alpha = 1f
+        binding.sectionChartHistory.translationY = 0f
         binding.tvEmpty.alpha = 1f
         binding.tvEmpty.translationY = 0f
         binding.cardStats.alpha = 1f

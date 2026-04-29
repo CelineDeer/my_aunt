@@ -4,6 +4,8 @@ package com.myaunt.app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +15,8 @@ import androidx.viewbinding.ViewBindings;
 import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.myaunt.app.R;
 import com.myaunt.app.ui.chart.HormoneCurveView;
 import java.lang.NullPointerException;
@@ -24,10 +28,16 @@ public final class FragmentChartBinding implements ViewBinding {
   private final NestedScrollView rootView;
 
   @NonNull
+  public final ImageButton btnChartBack;
+
+  @NonNull
   public final MaterialButton btnPickMonth;
 
   @NonNull
   public final MaterialCardView cardChartArea;
+
+  @NonNull
+  public final MaterialCardView cardHormoneCurve;
 
   @NonNull
   public final MaterialCardView cardStats;
@@ -36,7 +46,28 @@ public final class FragmentChartBinding implements ViewBinding {
   public final ViewPager2 chartPager;
 
   @NonNull
+  public final ChipGroup chipGroupRange;
+
+  @NonNull
+  public final Chip chipRange12m;
+
+  @NonNull
+  public final Chip chipRange3m;
+
+  @NonNull
+  public final Chip chipRange6m;
+
+  @NonNull
+  public final Chip chipRangeCustom;
+
+  @NonNull
+  public final LinearLayout containerChartHistory;
+
+  @NonNull
   public final HormoneCurveView hormoneCurveView;
+
+  @NonNull
+  public final LinearLayout sectionChartHistory;
 
   @NonNull
   public final TextView tvAbnormal;
@@ -66,19 +97,32 @@ public final class FragmentChartBinding implements ViewBinding {
   public final TextView tvWindowRange;
 
   private FragmentChartBinding(@NonNull NestedScrollView rootView,
-      @NonNull MaterialButton btnPickMonth, @NonNull MaterialCardView cardChartArea,
+      @NonNull ImageButton btnChartBack, @NonNull MaterialButton btnPickMonth,
+      @NonNull MaterialCardView cardChartArea, @NonNull MaterialCardView cardHormoneCurve,
       @NonNull MaterialCardView cardStats, @NonNull ViewPager2 chartPager,
-      @NonNull HormoneCurveView hormoneCurveView, @NonNull TextView tvAbnormal,
+      @NonNull ChipGroup chipGroupRange, @NonNull Chip chipRange12m, @NonNull Chip chipRange3m,
+      @NonNull Chip chipRange6m, @NonNull Chip chipRangeCustom,
+      @NonNull LinearLayout containerChartHistory, @NonNull HormoneCurveView hormoneCurveView,
+      @NonNull LinearLayout sectionChartHistory, @NonNull TextView tvAbnormal,
       @NonNull TextView tvAvgCycle, @NonNull TextView tvChartHeadline,
       @NonNull TextView tvChartLegend, @NonNull TextView tvEmpty, @NonNull TextView tvMaxCycle,
       @NonNull TextView tvMinCycle, @NonNull TextView tvRecordCount,
       @NonNull TextView tvWindowRange) {
     this.rootView = rootView;
+    this.btnChartBack = btnChartBack;
     this.btnPickMonth = btnPickMonth;
     this.cardChartArea = cardChartArea;
+    this.cardHormoneCurve = cardHormoneCurve;
     this.cardStats = cardStats;
     this.chartPager = chartPager;
+    this.chipGroupRange = chipGroupRange;
+    this.chipRange12m = chipRange12m;
+    this.chipRange3m = chipRange3m;
+    this.chipRange6m = chipRange6m;
+    this.chipRangeCustom = chipRangeCustom;
+    this.containerChartHistory = containerChartHistory;
     this.hormoneCurveView = hormoneCurveView;
+    this.sectionChartHistory = sectionChartHistory;
     this.tvAbnormal = tvAbnormal;
     this.tvAvgCycle = tvAvgCycle;
     this.tvChartHeadline = tvChartHeadline;
@@ -117,6 +161,12 @@ public final class FragmentChartBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.btnChartBack;
+      ImageButton btnChartBack = ViewBindings.findChildViewById(rootView, id);
+      if (btnChartBack == null) {
+        break missingId;
+      }
+
       id = R.id.btnPickMonth;
       MaterialButton btnPickMonth = ViewBindings.findChildViewById(rootView, id);
       if (btnPickMonth == null) {
@@ -126,6 +176,12 @@ public final class FragmentChartBinding implements ViewBinding {
       id = R.id.cardChartArea;
       MaterialCardView cardChartArea = ViewBindings.findChildViewById(rootView, id);
       if (cardChartArea == null) {
+        break missingId;
+      }
+
+      id = R.id.cardHormoneCurve;
+      MaterialCardView cardHormoneCurve = ViewBindings.findChildViewById(rootView, id);
+      if (cardHormoneCurve == null) {
         break missingId;
       }
 
@@ -141,9 +197,51 @@ public final class FragmentChartBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.chipGroupRange;
+      ChipGroup chipGroupRange = ViewBindings.findChildViewById(rootView, id);
+      if (chipGroupRange == null) {
+        break missingId;
+      }
+
+      id = R.id.chipRange12m;
+      Chip chipRange12m = ViewBindings.findChildViewById(rootView, id);
+      if (chipRange12m == null) {
+        break missingId;
+      }
+
+      id = R.id.chipRange3m;
+      Chip chipRange3m = ViewBindings.findChildViewById(rootView, id);
+      if (chipRange3m == null) {
+        break missingId;
+      }
+
+      id = R.id.chipRange6m;
+      Chip chipRange6m = ViewBindings.findChildViewById(rootView, id);
+      if (chipRange6m == null) {
+        break missingId;
+      }
+
+      id = R.id.chipRangeCustom;
+      Chip chipRangeCustom = ViewBindings.findChildViewById(rootView, id);
+      if (chipRangeCustom == null) {
+        break missingId;
+      }
+
+      id = R.id.containerChartHistory;
+      LinearLayout containerChartHistory = ViewBindings.findChildViewById(rootView, id);
+      if (containerChartHistory == null) {
+        break missingId;
+      }
+
       id = R.id.hormoneCurveView;
       HormoneCurveView hormoneCurveView = ViewBindings.findChildViewById(rootView, id);
       if (hormoneCurveView == null) {
+        break missingId;
+      }
+
+      id = R.id.sectionChartHistory;
+      LinearLayout sectionChartHistory = ViewBindings.findChildViewById(rootView, id);
+      if (sectionChartHistory == null) {
         break missingId;
       }
 
@@ -201,9 +299,11 @@ public final class FragmentChartBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentChartBinding((NestedScrollView) rootView, btnPickMonth, cardChartArea,
-          cardStats, chartPager, hormoneCurveView, tvAbnormal, tvAvgCycle, tvChartHeadline,
-          tvChartLegend, tvEmpty, tvMaxCycle, tvMinCycle, tvRecordCount, tvWindowRange);
+      return new FragmentChartBinding((NestedScrollView) rootView, btnChartBack, btnPickMonth,
+          cardChartArea, cardHormoneCurve, cardStats, chartPager, chipGroupRange, chipRange12m,
+          chipRange3m, chipRange6m, chipRangeCustom, containerChartHistory, hormoneCurveView,
+          sectionChartHistory, tvAbnormal, tvAvgCycle, tvChartHeadline, tvChartLegend, tvEmpty,
+          tvMaxCycle, tvMinCycle, tvRecordCount, tvWindowRange);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

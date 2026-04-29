@@ -1,43 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_bg">
+    android:background="@drawable/bg_hand_pattern">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp"
+        android:paddingHorizontal="@dimen/page_padding_horizontal"
         android:clipToPadding="false"
-        android:paddingBottom="100dp">
+        android:paddingTop="@dimen/spacing_lg"
+        android:paddingBottom="@dimen/page_padding_bottom">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/spacing_lg"
             android:gravity="center_vertical"
-            android:layout_marginBottom="24dp">
-            
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/ic_arrow_back"
-                android:background="@drawable/bg_warning_dot"
-                android:backgroundTint="#FFFAFC"
-                app:tint="#F43F68"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnChartBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_science_pill"
+                android:contentDescription="@string/chart_back_cd"
                 android:padding="8dp"
-                android:layout_marginEnd="16dp" />
-                
+                app:srcCompat="@drawable/ic_arrow_back"
+                app:tint="@color/md_primary_soft" />
+
             <TextView
                 android:id="@+id/tvChartHeadline"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
                 android:text="我的周期趋势"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#F43F68" />
+                android:textColor="@color/md_primary"
+                android:textSize="22sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
@@ -58,9 +62,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginEnd="8dp"
-                    app:cardCornerRadius="20dp"
+                    app:cardCornerRadius="@dimen/card_radius_lg"
                     app:cardElevation="0dp"
-                    app:cardBackgroundColor="#FFF0F6">
+                    app:cardBackgroundColor="@color/ui_chart_stats_pink_surface">
                     
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -72,9 +76,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="平均周期"
-                            android:textSize="12sp"
+                            android:textSize="10sp"
                             android:textStyle="bold"
-                            android:textColor="#E8729A"/>
+                            android:textAllCaps="true"
+                            android:textColor="@color/ui_chart_label_pink"/>
                             
                         <TextView
                             android:id="@+id/tvAvgCycle"
@@ -85,7 +90,7 @@
                             android:includeFontPadding="false"
                             android:textSize="36sp"
                             android:textStyle="bold"
-                            android:textColor="#D12A52"/>
+                            android:textColor="@color/md_primary"/>
                             
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -95,9 +100,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
-                    app:cardCornerRadius="20dp"
+                    app:cardCornerRadius="@dimen/card_radius_lg"
                     app:cardElevation="0dp"
-                    app:cardBackgroundColor="#FFF8F0">
+                    app:cardBackgroundColor="@color/ui_chart_stats_orange_surface">
                     
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -108,21 +113,22 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="记录次数"
-                            android:textSize="12sp"
+                            android:text="平均经期"
+                            android:textSize="10sp"
                             android:textStyle="bold"
-                            android:textColor="#D97706"/>
+                            android:textAllCaps="true"
+                            android:textColor="@color/ui_chart_label_amber"/>
                             
                         <TextView
                             android:id="@+id/tvRecordCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="5次"
+                            android:text="5天"
                             android:includeFontPadding="false"
                             android:textSize="36sp"
                             android:textStyle="bold"
-                            android:textColor="#C2410C"/>
+                            android:textColor="@color/ui_warm_title"/>
                             
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -133,15 +139,59 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:layout_marginBottom="@dimen/spacing_md"
+            android:scrollbars="none">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupRange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipSpacingHorizontal="8dp"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipRange3m"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chart_range_3m" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipRange6m"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chart_range_6m" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipRange12m"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chart_range_12m" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipRangeCustom"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chart_range_custom" />
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardChartArea"
             android:layout_width="match_parent"
             android:layout_height="320dp"
             android:layout_marginTop="24dp"
-            app:cardCornerRadius="24dp"
-            app:cardBackgroundColor="#FFFFFF"
-            app:strokeColor="#FCE4EC"
-            app:strokeWidth="2dp">
+            app:cardCornerRadius="@dimen/card_radius_lg"
+            app:cardBackgroundColor="@color/md_surface"
+            app:strokeColor="@color/ui_chart_area_stroke"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -155,15 +205,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp">
-                    
-                    <TextView
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
-                        android:text="周期长度波动"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="#333333" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_chart"
+                            app:tint="@color/md_primary_soft" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="周期长度波动"
+                            android:textColor="@color/md_on_surface"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
                         
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnPickMonth"
@@ -175,10 +241,11 @@
                         android:minWidth="0dp"
                         android:minHeight="0dp"
                         android:padding="0dp"
-                        android:text="范围"
+                        android:text="@string/chart_pick_custom_range"
                         android:textSize="13sp"
                         android:background="@android:color/transparent"
-                        android:textColor="#888888" />
+                        android:textColor="@color/ui_dial_muted"
+                        android:visibility="gone" />
                 </RelativeLayout>
                     
                 <androidx.viewpager2.widget.ViewPager2
@@ -193,12 +260,14 @@
 
         <!-- 激素变化曲线卡片 -->
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardHormoneCurve"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="220dp"
             android:layout_marginTop="24dp"
-            app:cardCornerRadius="24dp"
-            app:cardBackgroundColor="#F0F5FF"
-            app:strokeWidth="0dp">
+            app:cardCornerRadius="@dimen/card_radius_lg"
+            app:cardBackgroundColor="@color/ui_hormone_curve_surface"
+            app:strokeColor="@color/ui_card_border_soft"
+            app:strokeWidth="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -212,7 +281,7 @@
                     android:text="激素变化曲线"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="#3F51B5" />
+                    android:textColor="@color/ui_hormone_curve_title" />
 
                 <com.myaunt.app.ui.chart.HormoneCurveView
                     android:id="@+id/hormoneCurveView"
@@ -221,9 +290,44 @@
                     android:layout_weight="1"
                     android:layout_marginTop="12dp" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/chart_hormone_footer"
+                    android:textColor="@color/md_secondary"
+                    android:textSize="10sp"
+                    android:textStyle="italic" />
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:id="@+id/sectionChartHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="12dp"
+                android:text="历史记录"
+                android:textColor="@color/md_on_surface"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/containerChartHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </LinearLayout>
 
         <!-- 将不可视或次要组件隐藏放置最底 -->
         <TextView
@@ -242,7 +346,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:gravity="center"
-            android:text="长按点可查看备注"
+            android:text="长按柱子可查看备注"
             android:textSize="12sp"
             android:textColor="@color/md_text_secondary" />
             

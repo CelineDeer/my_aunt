@@ -11,6 +11,8 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.util.TypedValue
 import android.view.View
+import android.widget.Button
+import android.widget.GridLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
@@ -22,20 +24,34 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.google.android.material.chip.Chip
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointBackward
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.myaunt.app.databinding.ActivityMainBinding
+import com.myaunt.app.data.PeriodRepository
 import com.myaunt.app.privacy.PrivacyConsent
 import com.myaunt.app.ui.chart.ChartFragment
 import com.myaunt.app.ui.healthtreasury.HealthTreasuryFragment
 import com.myaunt.app.ui.home.HomeFragment
-import com.myaunt.app.ui.vaginaldischarge.VaginalDischargeRecordFragment
+import com.myaunt.app.ui.history.PeriodHistoryFragment
+import com.myaunt.app.ui.recordbook.RecordBookFragment
 import com.myaunt.app.widget.PeriodWidgetUpdater
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val repository by lazy { PeriodRepository(this) }
+    private val dateFormatter = DateTimeFormatter.ofPattern("M月d日", Locale.CHINESE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,11 +83,37 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.selectedItemId = itemId
     }
 
+    /** 打开历史记录进行编辑，由 HomeFragment 等调用。 */
+    fun openPeriodHistoryForEdit(date: LocalDate) {
+        supportFragmentManager.beginTransaction()
+            .setReorderingAllowed(true)
+            .setCustomAnimations(R.anim.fragment_enter, R.anim.fragment_exit)
+            .replace(R.id.fragment_container, PeriodHistoryFragment.newInstanceForEdit(date))
+            .addToBackStack("period_history_edit")
+            .commit()
+    }
+
+    /** 编辑选定的周期记录。 */
+    fun editSelectedPeriod(date: LocalDate) {
+        (supportFragmentManager.findFragmentById(R.id.fragment_container) as?
+                com.myaunt.app.ui.history.PeriodHistoryFragment)?.prepareEditMode(date)
+    }
+
+    /** 从首页等进入：月经开始日历史列表。 */
+    fun openPeriodHistory() {
+        supportFragmentManager.beginTransaction()
+            .setReorderingAllowed(true)
+            .setCustomAnimations(R.anim.fragment_enter, R.anim.fragment_exit)
+            .replace(R.id.fragment_container, PeriodHistoryFragment())
+            .addToBackStack("period_history")
+            .commit()
+    }
+
     private fun setupNavigation() {
         val homeFragment = HomeFragment()
         val chartFragment = ChartFragment()
         val healthTreasuryFragment = HealthTreasuryFragment()
-        val vaginalDischargeFragment = VaginalDischargeRecordFragment()
+        val recordsFragment = RecordBookFragment()
 
         setCurrentFragment(homeFragment)
 
@@ -86,8 +128,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_add -> {
-                    // 中间添加按钮点击处理
-                    showDatePickerDialog()
+                    // 中间为“动作按钮占位”，不作为可选中的目的地。
                     false
                 }
                 R.id.nav_info -> {
@@ -95,7 +136,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_record -> {
-                    setCurrentFragment(vaginalDischargeFragment)
+                    setCurrentFragment(recordsFragment)
                     true
                 }
                 else -> false
@@ -104,54 +145,48 @@ class MainActivity : AppCompatActivity() {
 
         // 中央添加按钮点击
         binding.centerAddButton.setOnClickListener {
-            showDatePickerDialog()
+            showRecordDatePicker()
         }
     }
 
-    private fun showDatePickerDialog() {
-        val today = java.time.LocalDate.now()
-        val datePickerDialog = android.app.DatePickerDialog(
-            this,
-            { _, year, month, dayOfMonth ->
-                val selectedDate = java.time.LocalDate.of(year, month + 1, dayOfMonth)
-                showRecordConfirmDialog(selectedDate)
-            },
-            today.year,
-            today.monthValue - 1,
-            today.dayOfMonth
-        )
-        datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
-        datePickerDialog.show()
+    private fun showRecordDatePicker() {
+        val constraints = CalendarConstraints.Builder()
+            .setValidator(DateValidatorPointBackward.now())
+            .build()
+        val picker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText("记录：来月经的日期")
+            .setCalendarConstraints(constraints)
+            .build()
+        picker.addOnPositiveButtonClickListener { utcMillis ->
+            val picked = Instant.ofEpochMilli(utcMillis)
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate()
+            if (picked.isAfter(LocalDate.now())) return@addOnPositiveButtonClickListener
+            showRecordConfirmDialog(picked)
+        }
+        picker.show(supportFragmentManager, "record_date")
     }
 
-    private fun showRecordConfirmDialog(selectedDate: java.time.LocalDate) {
-        val repository = com.myaunt.app.data.PeriodRepository(this)
-        val formatter = java.time.format.DateTimeFormatter.ofPattern("M月d日", java.util.Locale.CHINESE)
-        
-        val message = if (selectedDate == java.time.LocalDate.now()) {
+    private fun showRecordConfirmDialog(selectedDate: LocalDate) {
+        val message = if (selectedDate == LocalDate.now()) {
             "确认今天开始了吗？"
         } else {
-            "确认 ${selectedDate.format(formatter)} 开始了吗？"
+            "确认 ${selectedDate.format(dateFormatter)} 开始了吗？"
         }
-        
+
         MaterialAlertDialogBuilder(this)
             .setTitle("来姨妈了？")
             .setMessage(message)
             .setNegativeButton("取消", null)
             .setPositiveButton("确认记录") { _, _ ->
-                tryRecordDate(repository, selectedDate)
+                tryRecordDate(selectedDate)
             }
             .show()
     }
 
-    private fun tryRecordDate(repository: com.myaunt.app.data.PeriodRepository, recordDate: java.time.LocalDate) {
+    private fun tryRecordDate(recordDate: LocalDate) {
         if (repository.getAllPeriods().contains(recordDate)) {
-            val formatter = java.time.format.DateTimeFormatter.ofPattern("M月d日", java.util.Locale.CHINESE)
-            MaterialAlertDialogBuilder(this)
-                .setTitle("该日期已有记录")
-                .setMessage("${recordDate.format(formatter)} 已经记过一次，无需重复添加。")
-                .setPositiveButton("知道了", null)
-                .show()
+            showAlreadyExistsDialog(recordDate)
             return
         }
 
@@ -159,45 +194,162 @@ class MainActivity : AppCompatActivity() {
         if (abnormalGap == null) {
             repository.addPeriod(recordDate)
             PeriodWidgetUpdater.updateAll(this)
-            showSuccessToast()
+            notifyRecordChanged()
             return
         }
 
-        showAbnormalCycleDialog(abnormalGap.days, recordDate, abnormalGap.comparedToFollowingPeriod, repository)
+        showAbnormalCycleDialog(abnormalGap.days, recordDate)
     }
 
-    private fun showAbnormalCycleDialog(
-        cycleLength: Long,
-        recordDate: java.time.LocalDate,
-        comparedToFollowingPeriod: Boolean,
-        repository: com.myaunt.app.data.PeriodRepository
-    ) {
-        val whenText = when {
-            recordDate == java.time.LocalDate.now() -> "本次"
-            comparedToFollowingPeriod ->
-                "为 ${recordDate.format(java.time.format.DateTimeFormatter.ofPattern("M月d日"))} 补录时，与之后最近一条记录"
-            else ->
-                "为 ${recordDate.format(java.time.format.DateTimeFormatter.ofPattern("M月d日"))} 补录时，相对上一次记录"
-        }
-        
+    private fun showAlreadyExistsDialog(existingDate: LocalDate) {
+        val message = "${existingDate.format(dateFormatter)} 已经记过一次，"
         MaterialAlertDialogBuilder(this)
-            .setTitle("周期提醒")
-            .setMessage("$whenText 间隔为 $cycleLength 天，超出常见 20-40 天范围。\n周期可能不太规律，仍要记录吗？")
-            .setNegativeButton("取消", null)
-            .setPositiveButton("仍要记录") { _, _ ->
-                repository.addPeriodWithSpecialReason(recordDate, "未填写")
-                PeriodWidgetUpdater.updateAll(this)
-                showSuccessToast()
+            .setTitle("该日期已有记录")
+            .setMessage(message + "是否要修改这条记录？")
+            .setNegativeButton("取消") { _, _ ->
+                // 取消，不做任何操作
+            }
+            .setPositiveButton("修改") { _, _ ->
+                openPeriodHistoryForEdit(existingDate)
+            }
+            .setNeutralButton("删除") { _, _ ->
+                deleteAndRecord(existingDate)
             }
             .show()
     }
 
-    private fun showSuccessToast() {
+    private fun deleteAndRecord(existingDate: LocalDate) {
+        val oldReason = repository.getSpecialReason(existingDate)
+        repository.removePeriod(existingDate)
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle("删除并重新记录")
+            .setMessage("已删除${existingDate.format(dateFormatter)}的旧记录，现在可以重新记录。")
+            .setPositiveButton("开始记录") { _, _ ->
+                showRecordConfirmDialog(existingDate)
+            }
+            .show()
+    }
+
+    private fun showAbnormalCycleDialog(
+        cycleLength: Long,
+        recordDate: LocalDate,
+    ) {
+        val whenText = when {
+            recordDate == LocalDate.now() -> "本次"
+            else -> "为 ${recordDate.format(dateFormatter)} 补录时"
+        }
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle("周期提醒")
+            .setMessage("$whenText 间隔为 $cycleLength 天，超出常见 20-40 天范围。\n周期可能不太规律，仍要记录吗？")
+            .setNegativeButton("取消", null)
+            .setNeutralButton("写备注") { _, _ ->
+                showSpecialReasonDialog(cycleLength, recordDate)
+            }
+            .setPositiveButton("直接记录") { _, _ ->
+                repository.addPeriod(recordDate)
+                PeriodWidgetUpdater.updateAll(this)
+                notifyRecordChanged()
+            }
+            .show()
+    }
+
+    private fun showSpecialReasonDialog(
+        cycleLength: Long,
+        recordDate: LocalDate,
+    ) {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_special_reason, null, false)
+        val gridChips = dialogView.findViewById<GridLayout>(R.id.grid_reason_chips)
+        val noteInput = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.edit_special_note)
+        val noteLayout = dialogView.findViewById<com.google.android.material.textfield.TextInputLayout>(R.id.layout_special_note)
+
+        dialogView.findViewById<TextView>(R.id.tv_dialog_subtitle).text = recordDate.format(dateFormatter)
+        dialogView.findViewById<TextView>(R.id.tv_gap_card_body).text =
+            "本次间隔为 ${cycleLength} 天，超出常见的 20–40 天范围。\n勾选标签（可多选）或写一句备注，帮助以后更懂自己的周期。"
+
+        fun collectTags(): List<String> {
+            val out = mutableListOf<String>()
+            for (i in 0 until gridChips.childCount) {
+                val child = gridChips.getChildAt(i)
+                if (child is Chip && child.isChecked) out.add(child.text.toString())
+            }
+            return out
+        }
+
+        fun buildReason(tags: List<String>, note: String): String {
+            return buildString {
+                append("周期${cycleLength}天")
+                if (tags.isNotEmpty()) {
+                    append(" · ")
+                    append(tags.joinToString("、"))
+                }
+                if (note.isNotEmpty()) {
+                    append(" · ")
+                    append(note)
+                }
+            }
+        }
+
+        val dialog = android.app.Dialog(this)
+        dialog.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
+        dialog.setContentView(dialogView)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.window?.apply {
+            setBackgroundDrawable(android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT))
+            setLayout(
+                android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+                (resources.displayMetrics.heightPixels * 0.92f).toInt(),
+            )
+            setGravity(android.view.Gravity.BOTTOM)
+        }
+        @Suppress("DEPRECATION")
+        dialog.window?.setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
+        fun performSave() {
+            val tags = collectTags()
+            val note = noteInput.text?.toString()?.trim().orEmpty()
+            if (tags.isEmpty() && note.isEmpty()) {
+                noteLayout.error = "请至少选一个标签，或填写补充说明"
+                return
+            }
+            noteLayout.error = null
+            repository.addPeriodWithSpecialReason(recordDate, buildReason(tags, note))
+            PeriodWidgetUpdater.updateAll(this)
+            dialog.dismiss()
+            notifyRecordChanged()
+        }
+
+        dialogView.findViewById<View>(R.id.btn_dialog_close).setOnClickListener { dialog.dismiss() }
+        dialogView.findViewById<TextView>(R.id.btn_dialog_save_top).setOnClickListener { performSave() }
+        dialogView.findViewById<Button>(R.id.btn_save_record).setOnClickListener { performSave() }
+        dialogView.findViewById<TextView>(R.id.tv_skip_record).setOnClickListener {
+            MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.confirm_skip_title)
+                .setMessage(R.string.confirm_skip_message)
+                .setNegativeButton(R.string.special_dialog_save_record, null)
+                .setPositiveButton(R.string.special_dialog_skip) { _, _ ->
+                    repository.addPeriodWithSpecialReason(recordDate, "未填写")
+                    PeriodWidgetUpdater.updateAll(this)
+                    dialog.dismiss()
+                    notifyRecordChanged()
+                }
+                .show()
+        }
+
+        dialog.show()
+    }
+
+    private fun notifyRecordChanged() {
         Toast.makeText(this, "记录成功", Toast.LENGTH_SHORT).show()
+        (supportFragmentManager.findFragmentById(R.id.fragment_container) as? HomeFragment)?.refreshAfterRecord()
     }
 
     private fun setCurrentFragment(fragment: Fragment) {
         val fm = supportFragmentManager
+        if (fm.backStackEntryCount > 0) {
+            fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        }
         val tx = fm.beginTransaction().setReorderingAllowed(true)
         if (fm.findFragmentById(R.id.fragment_container) != null) {
             tx.setCustomAnimations(R.anim.fragment_enter, R.anim.fragment_exit)

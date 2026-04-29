@@ -3,6 +3,8 @@ package com.myaunt.app.data
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
@@ -77,6 +79,17 @@ class PeriodRepository(context: Context) {
         val dateStrings = periods.map { it.toString() }
         val json = gson.toJson(dateStrings)
         prefs.edit().putString(KEY_PERIODS, json).apply()
+    }
+
+    /**
+     * 删除某次月经开始日记录；若该日有周期备注，将一并删除备注条目。
+     */
+    fun removePeriod(date: LocalDate) {
+        val periods = getAllPeriods().toMutableList()
+        if (periods.remove(date)) {
+            savePeriods(periods)
+            removeSpecialReason(date)
+        }
     }
 
     fun getDaysSinceLastPeriod(): Long? {
@@ -345,5 +358,38 @@ class PeriodRepository(context: Context) {
         }
         
         return hormonePoints
+    }
+
+    /**
+     * 导出本地所有业务数据为 JSON 字符串，便于用户自行备份到文件。
+     * 仅包含本应用 [prefs] 中的三份键值，不含系统其它数据。
+     */
+    fun exportDataJson(): String {
+        val o = JsonObject()
+        o.addProperty("schemaVersion", 1)
+        o.addProperty(KEY_PERIODS, prefs.getString(KEY_PERIODS, "[]") ?: "[]")
+        o.addProperty(KEY_SPECIAL_REASONS, prefs.getString(KEY_SPECIAL_REASONS, "{}") ?: "{}")
+        o.addProperty(KEY_VAGINAL_DISCHARGE_RECORDS, prefs.getString(KEY_VAGINAL_DISCHARGE_RECORDS, "{}") ?: "{}")
+        return o.toString()
+    }
+
+    /**
+     * 从 [exportDataJson] 生成的 JSON 整包恢复。失败时返回 [Result.failure]。
+     */
+    fun importDataJson(json: String): Result<Unit> = runCatching {
+        val root = JsonParser.parseString(json).asJsonObject
+        val v = root.get("schemaVersion")?.asInt ?: 1
+        if (v != 1) error("不支持的备份版本: $v")
+        val p = root.get(KEY_PERIODS).asString
+        val s = root.get(KEY_SPECIAL_REASONS).asString
+        val d = root.get(KEY_VAGINAL_DISCHARGE_RECORDS).asString
+        JsonParser.parseString(p) // 数组
+        JsonParser.parseString(s) // 对象
+        JsonParser.parseString(d) // 对象
+        prefs.edit()
+            .putString(KEY_PERIODS, p)
+            .putString(KEY_SPECIAL_REASONS, s)
+            .putString(KEY_VAGINAL_DISCHARGE_RECORDS, d)
+            .commit()
     }
 }

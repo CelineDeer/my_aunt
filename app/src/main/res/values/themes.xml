@@ -10,7 +10,7 @@
         <item name="colorOnSurface">@color/md_on_surface</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowLightNavigationBar">true</item>
-        <item name="android:windowBackground">@color/md_bg</item>
+        <item name="android:windowBackground">@color/ui_page_background</item>
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.MyAunt.Dialog</item>
     </style>
 
