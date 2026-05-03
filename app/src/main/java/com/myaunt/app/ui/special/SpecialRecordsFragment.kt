@@ -78,7 +78,11 @@ class SpecialRecordsFragment : Fragment() {
     }
 
     private fun showEditDialog(record: SpecialRecord) {
-        val inputLayout = TextInputLayout(requireContext()).apply {
+        val inputLayout = TextInputLayout(
+            requireContext(),
+            null,
+            com.google.android.material.R.attr.textInputOutlinedStyle,
+        ).apply {
             hint = "备注内容"
             setPadding(48, 24, 48, 0)
         }

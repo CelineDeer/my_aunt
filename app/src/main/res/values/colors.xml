@@ -5,6 +5,10 @@
 
     <!-- doc 原型：Tailwind rose 系 + 浅粉底 #FFF5F5 -->
     <color name="md_bg">#FFF5F5</color>
+    <color name="ui_record_screen_bg">#FFF9F9</color>
+    <color name="record_today_accent">#FF5C8D</color>
+    <color name="record_today_note_counter">#B8B8C4</color>
+    <color name="ui_record_toolbar_divider">#F3E8EB</color>
     <color name="ui_page_background">@color/md_bg</color>
     <color name="md_surface">#FFFFFF</color>
     <color name="md_on_surface">#1F2937</color>

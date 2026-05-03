@@ -20,6 +20,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 import kotlin.math.max
+import kotlin.math.roundToInt
 
 class BarChartView @JvmOverloads constructor(
     context: Context,
@@ -197,29 +198,49 @@ class BarChartView @JvmOverloads constructor(
 
         val chartWidth = width - paddingLeft - paddingRight
         val chartHeight = height - paddingTop - paddingBottom
+        if (chartWidth <= 0f || chartHeight <= 0f) return
 
-        val intervalValues = points.map { it.intervalDays }
-        val maxVal = max(intervalValues.maxOrNull()?.toFloat() ?: 30f, 35f)
+        val intervalValues = points.map { it.intervalDays.toFloat() }
+        val dataMin = intervalValues.minOrNull() ?: 28f
+        val dataMax = intervalValues.maxOrNull() ?: 28f
+        // 纵轴紧贴数据范围，否则 26–32 天落在 0–35 轴上几乎等高，看不出波动
+        val pad = max(2f, (dataMax - dataMin) * 0.25f).coerceAtLeast(1f)
+        var axisMin = dataMin - pad
+        var axisMax = dataMax + pad
+        if (axisMax - axisMin < 6f) {
+            val mid = (dataMin + dataMax) / 2f
+            axisMin = mid - 3f
+            axisMax = mid + 3f
+        }
+        axisMin = axisMin.coerceAtLeast(1f)
+        axisMax = max(axisMax, axisMin + 4f)
+        val axisSpan = axisMax - axisMin
+
         val avg = intervalValues.average().toFloat()
 
         val barCount = points.size
         val barWidth = (chartWidth / barCount) * 0.58f
         val barSpacing = chartWidth / barCount
 
+        fun valueToHeight(v: Float): Float {
+            val ratio = ((v - axisMin) / axisSpan).coerceIn(0f, 1f)
+            return ratio * chartHeight
+        }
+
         // 绘制网格线
         val gridLines = 4
         for (i in 0..gridLines) {
             val y = paddingTop + chartHeight - (i * chartHeight / gridLines)
             canvas.drawLine(paddingLeft, y, paddingLeft + chartWidth, y, gridPaint)
-            val label = (maxVal / gridLines * i).toInt().toString()
+            val label = (axisMin + axisSpan * (i.toFloat() / gridLines)).roundToInt().toString()
             labelPaint.textAlign = Paint.Align.RIGHT
             canvas.drawText(label, paddingLeft - 8f, y + 8f, labelPaint)
         }
 
         // 绘制平均值线
-        val avgY = paddingTop + chartHeight - (avg / maxVal * chartHeight)
+        val avgY = paddingTop + chartHeight - valueToHeight(avg)
         canvas.drawLine(paddingLeft, avgY, paddingLeft + chartWidth, avgY, avgLinePaint)
-        canvas.drawText("均值 ${avg.toInt()}天", paddingLeft + chartWidth - 100f, avgY - 10f, avgLabelPaint)
+        canvas.drawText("均值 ${avg.roundToInt()}天", paddingLeft + chartWidth - 100f, avgY - 10f, avgLabelPaint)
 
         // 绘制激素曲线
         if (showHormoneCurves && hormonePoints.size == points.size) {
@@ -230,7 +251,7 @@ class BarChartView @JvmOverloads constructor(
         for (i in points.indices) {
             val point = points[i]
             val value = point.intervalDays.toFloat()
-            val animatedHeight = (value / maxVal * chartHeight) * animationProgress
+            val animatedHeight = valueToHeight(value) * animationProgress
             val band = bandForCycleDays(point.intervalDays)
 
             val left = paddingLeft + i * barSpacing + (barSpacing - barWidth) / 2

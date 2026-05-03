@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myaunt.app.data.PeriodRepository
+import androidx.core.os.bundleOf
 import com.myaunt.app.databinding.FragmentVaginalDischargeHistoryBinding
 import com.myaunt.app.ui.recordbook.RecordBookFragment
 
@@ -44,7 +45,16 @@ class VaginalDischargeHistoryFragment : Fragment() {
         adapter = VaginalDischargeHistoryAdapter(
             repository = repository,
             onItemClick = { record ->
-                (parentFragment as? RecordBookFragment)?.openDischargeAtDate(record.date)
+                val host = parentFragment as? RecordBookFragment
+                if (host != null) {
+                    host.openDischargeAtDate(record.date)
+                } else {
+                    requireActivity().supportFragmentManager.setFragmentResult(
+                        RecordBookFragment.RESULT_DISCHARGE_DATE,
+                        bundleOf(RecordBookFragment.EXTRA_DATE to record.date.toString()),
+                    )
+                    requireActivity().supportFragmentManager.popBackStack()
+                }
             },
         )
 

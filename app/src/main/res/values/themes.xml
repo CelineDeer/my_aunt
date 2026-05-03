@@ -12,6 +12,29 @@
         <item name="android:windowLightNavigationBar">true</item>
         <item name="android:windowBackground">@color/ui_page_background</item>
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.MyAunt.Dialog</item>
+        <!-- TextInputLayout 默认底部分割线（box stroke）去掉 -->
+        <item name="textInputStyle">@style/Widget.MyAunt.TextInputLayout.FilledBox</item>
+        <item name="textInputFilledStyle">@style/Widget.MyAunt.TextInputLayout.FilledBox</item>
+        <item name="textInputOutlinedStyle">@style/Widget.MyAunt.TextInputLayout.OutlinedBox</item>
+        <item name="textInputFilledDenseStyle">@style/Widget.MyAunt.TextInputLayout.FilledBox.Dense</item>
+        <item name="textInputOutlinedDenseStyle">@style/Widget.MyAunt.TextInputLayout.OutlinedBox.Dense</item>
+    </style>
+
+    <style name="Widget.MyAunt.TextInputLayout.FilledBox" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+    </style>
+    <style name="Widget.MyAunt.TextInputLayout.FilledBox.Dense" parent="Widget.Material3.TextInputLayout.FilledBox.Dense">
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+    </style>
+    <style name="Widget.MyAunt.TextInputLayout.OutlinedBox" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+    </style>
+    <style name="Widget.MyAunt.TextInputLayout.OutlinedBox.Dense" parent="Widget.Material3.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
     </style>
 
     <style name="ThemeOverlay.MyAunt.Dialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">

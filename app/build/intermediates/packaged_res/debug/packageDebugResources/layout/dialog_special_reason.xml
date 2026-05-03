@@ -254,6 +254,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layout_special_note"
+                style="@style/Widget.MyAunt.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -265,7 +266,6 @@
                 app:boxCornerRadiusTopEnd="16dp"
                 app:boxCornerRadiusTopStart="16dp"
                 app:boxStrokeColor="@color/md_pink_soft"
-                app:boxStrokeWidth="1dp"
                 app:hintTextColor="@color/md_text_secondary">
 
                 <com.google.android.material.textfield.TextInputEditText

@@ -23,7 +23,6 @@ import com.myaunt.app.data.DischargeTexture
 import com.myaunt.app.data.PeriodRepository
 import com.myaunt.app.data.VaginalDischargeRecord
 import com.myaunt.app.databinding.FragmentVaginalDischargeRecordBinding
-import com.myaunt.app.ui.recordbook.RecordBookFragment
 import com.myaunt.app.widget.PeriodWidgetUpdater
 import java.time.Instant
 import java.time.LocalDate
@@ -98,7 +97,11 @@ class VaginalDischargeRecordFragment : Fragment() {
                     true
                 }
                 R.id.action_history -> {
-                    (parentFragment as? RecordBookFragment)?.navigateToDischargeHistoryTab()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .setReorderingAllowed(true)
+                        .replace(R.id.fragment_container, VaginalDischargeHistoryFragment.newInstance(false))
+                        .addToBackStack("discharge_history")
+                        .commit()
                     true
                 }
                 else -> false
@@ -316,7 +319,11 @@ class VaginalDischargeRecordFragment : Fragment() {
         repository.saveVaginalDischargeRecord(record)
         if (embedded) {
             Toast.makeText(requireContext(), "已保存", Toast.LENGTH_SHORT).show()
-            (parentFragment as? RecordBookFragment)?.navigateToDischargeHistoryAfterSave()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .setReorderingAllowed(true)
+                .replace(R.id.fragment_container, VaginalDischargeHistoryFragment.newInstance(false))
+                .addToBackStack("discharge_history")
+                .commit()
         } else {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle("保存成功")

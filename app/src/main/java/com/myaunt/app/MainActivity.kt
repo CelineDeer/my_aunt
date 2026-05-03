@@ -26,9 +26,6 @@ import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.chip.Chip
-import com.google.android.material.datepicker.CalendarConstraints
-import com.google.android.material.datepicker.DateValidatorPointBackward
-import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -39,11 +36,10 @@ import com.myaunt.app.ui.chart.ChartFragment
 import com.myaunt.app.ui.healthtreasury.HealthTreasuryFragment
 import com.myaunt.app.ui.home.HomeFragment
 import com.myaunt.app.ui.history.PeriodHistoryFragment
+import com.myaunt.app.ui.record.RecordTodayFragment
 import com.myaunt.app.ui.recordbook.RecordBookFragment
 import com.myaunt.app.widget.PeriodWidgetUpdater
-import java.time.Instant
 import java.time.LocalDate
-import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
@@ -143,62 +139,30 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // 中央添加按钮点击
+        // 中央添加按钮：进入「记录今天」全屏页
         binding.centerAddButton.setOnClickListener {
-            showRecordDatePicker()
+            openRecordToday()
         }
     }
 
-    private fun showRecordDatePicker() {
-        val constraints = CalendarConstraints.Builder()
-            .setValidator(DateValidatorPointBackward.now())
-            .build()
-        val picker = MaterialDatePicker.Builder.datePicker()
-            .setTitleText("记录：来月经的日期")
-            .setCalendarConstraints(constraints)
-            .build()
-        picker.addOnPositiveButtonClickListener { utcMillis ->
-            val picked = Instant.ofEpochMilli(utcMillis)
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate()
-            if (picked.isAfter(LocalDate.now())) return@addOnPositiveButtonClickListener
-            showRecordConfirmDialog(picked)
-        }
-        picker.show(supportFragmentManager, "record_date")
-    }
-
-    private fun showRecordConfirmDialog(selectedDate: LocalDate) {
-        val message = if (selectedDate == LocalDate.now()) {
-            "确认今天开始了吗？"
+    fun openRecordToday(initialDate: LocalDate? = null) {
+        val frag = if (initialDate != null) {
+            RecordTodayFragment.newInstance(initialDate)
         } else {
-            "确认 ${selectedDate.format(dateFormatter)} 开始了吗？"
+            RecordTodayFragment()
         }
-
-        MaterialAlertDialogBuilder(this)
-            .setTitle("来姨妈了？")
-            .setMessage(message)
-            .setNegativeButton("取消", null)
-            .setPositiveButton("确认记录") { _, _ ->
-                tryRecordDate(selectedDate)
-            }
-            .show()
+        supportFragmentManager.beginTransaction()
+            .setReorderingAllowed(true)
+            .setCustomAnimations(R.anim.fragment_enter, R.anim.fragment_exit)
+            .replace(R.id.fragment_container, frag)
+            .addToBackStack("record_today")
+            .commit()
     }
 
-    private fun tryRecordDate(recordDate: LocalDate) {
-        if (repository.getAllPeriods().contains(recordDate)) {
-            showAlreadyExistsDialog(recordDate)
-            return
-        }
-
-        val abnormalGap = repository.getAbnormalGapForNewRecord(recordDate)
-        if (abnormalGap == null) {
-            repository.addPeriod(recordDate)
-            PeriodWidgetUpdater.updateAll(this)
-            notifyRecordChanged()
-            return
-        }
-
-        showAbnormalCycleDialog(abnormalGap.days, recordDate)
+    /** 从「记录今天」页保存后刷新首页数据。 */
+    fun refreshHomeAfterRecord() {
+        (supportFragmentManager.fragments.find { it is HomeFragment } as? HomeFragment)?.refreshAfterRecord()
+        (supportFragmentManager.findFragmentById(R.id.fragment_container) as? HomeFragment)?.refreshAfterRecord()
     }
 
     private fun showAlreadyExistsDialog(existingDate: LocalDate) {
@@ -226,7 +190,7 @@ class MainActivity : AppCompatActivity() {
             .setTitle("删除并重新记录")
             .setMessage("已删除${existingDate.format(dateFormatter)}的旧记录，现在可以重新记录。")
             .setPositiveButton("开始记录") { _, _ ->
-                showRecordConfirmDialog(existingDate)
+                openRecordToday(initialDate = existingDate)
             }
             .show()
     }
@@ -342,7 +306,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun notifyRecordChanged() {
         Toast.makeText(this, "记录成功", Toast.LENGTH_SHORT).show()
-        (supportFragmentManager.findFragmentById(R.id.fragment_container) as? HomeFragment)?.refreshAfterRecord()
+        refreshHomeAfterRecord()
     }
 
     private fun setCurrentFragment(fragment: Fragment) {

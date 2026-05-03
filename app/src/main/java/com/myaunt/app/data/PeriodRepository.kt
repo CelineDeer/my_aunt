@@ -22,6 +22,7 @@ class PeriodRepository(context: Context) {
         private const val KEY_PERIODS = "periods"
         private const val KEY_SPECIAL_REASONS = "special_reasons"
         private const val KEY_VAGINAL_DISCHARGE_RECORDS = "vaginal_discharge_records"
+        private const val KEY_MENSTRUATION_DIARY = "menstruation_diary"
     }
 
     fun getAllPeriods(): List<LocalDate> {
@@ -160,6 +161,36 @@ class PeriodRepository(context: Context) {
         val reasons = getSpecialReasons().toMutableMap()
         reasons.remove(date.toString())
         saveSpecialReasons(reasons)
+    }
+
+    /** 写入或覆盖某日备注（不要求该日已有月经记录）。 */
+    fun putSpecialReason(date: LocalDate, reason: String) {
+        val trimmed = reason.trim()
+        if (trimmed.isEmpty()) return
+        val reasons = getSpecialReasons().toMutableMap()
+        reasons[date.toString()] = trimmed
+        saveSpecialReasons(reasons)
+    }
+
+    // ============ 「记录今天」经期日记（非开始日 / 仅结束记录） ============
+
+    fun saveMenstruationDiary(date: LocalDate, diary: MenstruationDiary) {
+        val map = getMenstruationDiaryMap().toMutableMap()
+        map[date.toString()] = diary
+        saveMenstruationDiaryMap(map)
+    }
+
+    fun getMenstruationDiary(date: LocalDate): MenstruationDiary? =
+        getMenstruationDiaryMap()[date.toString()]
+
+    private fun getMenstruationDiaryMap(): Map<String, MenstruationDiary> {
+        val json = prefs.getString(KEY_MENSTRUATION_DIARY, "{}") ?: "{}"
+        val type = object : TypeToken<Map<String, MenstruationDiary>>() {}.type
+        return gson.fromJson<Map<String, MenstruationDiary>>(json, type) ?: emptyMap()
+    }
+
+    private fun saveMenstruationDiaryMap(map: Map<String, MenstruationDiary>) {
+        prefs.edit().putString(KEY_MENSTRUATION_DIARY, gson.toJson(map)).apply()
     }
 
     // ============ 白带记录相关方法 ============
@@ -366,10 +397,11 @@ class PeriodRepository(context: Context) {
      */
     fun exportDataJson(): String {
         val o = JsonObject()
-        o.addProperty("schemaVersion", 1)
+        o.addProperty("schemaVersion", 2)
         o.addProperty(KEY_PERIODS, prefs.getString(KEY_PERIODS, "[]") ?: "[]")
         o.addProperty(KEY_SPECIAL_REASONS, prefs.getString(KEY_SPECIAL_REASONS, "{}") ?: "{}")
         o.addProperty(KEY_VAGINAL_DISCHARGE_RECORDS, prefs.getString(KEY_VAGINAL_DISCHARGE_RECORDS, "{}") ?: "{}")
+        o.addProperty(KEY_MENSTRUATION_DIARY, prefs.getString(KEY_MENSTRUATION_DIARY, "{}") ?: "{}")
         return o.toString()
     }
 
@@ -379,17 +411,20 @@ class PeriodRepository(context: Context) {
     fun importDataJson(json: String): Result<Unit> = runCatching {
         val root = JsonParser.parseString(json).asJsonObject
         val v = root.get("schemaVersion")?.asInt ?: 1
-        if (v != 1) error("不支持的备份版本: $v")
+        if (v != 1 && v != 2) error("不支持的备份版本: $v")
         val p = root.get(KEY_PERIODS).asString
         val s = root.get(KEY_SPECIAL_REASONS).asString
         val d = root.get(KEY_VAGINAL_DISCHARGE_RECORDS).asString
         JsonParser.parseString(p) // 数组
         JsonParser.parseString(s) // 对象
         JsonParser.parseString(d) // 对象
+        val diary = root.get(KEY_MENSTRUATION_DIARY)?.asString ?: "{}"
+        JsonParser.parseString(diary)
         prefs.edit()
             .putString(KEY_PERIODS, p)
             .putString(KEY_SPECIAL_REASONS, s)
             .putString(KEY_VAGINAL_DISCHARGE_RECORDS, d)
+            .putString(KEY_MENSTRUATION_DIARY, diary)
             .commit()
     }
 }

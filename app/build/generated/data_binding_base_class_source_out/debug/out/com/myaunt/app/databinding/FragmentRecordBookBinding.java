@@ -4,13 +4,21 @@ package com.myaunt.app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import androidx.viewpager2.widget.ViewPager2;
-import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.myaunt.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -18,24 +26,137 @@ import java.lang.String;
 
 public final class FragmentRecordBookBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final CoordinatorLayout rootView;
 
   @NonNull
-  public final TabLayout tabLayoutRecordBook;
+  public final ImageButton btnCycleCalendar;
 
   @NonNull
-  public final ViewPager2 viewPagerRecordBook;
+  public final MaterialButton btnSaveRecord;
 
-  private FragmentRecordBookBinding(@NonNull LinearLayout rootView,
-      @NonNull TabLayout tabLayoutRecordBook, @NonNull ViewPager2 viewPagerRecordBook) {
+  @NonNull
+  public final MaterialCardView cardQuickDry;
+
+  @NonNull
+  public final MaterialCardView cardQuickMilky;
+
+  @NonNull
+  public final MaterialCardView cardQuickStretchy;
+
+  @NonNull
+  public final MaterialCardView cardQuickThick;
+
+  @NonNull
+  public final FloatingActionButton fabQuickAdd;
+
+  @NonNull
+  public final FrameLayout flIconDry;
+
+  @NonNull
+  public final FrameLayout flIconMilky;
+
+  @NonNull
+  public final FrameLayout flIconStretchy;
+
+  @NonNull
+  public final FrameLayout flIconThick;
+
+  @NonNull
+  public final ImageView ivCheckDry;
+
+  @NonNull
+  public final ImageView ivCheckMilky;
+
+  @NonNull
+  public final ImageView ivCheckStretchy;
+
+  @NonNull
+  public final ImageView ivCheckThick;
+
+  @NonNull
+  public final RecyclerView recyclerHubHistory;
+
+  @NonNull
+  public final NestedScrollView scrollRecordHub;
+
+  @NonNull
+  public final LinearLayout sectionRecord;
+
+  @NonNull
+  public final TextView tvAnalysisDisclaimer;
+
+  @NonNull
+  public final TextView tvAnalysisSuggestion;
+
+  @NonNull
+  public final TextView tvAnalysisTip;
+
+  @NonNull
+  public final TextView tvCycleDaysBig;
+
+  @NonNull
+  public final TextView tvCyclePhaseLabel;
+
+  @NonNull
+  public final TextView tvHistoryEmpty;
+
+  @NonNull
+  public final TextView tvLinkChangeOnHome;
+
+  @NonNull
+  public final TextView tvRecordDate;
+
+  @NonNull
+  public final TextView tvViewMoreHistory;
+
+  private FragmentRecordBookBinding(@NonNull CoordinatorLayout rootView,
+      @NonNull ImageButton btnCycleCalendar, @NonNull MaterialButton btnSaveRecord,
+      @NonNull MaterialCardView cardQuickDry, @NonNull MaterialCardView cardQuickMilky,
+      @NonNull MaterialCardView cardQuickStretchy, @NonNull MaterialCardView cardQuickThick,
+      @NonNull FloatingActionButton fabQuickAdd, @NonNull FrameLayout flIconDry,
+      @NonNull FrameLayout flIconMilky, @NonNull FrameLayout flIconStretchy,
+      @NonNull FrameLayout flIconThick, @NonNull ImageView ivCheckDry,
+      @NonNull ImageView ivCheckMilky, @NonNull ImageView ivCheckStretchy,
+      @NonNull ImageView ivCheckThick, @NonNull RecyclerView recyclerHubHistory,
+      @NonNull NestedScrollView scrollRecordHub, @NonNull LinearLayout sectionRecord,
+      @NonNull TextView tvAnalysisDisclaimer, @NonNull TextView tvAnalysisSuggestion,
+      @NonNull TextView tvAnalysisTip, @NonNull TextView tvCycleDaysBig,
+      @NonNull TextView tvCyclePhaseLabel, @NonNull TextView tvHistoryEmpty,
+      @NonNull TextView tvLinkChangeOnHome, @NonNull TextView tvRecordDate,
+      @NonNull TextView tvViewMoreHistory) {
     this.rootView = rootView;
-    this.tabLayoutRecordBook = tabLayoutRecordBook;
-    this.viewPagerRecordBook = viewPagerRecordBook;
+    this.btnCycleCalendar = btnCycleCalendar;
+    this.btnSaveRecord = btnSaveRecord;
+    this.cardQuickDry = cardQuickDry;
+    this.cardQuickMilky = cardQuickMilky;
+    this.cardQuickStretchy = cardQuickStretchy;
+    this.cardQuickThick = cardQuickThick;
+    this.fabQuickAdd = fabQuickAdd;
+    this.flIconDry = flIconDry;
+    this.flIconMilky = flIconMilky;
+    this.flIconStretchy = flIconStretchy;
+    this.flIconThick = flIconThick;
+    this.ivCheckDry = ivCheckDry;
+    this.ivCheckMilky = ivCheckMilky;
+    this.ivCheckStretchy = ivCheckStretchy;
+    this.ivCheckThick = ivCheckThick;
+    this.recyclerHubHistory = recyclerHubHistory;
+    this.scrollRecordHub = scrollRecordHub;
+    this.sectionRecord = sectionRecord;
+    this.tvAnalysisDisclaimer = tvAnalysisDisclaimer;
+    this.tvAnalysisSuggestion = tvAnalysisSuggestion;
+    this.tvAnalysisTip = tvAnalysisTip;
+    this.tvCycleDaysBig = tvCycleDaysBig;
+    this.tvCyclePhaseLabel = tvCyclePhaseLabel;
+    this.tvHistoryEmpty = tvHistoryEmpty;
+    this.tvLinkChangeOnHome = tvLinkChangeOnHome;
+    this.tvRecordDate = tvRecordDate;
+    this.tvViewMoreHistory = tvViewMoreHistory;
   }
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public CoordinatorLayout getRoot() {
     return rootView;
   }
 
@@ -60,20 +181,174 @@ public final class FragmentRecordBookBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.tab_layout_record_book;
-      TabLayout tabLayoutRecordBook = ViewBindings.findChildViewById(rootView, id);
-      if (tabLayoutRecordBook == null) {
+      id = R.id.btn_cycle_calendar;
+      ImageButton btnCycleCalendar = ViewBindings.findChildViewById(rootView, id);
+      if (btnCycleCalendar == null) {
         break missingId;
       }
 
-      id = R.id.view_pager_record_book;
-      ViewPager2 viewPagerRecordBook = ViewBindings.findChildViewById(rootView, id);
-      if (viewPagerRecordBook == null) {
+      id = R.id.btn_save_record;
+      MaterialButton btnSaveRecord = ViewBindings.findChildViewById(rootView, id);
+      if (btnSaveRecord == null) {
         break missingId;
       }
 
-      return new FragmentRecordBookBinding((LinearLayout) rootView, tabLayoutRecordBook,
-          viewPagerRecordBook);
+      id = R.id.card_quick_dry;
+      MaterialCardView cardQuickDry = ViewBindings.findChildViewById(rootView, id);
+      if (cardQuickDry == null) {
+        break missingId;
+      }
+
+      id = R.id.card_quick_milky;
+      MaterialCardView cardQuickMilky = ViewBindings.findChildViewById(rootView, id);
+      if (cardQuickMilky == null) {
+        break missingId;
+      }
+
+      id = R.id.card_quick_stretchy;
+      MaterialCardView cardQuickStretchy = ViewBindings.findChildViewById(rootView, id);
+      if (cardQuickStretchy == null) {
+        break missingId;
+      }
+
+      id = R.id.card_quick_thick;
+      MaterialCardView cardQuickThick = ViewBindings.findChildViewById(rootView, id);
+      if (cardQuickThick == null) {
+        break missingId;
+      }
+
+      id = R.id.fab_quick_add;
+      FloatingActionButton fabQuickAdd = ViewBindings.findChildViewById(rootView, id);
+      if (fabQuickAdd == null) {
+        break missingId;
+      }
+
+      id = R.id.fl_icon_dry;
+      FrameLayout flIconDry = ViewBindings.findChildViewById(rootView, id);
+      if (flIconDry == null) {
+        break missingId;
+      }
+
+      id = R.id.fl_icon_milky;
+      FrameLayout flIconMilky = ViewBindings.findChildViewById(rootView, id);
+      if (flIconMilky == null) {
+        break missingId;
+      }
+
+      id = R.id.fl_icon_stretchy;
+      FrameLayout flIconStretchy = ViewBindings.findChildViewById(rootView, id);
+      if (flIconStretchy == null) {
+        break missingId;
+      }
+
+      id = R.id.fl_icon_thick;
+      FrameLayout flIconThick = ViewBindings.findChildViewById(rootView, id);
+      if (flIconThick == null) {
+        break missingId;
+      }
+
+      id = R.id.iv_check_dry;
+      ImageView ivCheckDry = ViewBindings.findChildViewById(rootView, id);
+      if (ivCheckDry == null) {
+        break missingId;
+      }
+
+      id = R.id.iv_check_milky;
+      ImageView ivCheckMilky = ViewBindings.findChildViewById(rootView, id);
+      if (ivCheckMilky == null) {
+        break missingId;
+      }
+
+      id = R.id.iv_check_stretchy;
+      ImageView ivCheckStretchy = ViewBindings.findChildViewById(rootView, id);
+      if (ivCheckStretchy == null) {
+        break missingId;
+      }
+
+      id = R.id.iv_check_thick;
+      ImageView ivCheckThick = ViewBindings.findChildViewById(rootView, id);
+      if (ivCheckThick == null) {
+        break missingId;
+      }
+
+      id = R.id.recycler_hub_history;
+      RecyclerView recyclerHubHistory = ViewBindings.findChildViewById(rootView, id);
+      if (recyclerHubHistory == null) {
+        break missingId;
+      }
+
+      id = R.id.scroll_record_hub;
+      NestedScrollView scrollRecordHub = ViewBindings.findChildViewById(rootView, id);
+      if (scrollRecordHub == null) {
+        break missingId;
+      }
+
+      id = R.id.section_record;
+      LinearLayout sectionRecord = ViewBindings.findChildViewById(rootView, id);
+      if (sectionRecord == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_analysis_disclaimer;
+      TextView tvAnalysisDisclaimer = ViewBindings.findChildViewById(rootView, id);
+      if (tvAnalysisDisclaimer == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_analysis_suggestion;
+      TextView tvAnalysisSuggestion = ViewBindings.findChildViewById(rootView, id);
+      if (tvAnalysisSuggestion == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_analysis_tip;
+      TextView tvAnalysisTip = ViewBindings.findChildViewById(rootView, id);
+      if (tvAnalysisTip == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_cycle_days_big;
+      TextView tvCycleDaysBig = ViewBindings.findChildViewById(rootView, id);
+      if (tvCycleDaysBig == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_cycle_phase_label;
+      TextView tvCyclePhaseLabel = ViewBindings.findChildViewById(rootView, id);
+      if (tvCyclePhaseLabel == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_history_empty;
+      TextView tvHistoryEmpty = ViewBindings.findChildViewById(rootView, id);
+      if (tvHistoryEmpty == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_link_change_on_home;
+      TextView tvLinkChangeOnHome = ViewBindings.findChildViewById(rootView, id);
+      if (tvLinkChangeOnHome == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_record_date;
+      TextView tvRecordDate = ViewBindings.findChildViewById(rootView, id);
+      if (tvRecordDate == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_view_more_history;
+      TextView tvViewMoreHistory = ViewBindings.findChildViewById(rootView, id);
+      if (tvViewMoreHistory == null) {
+        break missingId;
+      }
+
+      return new FragmentRecordBookBinding((CoordinatorLayout) rootView, btnCycleCalendar,
+          btnSaveRecord, cardQuickDry, cardQuickMilky, cardQuickStretchy, cardQuickThick,
+          fabQuickAdd, flIconDry, flIconMilky, flIconStretchy, flIconThick, ivCheckDry,
+          ivCheckMilky, ivCheckStretchy, ivCheckThick, recyclerHubHistory, scrollRecordHub,
+          sectionRecord, tvAnalysisDisclaimer, tvAnalysisSuggestion, tvAnalysisTip, tvCycleDaysBig,
+          tvCyclePhaseLabel, tvHistoryEmpty, tvLinkChangeOnHome, tvRecordDate, tvViewMoreHistory);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

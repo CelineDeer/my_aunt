@@ -6,10 +6,13 @@
     <dimen name="spacing_lg">24dp</dimen>
     <dimen name="spacing_xl">32dp</dimen>
     <dimen name="page_padding_horizontal">20dp</dimen>
-    <dimen name="page_padding_bottom">100dp</dimen>
     <dimen name="card_radius_lg">24dp</dimen>
     <dimen name="card_radius_md">20dp</dimen>
     <dimen name="bottom_nav_bar_height">100dp</dimen>
+    <!-- 主界面底部自定义导航叠在 fragment 上（约 100dp + 中间凸起），可滚动内容统一预留 -->
+    <dimen name="content_above_bottom_nav">124dp</dimen>
+    <dimen name="page_padding_bottom">@dimen/content_above_bottom_nav</dimen>
+    <dimen name="record_today_scroll_bottom_padding">@dimen/content_above_bottom_nav</dimen>
     <dimen name="fab_size">56dp</dimen>
     <dimen name="fab_elevation">6dp</dimen>
 </resources>

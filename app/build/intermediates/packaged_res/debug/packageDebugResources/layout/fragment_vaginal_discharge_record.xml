@@ -55,6 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/md_surface"
+        android:clipToPadding="false"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -64,7 +65,7 @@
             android:orientation="vertical"
             android:paddingHorizontal="20dp"
             android:paddingTop="20dp"
-            android:paddingBottom="100dp">
+            android:paddingBottom="@dimen/content_above_bottom_nav">
 
             <!-- 分泌量 -->
             <LinearLayout
@@ -683,7 +684,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layoutDischargeNotes"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                style="@style/Widget.MyAunt.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"

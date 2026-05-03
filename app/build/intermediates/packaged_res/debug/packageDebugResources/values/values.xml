@@ -49,6 +49,8 @@
     <color name="md_surface">#FFFFFF</color>
     <color name="md_text_secondary">#6B7280</color>
     <color name="nav_item_inactive">#FECDD3</color>
+    <color name="record_today_accent">#FF5C8D</color>
+    <color name="record_today_note_counter">#B8B8C4</color>
     <color name="special_dialog_bottom_bar">#FFFFFF</color>
     <color name="special_dialog_section_label">#8A7A88</color>
     <color name="special_gap_body">#2D4A42</color>
@@ -96,6 +98,8 @@
     <color name="ui_nav_bar">#FFFFFF</color>
     <color name="ui_nav_divider">#FFF1F2</color>
     <color name="ui_page_background">@color/md_bg</color>
+    <color name="ui_record_screen_bg">#FFF9F9</color>
+    <color name="ui_record_toolbar_divider">#F3E8EB</color>
     <color name="ui_search_bar_bg">#FFF1F2</color>
     <color name="ui_search_bar_stroke">#FFE4E6</color>
     <color name="ui_warm_body">#EA580C</color>
@@ -104,10 +108,12 @@
     <dimen name="bottom_nav_bar_height">100dp</dimen>
     <dimen name="card_radius_lg">24dp</dimen>
     <dimen name="card_radius_md">20dp</dimen>
+    <dimen name="content_above_bottom_nav">124dp</dimen>
     <dimen name="fab_elevation">6dp</dimen>
     <dimen name="fab_size">56dp</dimen>
-    <dimen name="page_padding_bottom">100dp</dimen>
+    <dimen name="page_padding_bottom">@dimen/content_above_bottom_nav</dimen>
     <dimen name="page_padding_horizontal">20dp</dimen>
+    <dimen name="record_today_scroll_bottom_padding">@dimen/content_above_bottom_nav</dimen>
     <dimen name="spacing_lg">24dp</dimen>
     <dimen name="spacing_md">16dp</dimen>
     <dimen name="spacing_sm">8dp</dimen>
@@ -120,6 +126,8 @@
     <string name="cd_delete_special_record">删掉这条备注</string>
     <string name="cd_edit_period_record">编辑该条月经记录</string>
     <string name="cd_edit_special_record">改一改这条备注</string>
+    <string name="cd_hub_fab_today">跳到今日记录</string>
+    <string name="cd_hub_pick_record_date">选择记录日期</string>
     <string name="cd_record_period_fab">记录月经开始日</string>
     <string name="cd_splash_logo">应用图标</string>
     <string name="chart_avg_menses_days">5天</string>
@@ -211,6 +219,63 @@
     <string name="record_book_tab_discharge">分泌物</string>
     <string name="record_book_tab_discharge_history">分泌物历史</string>
     <string name="record_book_tab_period_notes">周期备注</string>
+    <string name="record_hub_analysis_disclaimer">以上为常见周期与分泌物变化的通俗参考，不能代替医疗诊断；若瘙痒、异味、疼痛持续或加重，请及时就医。</string>
+    <string name="record_hub_cycle_no_period">请先在首页记录月经开始日</string>
+    <string name="record_hub_days_until_next">距下次月经约 %d 天</string>
+    <string name="record_hub_health_analysis_title">健康分析 ✨</string>
+    <string name="record_hub_history_empty">暂无记录，先选一种状态并保存吧</string>
+    <string name="record_hub_history_title">历史记录</string>
+    <string name="record_hub_link_home_period">在首页修改日期 ›</string>
+    <string name="record_hub_phase_line">当前阶段：%1$s</string>
+    <string name="record_hub_pick_state_first">请先点选一种今日状态</string>
+    <string name="record_hub_quick_dry">干爽</string>
+    <string name="record_hub_quick_milky">乳白</string>
+    <string name="record_hub_quick_stretchy">拉丝</string>
+    <string name="record_hub_quick_thick">粘稠</string>
+    <string name="record_hub_save">保存记录</string>
+    <string name="record_hub_section_today">记录今日状态</string>
+    <string name="record_hub_sug_default">建议：持续观察并与既往对比；若有瘙痒、异味、疼痛或出血异常请及时就医。</string>
+    <string name="record_hub_sug_luteal">建议：减少熬夜与高糖饮食；明显不适请结合临床检查。</string>
+    <string name="record_hub_sug_menstrual">建议：注意清洁与透气；若血量异常、剧痛或发热请及时就医。</string>
+    <string name="record_hub_sug_no_cycle">建议：在首页记录一次月经开始日后，再结合分泌物与阶段观察。</string>
+    <string name="record_hub_sug_ovulation">建议：多喝温水、规律作息；若瘙痒、异味或疼痛持续，建议就诊。</string>
+    <string name="record_hub_tip_default">提示：分泌物会随周期变化，单次记录不能代表整体健康。</string>
+    <string name="record_hub_tip_luteal_other">提示：黄体期仍会有个体差异，与激素回落有关。</string>
+    <string name="record_hub_tip_luteal_thick">提示：黄体期分泌物可能变稠、乳白，多为生理现象。</string>
+    <string name="record_hub_tip_menstrual">提示：经期附近分泌物变化较大，多数属于正常现象。</string>
+    <string name="record_hub_tip_no_cycle">提示：暂无月经周期数据，健康分析仅供参考。</string>
+    <string name="record_hub_tip_ovulation_other">提示：当前阶段激素波动较大，分泌物变化多与排卵相关。</string>
+    <string name="record_hub_tip_ovulation_stretchy">提示：排卵期附近易出现拉丝、蛋清状分泌物，多为生理现象。</string>
+    <string name="record_hub_view_more">查看更多记录</string>
+    <string name="record_today_flow_heavy">量多</string>
+    <string name="record_today_flow_light">量少</string>
+    <string name="record_today_flow_medium">中等</string>
+    <string name="record_today_flow_spotting">点滴</string>
+    <string name="record_today_mood_anxious">焦虑</string>
+    <string name="record_today_mood_calm">平静</string>
+    <string name="record_today_mood_happy">开心</string>
+    <string name="record_today_mood_sensitive">敏感</string>
+    <string name="record_today_note_hint">写下你今天的感受…</string>
+    <string name="record_today_save">保存</string>
+    <string name="record_today_saved_diary">已保存今日记录</string>
+    <string name="record_today_section_flow">经量大小</string>
+    <string name="record_today_section_mood">心情状态</string>
+    <string name="record_today_section_note">添加备注</string>
+    <string name="record_today_section_state">经期状态</string>
+    <string name="record_today_section_symptoms">身体症状</string>
+    <string name="record_today_state_ended">经期已结束</string>
+    <string name="record_today_state_started">经期已开始</string>
+    <string name="record_today_symptom_belly">肚子痛</string>
+    <string name="record_today_symptom_bloat">胀气</string>
+    <string name="record_today_symptom_head">头痛</string>
+    <string name="record_today_symptom_insomnia">失眠</string>
+    <string name="record_today_symptom_leg">腿酸</string>
+    <string name="record_today_symptom_rash">皮疹</string>
+    <string name="record_today_symptom_skin">皮肤问题</string>
+    <string name="record_today_symptom_tired">疲惫</string>
+    <string name="record_today_symptom_waist">腰酸</string>
+    <string name="record_today_title">记录今天</string>
+    <string name="record_today_view_all">查看全部</string>
     <string name="shortcut_pin_widget_long">把经期天数小组件放到桌面</string>
     <string name="shortcut_pin_widget_short">添加桌面小组件</string>
     <string name="special_dialog_gap_title">间隔有点特别哦</string>
@@ -261,6 +326,12 @@
         <item name="android:windowLightNavigationBar">true</item>
         <item name="android:windowBackground">@color/ui_page_background</item>
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.MyAunt.Dialog</item>
+        
+        <item name="textInputStyle">@style/Widget.MyAunt.TextInputLayout.FilledBox</item>
+        <item name="textInputFilledStyle">@style/Widget.MyAunt.TextInputLayout.FilledBox</item>
+        <item name="textInputOutlinedStyle">@style/Widget.MyAunt.TextInputLayout.OutlinedBox</item>
+        <item name="textInputFilledDenseStyle">@style/Widget.MyAunt.TextInputLayout.FilledBox.Dense</item>
+        <item name="textInputOutlinedDenseStyle">@style/Widget.MyAunt.TextInputLayout.OutlinedBox.Dense</item>
     </style>
     <style name="Theme.MyAunt.Splash" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
@@ -304,5 +375,21 @@
         <item name="chipEndPadding">16dp</item>
         <item name="checkedIconVisible">false</item>
         <item name="rippleColor">@color/md_pink_soft</item>
+    </style>
+    <style name="Widget.MyAunt.TextInputLayout.FilledBox" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+    </style>
+    <style name="Widget.MyAunt.TextInputLayout.FilledBox.Dense" parent="Widget.Material3.TextInputLayout.FilledBox.Dense">
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+    </style>
+    <style name="Widget.MyAunt.TextInputLayout.OutlinedBox" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+    </style>
+    <style name="Widget.MyAunt.TextInputLayout.OutlinedBox.Dense" parent="Widget.Material3.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
     </style>
 </resources>
